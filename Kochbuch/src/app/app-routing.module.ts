@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {RezeptansichtComponent} from "./rezeptansicht/rezeptansicht.component";
+import {UserProfileComponent} from './user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -8,6 +9,10 @@ const routes: Routes = [
     children: []
   },
   {path: 'rezeptansicht', component: RezeptansichtComponent}
+  {
+    path: 'user-profile',
+    component: UserProfileComponent
+  }
 ];
 
 @NgModule({
