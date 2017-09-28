@@ -1,4 +1,214 @@
-<h1>
-  {{title}}
-</h1>
+<!--Navbar, welche über allen Seiten stehen soll, worüber die einzelnen Komponenten aufgerufen / eingetragen werden -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Kochbuch</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Mein Profil</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Neues Rezept anlegen</a>
+      </li>
+    </ul>
+
+    <span>
+      <button class="btn btn-success" type="submit">Login</button>
+      <a href="#RegistrierungsModal" data-toggle="modal" class="btn btn-success">Neu Registrieren</a>
+</span>
+
+  </div>
+</nav>
+
+
+<!-- Modal für die Registrierung, wird über jQuery aufgerufen -->
+<div class="modal bs-example" id="RegistrierungsModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Registrierung</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+
+        <h5>Registrieren mit:</h5>
+
+        <br>
+        <button class="loginBtn loginBtn--facebook">
+          Facebook
+        </button>
+
+        <button class="loginBtn loginBtn--google">
+          Google+
+        </button>
+
+        <button class="loginBtn loginBtn--pinterest">
+          Pinterest
+        </button>
+
+        <button class="loginBtn loginBtn--instagram">
+          Instagram
+        </button>
+
+        <br>
+        <br>
+
+
+        <div id="neueRegistrierung" class="form-group">
+          <h5>Oder bei uns neu registrieren:</h5>
+          <br>
+          <div class="container">
+
+            <label>Name</label>
+            <div class="row">
+              <div class="col-lg-10">
+                <div class="input-group">
+                  <input type="text" id="vorname" name="vorname" placeholder="Vorname" class="form-control"/>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-lg-10">
+                <div class="input-group">
+                  <input type="text" id="nachname" name="nachname" placeholder="Nachname"
+                         class="form-control col-xs-6"/>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <label>Geburtstag</label>
+            <div class="row">
+              <div class="col-lg-10">
+                <div class="input-group">
+                  <input type="date" id="gebdat" name="gebdat" placeholder="Geburtstag" class="form-control"/>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <label>Geschlecht</label>
+            <div class="row">
+              <div class="col-lg-2">
+                <input type="radio" name="geschlecht" id="weiblich" autocomplete="off"><label for="weiblich">weiblich</label>
+              </div>
+
+              <div class="col-lg-2">
+                <input type="radio" name="geschlecht" id="maennlich" autocomplete="off"><label for="maennlich">männlich</label>
+              </div>
+            </div>
+            <br>
+
+
+            <label>Interessen</label>
+            <div class="row">
+              <div class="col-lg-2">
+                <input type="checkbox" name="kochen" id="kochen" autocomplete="off">><label for="kochen">Kochen</label>
+              </div>
+              <div class="col-lg-2">
+                <input type="checkbox" name="backen" id="backen" autocomplete="off"><label for="backen">Backen</label>
+              </div>
+              <div class="col-lg-2">
+                <input type="checkbox" name="cocktails" id="cocktails" autocomplete="off"><label for="cocktails">Cocktails</label>
+              </div>
+              <div class="col-lg-2">
+                <input type="checkbox" name="desserts" id="desserts" autocomplete="off"><label for="desserts">Desserts</label>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-2">
+                <input type="checkbox" name="vegetraisch" id="vegetraisch" autocomplete="off"><label for="vegetraisch">vegetraisch</label>
+              </div>
+              <div class="col-lg-2">
+                <input type="checkbox" name="vegan" id="vegan" autocomplete="off"><label for="vegan">vegan</label>
+              </div>
+              <div class="col-lg-2">
+                <input type="checkbox" name="bio" id="bio" autocomplete="off"><label for="bio">bio</label>
+              </div>
+              <div class="col-lg-3">
+                <input type="checkbox" name="kalorienarm" id="kalorienarm" autocomplete="off"><label for="kalorienarm">kalorienarm</label>
+              </div>
+            </div>
+            <br>
+
+            <label>Email</label>
+            <div class="row">
+              <div class="col-lg-10">
+                <div class="input-group">
+                  <input type="email" id="email" name="email" placeholder="E-Mail" class="form-control"/>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <label>Benutzername</label>
+            <div class="row">
+              <div class="col-lg-10">
+                <div class="input-group">
+                  <input type="text" id="user" name="user" placeholder="Benutzername" class="form-control"/>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <label>Passwort</label>
+            <div class="row">
+              <div class="col-lg-10">
+                <div class="input-group">
+                  <input type="password" id="password1" name="password1" placeholder="Passwort" class="form-control"/>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-lg-10">
+                <div class="input-group">
+                  <input type="password" id="password2" name="password2" placeholder="Passwort wiederholen"
+                         class="form-control"/>
+                </div>
+              </div>
+            </div>
+            <br>
+            <label>Nutzungsbedingungen</label>
+            <div class="row">
+              <div class="form-inline col-lg-10">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" id="nutzungsbedingung" name="nutzungsbedingung" class="form-control"/><label for="nutzungsbedingung">
+                    &nbsp;Ich habe die <a href="https://de.wikipedia.org/wiki/Allgemeine_Gesch%C3%A4ftsbedingungen"
+                                          target="_blank" rel="noopener"> &nbsp;Nutzungsbedingungen&nbsp;</a> gelesen
+                    und bin damit einverstanden.</label>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <br>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+        <button type="button" class="btn btn-primary">Registrieren</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <router-outlet></router-outlet>
