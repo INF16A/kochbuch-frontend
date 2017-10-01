@@ -1,0 +1,18 @@
+/*responsive fix for preventing card-title overflow*/
+@media(max-width: 680px) {
+    .card-columns {
+      column-count: 1 !important;
+    }
+  }
+
+  @media(min-width: 680px) {
+    .card-columns {
+      column-count: 2 !important;
+    }
+  }
+
+  @media(min-width: 976px) {
+    .card-columns {
+      column-count: 3 !important;
+    }
+  }
