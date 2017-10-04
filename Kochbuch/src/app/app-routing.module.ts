@@ -1,14 +1,14 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {NgModule} from "@angular/core";
+import {RouterModule, Routes} from "@angular/router";
 import {RezeptansichtComponent} from "./rezeptansicht/rezeptansicht.component";
-import { RezeptlisteComponent} from "./rezeptliste/rezeptliste.component";
+import {AlleRezepteComponent} from "./alle-rezepte/alle-rezepte.component";
 const routes: Routes = [
   {
     path: '',
     children: []
   },
   {path: 'rezeptansicht', component: RezeptansichtComponent},
-  {path: 'rezeptliste', component: RezeptlisteComponent}
+  {path: 'rezeptliste', component: AlleRezepteComponent}
 ];
 
 @NgModule({
