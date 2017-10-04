@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { RezeptansichtComponent } from './rezeptansicht/rezeptansicht.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { RezeptanlegenComponent } from './rezeptanlegen/rezeptanlegen.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RezeptansichtComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    RezeptanlegenComponent
   ],
   imports: [
     BrowserModule,
