@@ -9,6 +9,7 @@ import { RezeptansichtComponent } from './rezeptansicht/rezeptansicht.component'
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RezeptanlegenComponent } from './rezeptanlegen/rezeptanlegen.component';
+import {RezeptansichtService} from "./rezeptansicht/rezeptansicht.service";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { RezeptanlegenComponent } from './rezeptanlegen/rezeptanlegen.component'
     AppRoutingModule,
     NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [RezeptansichtService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
