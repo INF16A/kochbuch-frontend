@@ -13,7 +13,7 @@ export class RezeptansichtComponent implements OnInit {
 
   paramId = 0;
   currentRecipe = {};
-
+  personCount: number = 4;
 
   ngOnInit() {
     console.log(this.currentRecipe);
@@ -22,6 +22,16 @@ export class RezeptansichtComponent implements OnInit {
       console.log(this.currentRecipe);
     });
   }
+
+  /**
+   *  Generates an array containing all numbers from min to max
+   *
+   *  e.g. range(1,4) returns [1, 2, 3, 4]
+   *
+   * @param min lower bound of array
+   * @param max upper bound of array
+   * @returns Array with numbers from min to max
+   */
 
   range(min, max) {
     let items = [];

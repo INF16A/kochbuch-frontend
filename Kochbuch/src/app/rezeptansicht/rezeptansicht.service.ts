@@ -26,7 +26,7 @@ export class RezeptansichtService {
     difficultyOwner: 5,
     creatorId: 0,
     creatorName: 'Fiete',
-    rating: 4.3,
+    rating: 13,
     ratingCount: 42,
     creation: new Date(1505000000).toISOString(),
     image: '../../assets/rezeptansicht/recipePictures/0.jpg',
@@ -38,10 +38,17 @@ export class RezeptansichtService {
     ingredients: [
       {id: 0, name: 'Butter', amountPerPerson: 20, unit: 'g'},
       {id: 1, name: 'Lachsfilet', amountPerPerson: 100, unit: 'g'},
+      {id: 4, name: 'Spargel', amountPerPerson: 2, unit: 'Stange(n)'},
       {id: 2, name: 'Salz', amountPerPerson: 1, unit: 'Prise(n)'},
       {id: 3, name: 'Pfeffer', amountPerPerson: 1, unit: 'Messerspitze(n)'},
     ],
-    instructions: 'Wer anderen einen Braten brät, hat ein Bratenbratgerät. Dann noch mit Fisch verfeinern und Salzpyramide bauen.',
+    instructions: [
+      'Wer anderen einen Braten brät, hat ein Bratenbratgerät.',
+      'Dann noch mit Fisch verfeinern.',
+      'Spargel rein stecken',
+      'In Soße ertränken',
+      'Abschließend eine Salzpyramide bauen.'
+    ],
     comments: [
       {name: 'Hannelore Schmidt', text: 'Love it!', creation: new Date(1506500000).toISOString()},
       {

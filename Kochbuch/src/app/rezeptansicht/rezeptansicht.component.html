@@ -11,7 +11,7 @@
       <h3>Zutaten</h3>
       <div class="input-group col-5">
         <span class="input-group-addon">für</span>
-        <input class="form-control" #personCount (keyup)="0" (change)="0" type="number" value="4" min="1">
+        <input class="form-control" [(ngModel)]="personCount" type="number" value="4" min="1">
         <span class="input-group-addon">Personen</span>
       </div>
 
@@ -21,7 +21,7 @@
           <th>Zutat</th>
         </tr>
         <tr *ngFor="let i of currentRecipe.ingredients">
-          <td class="text-right">{{i.amountPerPerson * personCount.value}} {{i.unit}}</td>
+          <td class="text-right">{{i.amountPerPerson * personCount}} {{i.unit}}</td>
           <td>{{i.name}}</td>
         </tr>
       </table>
@@ -29,7 +29,9 @@
       <hr>
 
       <h3>Zubereitung</h3>
-      {{currentRecipe.instructions}}
+      <ol>
+        <li *ngFor="let i of currentRecipe.instructions">{{i}}</li>
+      </ol>
     </div>
     <div class="col">
       <div>
@@ -38,15 +40,12 @@
       <div>
         <span class="badge badge-pill badge-primary mr-1" *ngFor="let tag of currentRecipe.tags">{{tag}}</span>
       </div>
-      <div>
-        <div class="d-inline" *ngFor="let i of range(1, currentRecipe.rating)">
-          <i class="fa fa-star" aria-hidden="true"></i>
-        </div>
-        <div class="d-inline" *ngFor="let i of range(currentRecipe.rating, 4)">
-          <i class="fa fa-star-o" aria-hidden="true"></i>
-        </div>
-        <span class="d-inline ml-2">{{currentRecipe.rating}} ({{currentRecipe.ratingCount}})</span>
-      </div>
+      <span class="text-danger" *ngIf="currentRecipe.rating < 0">
+          <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{-currentRecipe.rating}}
+        </span>
+      <span *ngIf="currentRecipe.rating > 0" class=" text-success">
+          <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{currentRecipe.rating}}
+      </span>
     </div>
   </div>
   <div class="row mt-3">
