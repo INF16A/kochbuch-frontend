@@ -6,6 +6,7 @@
         <h2 class="card-title">{{rezept.name}}</h2>
         <div class="card-subtitle text-muted">{{rezept.creator}} {{rezept.creatorDate | date:"dd.MM.yyyy"}}</div>
         <p class="card-text ">{{rezept.beschreibung}}</p>
+        <a class="btn btn-light" routerLink="/rezeptansicht" >zum Rezept<i class=""></i></a>
       </div>
       <div class="card-footer d-flex flex-row flex-wrap justify-content-start">
         <a *ngFor="let tag of rezept.tags" routerLink="/" class="btn btn-sm btn-outline-secondary m-1">{{tag}}</a>
