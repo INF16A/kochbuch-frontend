@@ -8,7 +8,8 @@ import {RezeptanlegenComponent} from "./rezeptanlegen/rezeptanlegen.component";
 const routes: Routes = [
   {
     path: '',
-    children: []
+    redirectTo: 'rezeptliste',
+    pathMatch: 'full'
   },
   {path: 'rezeptansicht', component: RezeptansichtComponent},
   {path: 'rezeptliste', component: AlleRezepteComponent},
