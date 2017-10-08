@@ -16,7 +16,6 @@ import { RezeptansichtService } from "./rezeptansicht/rezeptansicht.service";
   declarations: [
     AppComponent,
     RezeptansichtComponent,
-    RegistrierungNavbar,
     RegistrierungsmodalComponent,
     UserProfileComponent,
     RezeptanlegenComponent
