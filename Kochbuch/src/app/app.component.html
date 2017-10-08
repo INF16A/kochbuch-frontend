@@ -1,4 +1,27 @@
-<h1>
-  {{title}}
-</h1>
+<!--Navbar, welche über allen Seiten stehen soll, worüber die einzelnen Komponenten aufgerufen / eingetragen werden -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Kochbuch</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Mein Profil</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Neues Rezept anlegen</a>
+      </li>
+    </ul>
+
+    <span>
+      <button class="btn btn-success" type="submit">Login</button>
+      <app-registrierungsmodal></app-registrierungsmodal>
+    </span>
+
+  </div>
+</nav>
+
 <router-outlet></router-outlet>
