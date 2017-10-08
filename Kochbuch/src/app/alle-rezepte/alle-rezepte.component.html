@@ -1,0 +1,8 @@
+<nav class="navbar navbar-light bg-light">
+  <h2 class="navbar-brand">Alle Rezepte</h2>
+  <form class="form-inline">
+    <input class="form-control" type="text" placeholder="Suchen" aria-label="Suchen" [ngModel]="searchValue"
+           (ngModelChange)="searchTextChanged($event)" [ngModelOptions]="{standalone: true}">
+  </form>
+</nav>
+<app-rezeptliste [rezepte]="rezeptListe"></app-rezeptliste>

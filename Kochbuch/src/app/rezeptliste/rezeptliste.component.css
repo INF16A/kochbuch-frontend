@@ -1,0 +1,5 @@
+/* Setting column width instead of column count to be resizable */
+.card-columns {
+  column-count: auto !important;
+  column-width: 300px !important;
+}
