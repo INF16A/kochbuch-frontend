@@ -1,0 +1,139 @@
+<div class="container justify-content-md-center">
+  <h1>Neues Rezept anlegen</h1>
+  <div class="row">
+    <div class="col-4">
+      <h3>Allgemeine Informationen</h3>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="" value="Nudelauflauf">
+        <label for="schwierigkeit">Schwierigkeit</label>
+        <input type="number" class="form-control" id="schwierigkeit" placeholder="" min="1" max="10" value="3">
+        <label for="anzahlpersonen">Anzahl Personen</label>
+        <input type="number" class="form-control" id="anzahlpersonen" placeholder="" min="1" value="4">
+        <label for="beschreibung">Beschreibung </label>
+        <textarea placeholder="Beschreibung..." id="beschreibung" class="form-control">Leckerer Nudelauflauf für 4 Personen.</textarea>
+      </div>
+    </div>
+    <div class="col">
+      <img src="assets/nudelauflauf.jpg" alt="Bild">
+    </div>
+  </div>
+
+  <div class="col">
+    <h3>Tags</h3>
+    <div class="d-flex flex-row flex-wrap justify-content-start">
+      <div class="m-2 pr-2 pl-2" style="border: 1px solid #a5a5a5; border-radius: 5px;">
+        <span>Tag1</span>
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </div>
+      <div class="m-2 pr-2 pl-2" style="border: 1px solid #a5a5a5; border-radius: 5px;">
+        <input type="text" placeholder="Tag hinzufügen" class="border-0">
+        <i class="fa fa-check" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <h3>Zutaten</h3>
+    <ul>
+      <li style="border-bottom: 1px solid #d3d3d3" class="mb-2">
+        <div class="d-flex flex-row justify-content-between">
+          <p>500 g Nudeln</p>
+          <div>
+            <i class="fa fa-pencil mr-2 ml-2" aria-hidden="true"></i>
+            <i class="fa fa-trash-o mr-2 ml-2" aria-hidden="true"></i>
+          </div>
+        </div>
+      </li>
+      <li style="border-bottom: 1px solid #d3d3d3" class="mb-2">
+        <div class="d-flex flex-row justify-content-between">
+          <p>200 ml Wasser</p>
+          <div>
+            <i class="fa fa-pencil mr-2 ml-2" aria-hidden="true"></i>
+            <i class="fa fa-trash-o mr-2 ml-2" aria-hidden="true"></i>
+          </div>
+        </div>
+      </li>
+      <li style="border-bottom: 1px solid #d3d3d3" class="mb-2">
+        <div class="d-flex flex-row justify-content-between">
+          <p>150 g Tomaten</p>
+          <div>
+            <i class="fa fa-pencil mr-2 ml-2" aria-hidden="true"></i>
+            <i class="fa fa-trash-o mr-2 ml-2" aria-hidden="true"></i>
+          </div>
+        </div>
+      </li>
+      <li style="border-bottom: 1px solid #d3d3d3" class="mb-2">
+        <div class="d-flex flex-row justify-content-between">
+          <p>150 g Brokkoli</p>
+          <div>
+            <i class="fa fa-pencil mr-2 ml-2" aria-hidden="true"></i>
+            <i class="fa fa-trash-o mr-2 ml-2" aria-hidden="true"></i>
+          </div>
+        </div>
+      </li>
+      <li style="border-bottom: 1px solid #d3d3d3" class="mb-2">
+        <p class="h5">Zutat hinzufügen</p>
+        <div class="form-group">
+          <label for="zutatName">Zutat</label>
+          <input type="text" class="form-control" id="zutatName" placeholder="Zutat eingeben">
+
+          <label for="zutatMenge">Menge</label>
+          <div class="form-inline">
+            <input type="text" class="form-control" id="zutatMenge" placeholder="Menge eingeben">
+            <select class="form-control">
+              <option>g</option>
+              <option>ml</option>
+            </select>
+          </div>
+
+          <button class="btn btn-primary">Hinzufügen</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col">
+    <h3>Zubereitung</h3>
+    <ol>
+      <li style="border-bottom: 1px solid #d3d3d3" class="mb-2">
+        <div>
+          <div class="d-flex justify-content-between">
+            <p>Aufwand: 10 min</p>
+            <div>
+              <i class="fa fa-pencil"></i>
+              <i class="fa fa-trash"></i>
+            </div>
+          </div>
+          <p>Nudeln, Tomaten, Brokkoli in die Auflaufform schütten.</p>
+        </div>
+      </li>
+      <li style="border-bottom: 1px solid #d3d3d3" class="mb-2">
+        <div>
+          <div class="d-flex justify-content-between">
+            <p>Aufwand: 32 min</p>
+            <div>
+              <i class="fa fa-pencil"></i>
+              <i class="fa fa-trash"></i>
+            </div>
+          </div>
+          <p>Wasser dazugeben und für 30 Minuten bei 200°C im vorgewärmten Backofen fertigstellen.</p>
+        </div>
+      </li>
+      <li style="border-bottom: 1px solid #d3d3d3" class="mb-2">
+        <p class="h5">Zubereitungschritt hinzufügen</p>
+        <div class="form-group">
+          <label for="schrittZeit">Aufwand in Minuten</label>
+          <input type="number" class="form-control" id="schrittZeit" min="0" placeholder="">
+          <label for="schrittText">Beschreibung</label>
+          <textarea class="form-control" placeholder="" id="schrittText"></textarea>
+          <button class="btn btn-primary">Hinzufügen</button>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="col">
+    <button class="btn btn-primary">Rezept anlegen</button>
+  </div>
+</div>
