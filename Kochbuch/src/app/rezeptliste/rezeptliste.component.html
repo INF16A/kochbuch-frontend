@@ -9,7 +9,7 @@
         <a class="btn btn-outline-primary" routerLink="/rezeptansicht">Jetzt kochen</a>
       </div>
       <div class="card-footer d-flex flex-row flex-wrap justify-content-start">
-        <a *ngFor="let tag of rezept.tags" routerLink="/" class="btn btn-sm btn-outline-secondary m-1">{{tag}}</a>
+        <a *ngFor="let tag of rezept.tags" routerLink="./" [queryParams]="{search: tag}" class="btn btn-sm btn-outline-secondary m-1">{{tag}}</a>
       </div>
       <div class="card-footer d-flex flex-row justify-content-around">
         <span class="text-danger" *ngIf="rezept.bewertung < 0">
