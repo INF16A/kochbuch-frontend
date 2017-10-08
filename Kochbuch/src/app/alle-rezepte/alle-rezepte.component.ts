@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {RezeptListItem} from "../rezeptliste/RezeptListItem";
 import {Observable} from "rxjs";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-alle-rezepte',
@@ -8,51 +9,48 @@ import {Observable} from "rxjs";
   styleUrls: ['./alle-rezepte.component.css']
 })
 export class AlleRezepteComponent implements OnInit {
-  searchText: string = "";
-  rezeptListe: RezeptListItem[];
+  searchValue: string;
+  rezeptListe: Observable<RezeptListItem[]>;
 
-  constructor() {
-    console.log('Alle Rezepte');
+  constructor(private route: ActivatedRoute, private router: Router) {
+    this.rezeptListe = this.route.queryParams
+      .map(params => params['search'] || '')
+      .debounceTime(250)
+      .do(searchText => this.searchValue = searchText)
+      .map(searchText => searchText.toLowerCase().trim())
+      .flatMap(searchText => {
+        return this.getData()
+          .flatMap(liste => liste)
+          .filter((rezept: RezeptListItem, index: number): boolean => {
+            const name = rezept.name.toLowerCase();
+            const description = rezept.beschreibung.toLowerCase();
+            if (name.includes(searchText)) {
+              return true;
+            }
+            if (description.includes(searchText)) {
+              return true;
+            }
+            return this.findTag(rezept, searchText);
+          }).toArray();
+      });
   }
 
   ngOnInit() {
-    this.getData().subscribe(rezeptListe => {
-      this.rezeptListe = rezeptListe;
-      console.log('Rezepte', this.rezeptListe);
-    });
   }
 
   public searchTextChanged(newVal) {
-    this.searchText = newVal;
-    console.log('test');
-    this.getData()
-      .flatMap(rezeptListe => rezeptListe)
-      .filter((rezept: RezeptListItem, index: number): boolean => {
-        const name = rezept.name.toLowerCase();
-        const description = rezept.beschreibung.toLowerCase();
-        if (name.includes(this.searchText)) {
-          return true;
-        }
-        if (description.includes(this.searchText)) {
-          return true;
-        }
-        if(this.findTag(rezept)) {
-          return true;
-        }
-        return false;
-      }).toArray().subscribe(rezeptListe => this.rezeptListe = rezeptListe);
+    this.router.navigate([], {queryParams: {search: newVal}, replaceUrl: true});
   }
 
-  private findTag(rezept: RezeptListItem): boolean {
+  private findTag(rezept: RezeptListItem, searchText: string): boolean {
     let found: boolean = false;
-    const words = this.searchText.split(' ');
+    const words = searchText.split(' ');
     rezept.tags
       .map(tag => tag.toLowerCase())
       .forEach(tag => {
-        if(words.some((word): boolean => {
-          console.log(tag, word, tag.includes(word));
-          return tag.includes(word);
-        })) found = true;
+        if (words.some((word): boolean => {
+            return tag.includes(word);
+          })) found = true;
       });
     return found;
   }
@@ -83,7 +81,7 @@ export class AlleRezepteComponent implements OnInit {
         creatorDate: "2017-10-11",
         img: "../assets/320px-Cooked_snails.JPG",
         forpersons: 1,
-        tags: ["Französisch", "nicht lecker", "exotisch", "komisch"]
+        tags: ["Französisch", "nicht-lecker", "exotisch", "komisch"]
       },
       {
         id: "0000-0000-000000-000000",
@@ -122,7 +120,7 @@ export class AlleRezepteComponent implements OnInit {
         creatorDate: "2017-10-11",
         img: "../assets/320px-Cooked_snails.JPG",
         forpersons: 1,
-        tags: ["Französisch", "nicht lecker", "exotisch", "komisch"]
+        tags: ["Französisch", "nicht-lecker", "exotisch", "komisch"]
       },
       {
         id: "0000-0000-000000-000000",
@@ -161,7 +159,7 @@ export class AlleRezepteComponent implements OnInit {
         creatorDate: "2017-10-11",
         img: "../assets/320px-Cooked_snails.JPG",
         forpersons: 1,
-        tags: ["Französisch", "nicht lecker", "exotisch", "komisch"]
+        tags: ["Französisch", "nicht-lecker", "exotisch", "komisch"]
       },
       {
         id: "0000-0000-000000-000000",

@@ -5,4 +5,4 @@
            (ngModelChange)="searchTextChanged($event)" [ngModelOptions]="{standalone: true}">
   </form>
 </nav>
-<app-rezeptliste [rezepte]="rezeptListe"></app-rezeptliste>
+<app-rezeptliste [rezepte]="rezeptListe | async"></app-rezeptliste>
