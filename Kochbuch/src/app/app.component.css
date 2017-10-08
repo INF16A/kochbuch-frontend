@@ -86,7 +86,10 @@ body { padding: 2em; }
 
 /* Instagram */
 .loginBtn--instagram {
-  background: url('img/instagram_back.png') no-repeat;
+  background: #f87f2e; /* Old browsers */
+  background: -moz-linear-gradient(45deg, #f87f2e 0%, #f57a2d 4%, #ea6345 20%, #e65d4d 22%, #dd5058 28%, #db4b62 30%, #d74663 33%, #ce3d76 38%, #c73878 41%, #c23577 41%, #bd3283 45%, #b9338a 47%, #b53588 52%, #b1348f 54%, #a23998 63%, #9d38a0 66%, #9939a4 70%, #9138a4 72%, #8a3aa9 76%, #8a3cac 77%, #833aaf 80%, #7b3ab0 81%, #723cb6 84%, #5858ca 97%, #555cce 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg, #f87f2e 0%,#f57a2d 4%,#ea6345 20%,#e65d4d 22%,#dd5058 28%,#db4b62 30%,#d74663 33%,#ce3d76 38%,#c73878 41%,#c23577 41%,#bd3283 45%,#b9338a 47%,#b53588 52%,#b1348f 54%,#a23998 63%,#9d38a0 66%,#9939a4 70%,#9138a4 72%,#8a3aa9 76%,#8a3cac 77%,#833aaf 80%,#7b3ab0 81%,#723cb6 84%,#5858ca 97%,#555cce 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg, #f87f2e 0%,#f57a2d 4%,#ea6345 20%,#e65d4d 22%,#dd5058 28%,#db4b62 30%,#d74663 33%,#ce3d76 38%,#c73878 41%,#c23577 41%,#bd3283 45%,#b9338a 47%,#b53588 52%,#b1348f 54%,#a23998 63%,#9d38a0 66%,#9939a4 70%,#9138a4 72%,#8a3aa9 76%,#8a3cac 77%,#833aaf 80%,#7b3ab0 81%,#723cb6 84%,#5858ca 97%,#555cce 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 .loginBtn--instagram:before {
@@ -96,5 +99,9 @@ body { padding: 2em; }
 
 .loginBtn--instagram:hover,
 .loginBtn--instagram:focus {
-  background: url('img/instagram_back.png'); opacity: 0.85;
+  background: #f87f2e; /* Old browsers */
+  background: -moz-linear-gradient(45deg, #f87f2e 0%, #f57a2d 4%, #ea6345 20%, #e65d4d 22%, #dd5058 28%, #db4b62 30%, #d74663 33%, #ce3d76 38%, #c73878 41%, #c23577 41%, #bd3283 45%, #b9338a 47%, #b53588 52%, #b1348f 54%, #a23998 63%, #9d38a0 66%, #9939a4 70%, #9138a4 72%, #8a3aa9 76%, #8a3cac 77%, #833aaf 80%, #7b3ab0 81%, #723cb6 84%, #5858ca 97%, #555cce 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg, #f87f2e 0%,#f57a2d 4%,#ea6345 20%,#e65d4d 22%,#dd5058 28%,#db4b62 30%,#d74663 33%,#ce3d76 38%,#c73878 41%,#c23577 41%,#bd3283 45%,#b9338a 47%,#b53588 52%,#b1348f 54%,#a23998 63%,#9d38a0 66%,#9939a4 70%,#9138a4 72%,#8a3aa9 76%,#8a3cac 77%,#833aaf 80%,#7b3ab0 81%,#723cb6 84%,#5858ca 97%,#555cce 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg, #f87f2e 0%,#f57a2d 4%,#ea6345 20%,#e65d4d 22%,#dd5058 28%,#db4b62 30%,#d74663 33%,#ce3d76 38%,#c73878 41%,#c23577 41%,#bd3283 45%,#b9338a 47%,#b53588 52%,#b1348f 54%,#a23998 63%,#9d38a0 66%,#9939a4 70%,#9138a4 72%,#8a3aa9 76%,#8a3cac 77%,#833aaf 80%,#7b3ab0 81%,#723cb6 84%,#5858ca 97%,#555cce 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  opacity: 0.85;
 }
