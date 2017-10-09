@@ -13,6 +13,8 @@ import { AlleRezepteComponent } from './alle-rezepte/alle-rezepte.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RezeptanlegenComponent } from './rezeptanlegen/rezeptanlegen.component';
 import { RezeptansichtService } from "./rezeptansicht/rezeptansicht.service";
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { RezeptansichtService } from "./rezeptansicht/rezeptansicht.service";
     DifficultyPipe,
     AlleRezepteComponent,
     UserProfileComponent,
-    RezeptanlegenComponent
+    RezeptanlegenComponent,
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
