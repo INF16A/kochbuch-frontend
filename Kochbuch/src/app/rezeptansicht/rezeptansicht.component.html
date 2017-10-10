@@ -1,8 +1,14 @@
+<div class="row">
+    <div class="main-image">
+      <img src="{{currentRecipe.image}}">
+    </div>
+  </div>
 <div class="container">
+ 
   <div class="row">
+      
     <div class="col">
 
-      <img class="rounded" src="{{currentRecipe.image}}">
 
       <h1>{{currentRecipe.name}}</h1>
 
@@ -41,10 +47,10 @@
         <span class="badge badge-pill badge-primary mr-1" *ngFor="let tag of currentRecipe.tags">{{tag}}</span>
       </div>
       <span class="text-danger" *ngIf="currentRecipe.rating < 0">
-          <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{-currentRecipe.rating}}
-        </span>
+        <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{-currentRecipe.rating}}
+      </span>
       <span *ngIf="currentRecipe.rating > 0" class=" text-success">
-          <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{currentRecipe.rating}}
+        <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{currentRecipe.rating}}
       </span>
     </div>
   </div>
