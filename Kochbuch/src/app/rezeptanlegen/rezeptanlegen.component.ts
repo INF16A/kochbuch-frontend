@@ -1,3 +1,11 @@
+/*
+	Authors:
+		Thomas Hörner
+		Patrick Eichert
+		Florian Eder
+		Enrico Gresser
+*/
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
