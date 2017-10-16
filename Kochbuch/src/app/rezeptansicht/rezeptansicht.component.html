@@ -50,8 +50,20 @@
   </div>
   <div class="row mt-3">
     <div class="col">
+      <!-- 💩 -->
       <h3>Kommentare</h3>
-      <p>TODO: implementieren</p>
+      <div *ngIf="commentsLoading == true">
+        <p>Lade Kommentare ...</p>
+      </div>
+      <div *ngIf="commentsLoading == false">
+        <div *ngIf="comments.length == 0">
+          <p>Keine Kommentare</p>
+        </div>
+        <div *ngIf="comments.length > 0">
+          <p>TODO: implementieren</p>
+        </div>
+      </div>
+      <!-- 💩 -->
     </div>
   </div>
 </div>

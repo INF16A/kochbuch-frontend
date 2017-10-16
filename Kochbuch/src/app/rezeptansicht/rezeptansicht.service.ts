@@ -1,10 +1,17 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
+import {Http, Response } from '@angular/http';
+
+//💩
+export class Comment{
+  constructor(public creationDate:Date) {}
+}
+//💩
 
 @Injectable()
 export class RezeptansichtService {
 
-  constructor() {
+  constructor(private http:Http) {
   }
 
   /*mockRecipe = {
@@ -71,5 +78,24 @@ export class RezeptansichtService {
   getRecipeData(recipeId) {
     return this.getMockRecipeData();
   }
+
+
+  // 💩
+  /**
+   * Alle Kommentare zu einem Rezept.
+   * @param recipeId 
+   * @param callback 
+   */
+  public getRecipeComments(recipeId:Number, callback: (ar:Comment[]) => void){
+    // this.fetchRecipeComments().subscribe((res:Response) => {
+    //   callback([]);
+    // });
+    callback([]);
+  }
+  private fetchRecipeComments(){
+    let url = "http://";
+    return this.http.get(url);
+  }
+  // 💩
 
 }
