@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RezeptansichtService} from "./rezeptansicht.service";
+import {RezeptansichtService, Comment} from "./rezeptansicht.service";
 
 @Component({
   selector: 'app-rezeptansicht',
@@ -15,12 +15,24 @@ export class RezeptansichtComponent implements OnInit {
   currentRecipe = {};
   personCount: number = 4;
 
+  // 💩
+  private commentsLoading = true;
+  private comments:Comment[] = [];
+  // 💩
+
   ngOnInit() {
     console.log(this.currentRecipe);
     this.rezeptAnsichtService.getRecipeData(this.paramId).subscribe(data => {
       this.currentRecipe = data;
       console.log(this.currentRecipe);
     });
+
+    // 💩
+    this.rezeptAnsichtService.getRecipeComments(this.paramId, comments => {
+      this.commentsLoading = false;
+      this.comments = comments;
+    });
+    // 💩
   }
 
   /**
