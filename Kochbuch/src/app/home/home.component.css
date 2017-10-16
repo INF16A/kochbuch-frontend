@@ -45,3 +45,13 @@ h2, h3, h4 {
 .search .material-icons {
     color: #ff2a00;
 }
+
+@media (max-width: 575px) {  /* For mobile  */
+    .container h2 {
+        font-weight: 600;
+        margin: 40px 0 0 10px;
+    }
+    .container button{
+        margin-top: 20px;
+    }
+}

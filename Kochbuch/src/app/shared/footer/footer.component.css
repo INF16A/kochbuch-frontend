@@ -1,0 +1,24 @@
+
+.navbar-bottom {
+    background: #464646;
+    color: white;
+    bottom: 0px;
+    margin-bottom: -25px;
+    margin-top: 150px;
+    height: 300px;
+}
+
+.footer {
+    margin-top: 75px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+}
+
+.navbar-bottom p {
+    margin-top: 170px;
+}
+
+#header-img {
+    height: 60px;
+}
