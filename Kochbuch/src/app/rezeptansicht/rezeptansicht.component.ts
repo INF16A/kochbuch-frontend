@@ -15,10 +15,10 @@ export class RezeptansichtComponent implements OnInit {
   currentRecipe = {};
   personCount: number = 4;
 
-  // 💩
+  // 💩 Alexander Krieg
   private commentsLoading = true;
   private comments:Comment[] = [];
-  // 💩
+  // 💩 Alexander Krieg
 
   ngOnInit() {
     console.log(this.currentRecipe);
@@ -27,12 +27,12 @@ export class RezeptansichtComponent implements OnInit {
       console.log(this.currentRecipe);
     });
 
-    // 💩
+    // 💩 Alexander Krieg
     this.rezeptAnsichtService.getRecipeComments(this.paramId, comments => {
       this.commentsLoading = false;
       this.comments = comments;
     });
-    // 💩
+    // 💩 Alexander Krieg
   }
 
   /**
