@@ -13,7 +13,6 @@ import { AlleRezepteComponent } from './alle-rezepte/alle-rezepte.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RezeptanlegenComponent } from './rezeptanlegen/rezeptanlegen.component';
 import { RezeptansichtService } from "./rezeptansicht/rezeptansicht.service";
-import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -28,7 +27,6 @@ import { FooterComponent } from './shared/footer/footer.component';
     AlleRezepteComponent,
     UserProfileComponent,
     RezeptanlegenComponent,
-    LoginComponent,
     HomeComponent,
     NavbarComponent,
     FooterComponent
