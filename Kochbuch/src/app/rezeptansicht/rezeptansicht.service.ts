@@ -2,11 +2,11 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Http, Response } from '@angular/http';
 
-//💩
+// 💩 Alexander Krieg
 export class Comment{
   constructor(public creationDate:Date) {}
 }
-//💩
+// 💩 Alexander Krieg
 
 @Injectable()
 export class RezeptansichtService {
@@ -80,7 +80,7 @@ export class RezeptansichtService {
   }
 
 
-  // 💩
+  // 💩 Alexander Krieg
   /**
    * Alle Kommentare zu einem Rezept.
    * @param recipeId 
@@ -96,6 +96,6 @@ export class RezeptansichtService {
     let url = "http://";
     return this.http.get(url);
   }
-  // 💩
+  // 💩 Alexander Krieg
 
 }
