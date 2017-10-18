@@ -14,6 +14,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RezeptanlegenComponent } from './rezeptanlegen/rezeptanlegen.component';
 import { RezeptansichtService } from "./rezeptansicht/rezeptansicht.service";
 
+
+import { LOCALE_ID } from '@angular/core';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +35,16 @@ import { RezeptansichtService } from "./rezeptansicht/rezeptansicht.service";
     AppRoutingModule,
     NgbModule.forRoot()
   ],
-  providers: [RezeptansichtService],
+  providers: [
+    RezeptansichtService,
+
+    /**
+     * @author 💩 Alexander Krieg
+     * Für die DatePipe (deutsches Datumsformat)
+     */
+    { provide: LOCALE_ID, useValue: "de-CH" },
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
