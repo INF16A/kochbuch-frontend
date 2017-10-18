@@ -1,10 +1,29 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {Http, Response } from '@angular/http';
+import {Http, Response, Headers, RequestOptions } from '@angular/http';
+
+
+/**
+ * @author Alexander Krieg
+ */
 
 // 💩 Alexander Krieg
 export class Comment{
-  constructor(public creationDate:Date) {}
+  private id:Number;
+  constructor(
+    public text:String,
+    public userID:Number, // später user object
+    public recipeID:Number, // später rezept objekt sobald es die db gibt
+    public creationDate:Date
+  ) {}
+  public getID():Number{
+    return this.id;
+  }
+}
+export class Recipe{
+  constructor(
+    public id:Number
+  ) {}
 }
 // 💩 Alexander Krieg
 
@@ -83,18 +102,33 @@ export class RezeptansichtService {
   // 💩 Alexander Krieg
   /**
    * Alle Kommentare zu einem Rezept.
+   * Sind vom Server sortiert nach 'creationDate'.
+   * Eventuell umbau zu Observable, wird aber eh nur an einer Stelle gebraucht.
    * @param recipeId 
    * @param callback 
    */
   public getRecipeComments(recipeId:Number, callback: (ar:Comment[]) => void){
-    // this.fetchRecipeComments().subscribe((res:Response) => {
-    //   callback([]);
-    // });
-    callback([]);
+    this.fetchRecipeComments(recipeId).subscribe((res:Response) => {
+      callback(res.json());
+    });
   }
-  private fetchRecipeComments(){
-    let url = "http://";
+  private fetchRecipeComments(id:Number){
+    let url = "http://localhost:8080/comments/"+id;
     return this.http.get(url);
+  }
+  public addComment(comment:Comment, callback?: (fail:boolean, data:any) => void){
+    let url = "http://localhost:8080/comment";
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    this.http.post(url, JSON.stringify(comment), options).subscribe(data => {
+      if(callback){
+        callback(false, data);
+      }
+    }, error => {
+      if(callback){
+        callback(true, error);
+      }
+    });
   }
   // 💩 Alexander Krieg
 

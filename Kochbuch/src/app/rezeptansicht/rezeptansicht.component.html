@@ -48,22 +48,43 @@
       </span>
     </div>
   </div>
-  <div class="row mt-3">
-    <div class="col">
-      <!-- 💩 Alexander Krieg -->
-      <h3>Kommentare</h3>
-      <div *ngIf="commentsLoading == true">
-        <p>Lade Kommentare ...</p>
+  <!-- 💩 Alexander Krieg -->
+  <div>
+    <h3>Kommentare</h3>
+    <div class="row mt-3">
+      <div class="col">
+        <fieldset [disabled]="commentAdding">
+          <p>Sage deine Meinung:</p>
+          <div>
+            <textarea class="input-group-addon" style="text-align:left;width:100%;margin-bottom:10px;" placeholder="Kommentar abgeben ..." [(ngModel)]="newCommentText"></textarea>
+          </div>
+          <div>
+            <input class="btn btn-outline-primary" type="button" value="Kommentar hinzufügen" (click)="saveNewComment(newCommentText)">
+          </div>
+        </fieldset>
       </div>
-      <div *ngIf="commentsLoading == false">
-        <div *ngIf="comments.length == 0">
-          <p>Keine Kommentare</p>
-        </div>
-        <div *ngIf="comments.length > 0">
-          <p>TODO: implementieren</p>
-        </div>
-      </div>
-      <!-- 💩 Alexander Krieg -->
     </div>
+    <hr class="_ngcontent-c2">
+    <div class="row mt-3">
+      <div class="col">
+        <div *ngIf="commentsLoading == true">
+          <p>Lade Kommentare ...</p>
+        </div>
+        <div *ngIf="commentsLoading == false">
+          <div *ngIf="comments.length == 0">
+            <p>Keine Kommentare</p>
+          </div>
+          <div *ngIf="comments.length > 0">
+            <ul>
+              <li *ngFor="let c of comments">
+                <p>{{c.text}}</p>
+                <p>{{c.creationDate | date:'medium'}}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 💩 Alexander Krieg -->
   </div>
 </div>
