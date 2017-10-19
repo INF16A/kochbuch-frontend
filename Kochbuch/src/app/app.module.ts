@@ -13,7 +13,7 @@ import { AlleRezepteComponent } from './alle-rezepte/alle-rezepte.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RezeptanlegenComponent } from './rezeptanlegen/rezeptanlegen.component';
 import { RezeptansichtService } from "./rezeptansicht/rezeptansicht.service";
-
+import {AuthenticationService} from "./authentication/AuthenticationService";
 
 import { LOCALE_ID } from '@angular/core';
 
@@ -37,7 +37,7 @@ import { LOCALE_ID } from '@angular/core';
   ],
   providers: [
     RezeptansichtService,
-
+    AuthenticationService,
     /**
      * @author 💩 Alexander Krieg
      * Für die DatePipe (deutsches Datumsformat)
