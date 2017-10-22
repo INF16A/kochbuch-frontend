@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {RezeptListItem} from "../rezeptliste/RezeptListItem";
-import {Observable} from "rxjs";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Observable} from "rxjs/Rx";
+import {ActivatedRoute, Router, Params} from "@angular/router";
 
 /**
  * @author 💩
