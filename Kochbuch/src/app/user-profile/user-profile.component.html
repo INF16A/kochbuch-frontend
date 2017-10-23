@@ -1,30 +1,80 @@
+<!-- 
+    @author Yoco Harrmann
+    @author Robert Zebec
+    @author André Berberich
+-->
 <div class="userProfile">
-    <div class="container text-center">
-        <div class="card">
-            <h3 class="card-title">
-                Gibonni_123
-            </h3>
-            <img src="assets/user.png" class="card-img-top col-md-4 rounded-circle" />
-            <div class="card-text text-left">
-                <label>
-                    Benutzer seit:
+  <div class="container form-group">
+    <div>
+      <h3 class="text-center">
+        Gibonni_123
+      </h3>
+      <img src="assets/user.png" class="rounded-circle float-left col-lg-3" />
+      <h4 class="col-form-legend">Interessen</h4>
+      <div class="row">
+        <div class="form-check form-check-inline col-lg-5">
+          <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" disabled id="kochen" value="kochen"> Kochen
                 </label>
-                <p>
-                    15. Februar 2017
-                </p>
-                <label>
-                    Beschreibung:
+        </div>
+        <div class="form-check form-check-inline col-lg-5">
+          <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" checked="checked" disabled id="backen" value="backen"> Backen
                 </label>
-                <p>
-                    Mein Name ist Gibonni und ich komme aus der wunderschönen gegend neben Bologna, Italien. Zu meinen vorlieben gehören die traditionelen italienischen gerichte wie diverse Pasta und Bruschetta Sorten, aber auch ven den typischen Italienischen Salate schweife
-                    ich nicht ab.
-                </p>
-            </div>
         </div>
-        <div class="card col-md-10">
-            <h3>
-                Rezeptliste Platzhalter
-            </h3>
+      </div>
+      <div class="row">
+        <div class="form-check form-check-inline col-lg-5">
+          <label class="form-check-label">
+                  <input class="form-check-input" checked="checked" disabled type="checkbox" id="cocktails" value="cocktails"> Cocktails
+                </label>
         </div>
+        <div class="form-check form-check-inline col-lg-5">
+          <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" id="desserts" disabled value="desserts"> Desserts
+                </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-check form-check-inline col-lg-5">
+          <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" checked="checked" disabled id="vegetarisch" value="vegetarisch"> vegetarisch
+                </label>
+        </div>
+        <div class="form-check form-check-inline col-lg-5">
+          <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" disabled id="vegan" value="vegan"> vegan
+                </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-check form-check-inline col-lg-5">
+          <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" disabled id="bio" value="bio"> bio
+                </label>
+        </div>
+        <div class="form-check form-check-inline col-lg-5">
+          <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" disabled id="kalorienarm" value="kalorienarm"> kalorienarm
+                </label>
+        </div>
+      </div>
+      <div class="row">
+        <button type="button" class="btn btn-secondary btn-sm">Ändern</button>
+      </div>
     </div>
-</div>
+    <div class="container row">
+      <dl class="row">
+        <dt class="col-sm-3">Benutzer seit</dt>
+        <dd class="col-sm-9">15. Februar 2017</dd>
+
+        <dt class="col-sm-3">Beschreibung</dt>
+        <dd class="col-sm-9">
+          <p>Mein Name ist Gibonni und ich komme aus der wunderschönen gegend neben Bologna, Italien. Zu meinen vorlieben gehören
+            die traditionelen italienischen gerichte wie diverse Pasta und Bruschetta Sorten, aber auch ven den typischen
+            Italienischen Salate schweife ich nicht ab.</p>
+        </dd>
+      </dl>
+    </div>
+    <app-alle-rezepte></app-alle-rezepte>
+  </div>

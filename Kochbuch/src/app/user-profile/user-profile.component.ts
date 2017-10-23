@@ -1,3 +1,8 @@
+/**
+@author Yoco Harrmann
+@author Robert Zebec
+@author André Berberich
+*/
 import { Component, OnInit } from '@angular/core';
 
 @Component({
