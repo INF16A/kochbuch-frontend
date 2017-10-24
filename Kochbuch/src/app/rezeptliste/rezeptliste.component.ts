@@ -1,6 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {RezeptListItem} from "./RezeptListItem";
 
+/**
+ * @author Patrick Hahn
+ * @author Armin Beck
+ */
+
 @Component({
   selector: 'app-rezeptliste',
   templateUrl: './rezeptliste.component.html',

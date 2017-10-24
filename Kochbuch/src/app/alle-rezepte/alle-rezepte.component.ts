@@ -4,7 +4,8 @@ import {Observable} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 
 /**
- * @author 💩
+ * @author Patrick Hahn
+ * @author Armin Beck
  */
 
 @Component({
