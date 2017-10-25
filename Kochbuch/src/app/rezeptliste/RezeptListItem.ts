@@ -1,3 +1,8 @@
+/**
+ * @author Patrick Hahn
+ * @author Armin Beck
+ */
+
 export interface RezeptListItem {
   id: string
   name: string,
