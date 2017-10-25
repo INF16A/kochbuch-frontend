@@ -3,6 +3,7 @@ import { RezeptansichtService, Comment, Recipe } from "./rezeptansicht.service";
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, Params } from "@angular/router";
 import { Subscription } from 'rxjs/Subscription';
+import { AuthenticationService } from '../authentication/AuthenticationService';
 
 /**
  * @author Alexander Krieg
@@ -18,7 +19,8 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private rezeptAnsichtService: RezeptansichtService) {
+    private rezeptAnsichtService: RezeptansichtService,
+    private authService: AuthenticationService ) {
   }
 
   currentRecipe = {};
@@ -31,6 +33,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   private recipe: Recipe;
   private newCommentText: String = "";
   private commentAdding:boolean = false;
+  private isLoggedIn:boolean = false;
 
   ngOnInit() {
 
@@ -38,11 +41,18 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     this.rezeptAnsichtService.getRecipeData(0).subscribe(data => {
       this.currentRecipe = data;
     });
+    console.log(this.authService.authenticated);
 
     this.sub = this.route.queryParams.subscribe((params: Recipe) => {
       this.recipe = params;
+      console.log(this.recipe.id);
       this.loadComments();
     });
+
+    this.authService.authenticated.subscribe((params:boolean) => {
+      this.isLoggedIn = params;
+    });
+    this.authService.debugSetLogin(true);
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
@@ -60,6 +70,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     if(!text) return;
     this.commentAdding = true;
     let c = new Comment(text, 0, this.recipe.id, new Date());
+    console.log("C", c);
     this.rezeptAnsichtService.addComment(c, (fail:boolean, data:any) => {
       if(fail){
         console.error(JSON.stringify(data));

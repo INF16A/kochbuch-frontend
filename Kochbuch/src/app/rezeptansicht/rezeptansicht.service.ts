@@ -12,8 +12,8 @@ export class Comment{
   private id:Number;
   constructor(
     public text:String,
-    public userID:Number, // später user object
-    public recipeID:Number, // später rezept objekt sobald es die db gibt
+    public user_id:Number, // später user object
+    public recipe_id:Number, // später rezept objekt sobald es die db gibt
     public creationDate:Date
   ) {}
   public getID():Number{
@@ -110,6 +110,10 @@ export class RezeptansichtService {
   public getRecipeComments(recipeId:Number, callback: (ar:Comment[]) => void){
     this.fetchRecipeComments(recipeId).subscribe((res:Response) => {
       callback(res.json());
+    }, error => {
+      if(callback){
+        callback([]);
+      }
     });
   }
   private fetchRecipeComments(id:Number){
