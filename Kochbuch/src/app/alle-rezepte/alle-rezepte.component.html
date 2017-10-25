@@ -1,10 +1,21 @@
-<!-- @author Patrick Hahn -->
-<nav class="navbar navbar-light bg-light">
-  <h2 class="navbar-brand">Alle Rezepte</h2>
-  <form class="form-inline">
-    <input class="form-control" type="text" placeholder="Suchen" aria-label="Suchen" [ngModel]="searchValue"
-           (ngModelChange)="searchTextChanged($event)" [ngModelOptions]="{standalone: true}">
-  </form>
-</nav>
-<app-rezeptliste [rezepte]="rezeptListe | async"></app-rezeptliste>
-<!-- <app-rezeptliste [rezepte]="rezeptListe"></app-rezeptliste> -->
+
+<!-- @authors Nico Frischkorn Patrick Hahn -->
+    <div class="background">
+        <div class="search">
+            <div class="input-group col-md-5 center">
+                <input type="text" placeholder="Suchen" [ngModel]="searchValue" (ngModelChange)="searchTextChanged($event)" [ngModelOptions]="{standalone: true}">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                        <i class="material-icons">search</i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Alle Rezepte</h2>
+
+        <app-rezeptliste [rezepte]="rezeptListe | async"></app-rezeptliste>
+    </div>
+

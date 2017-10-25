@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve -open",
     "build": "ng build",
     "buildProd": "ng build --base-href /kochbuch-frontend/",
     "deploy": "npm run buildProd && git add dist -f && git commit -m \"update dist\" && cd .. && git subtree push --prefix Kochbuch/dist origin gh-pages && cd Kochbuch",

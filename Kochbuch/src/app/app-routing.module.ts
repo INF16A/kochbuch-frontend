@@ -4,11 +4,12 @@ import {RezeptansichtComponent} from "./rezeptansicht/rezeptansicht.component";
 import {AlleRezepteComponent} from "./alle-rezepte/alle-rezepte.component";
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {RezeptanlegenComponent} from "./rezeptanlegen/rezeptanlegen.component";
+import {HomeComponent} from './home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'rezeptliste',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {path: 'rezeptansicht', component: RezeptansichtComponent},
@@ -17,7 +18,8 @@ const routes: Routes = [
     path: 'user-profile',
     component: UserProfileComponent
   },
-  {path: 'rezeptanlegen', component: RezeptanlegenComponent}
+  {path: 'rezeptanlegen', component: RezeptanlegenComponent},
+  {path: 'home', component: HomeComponent}
 ];
 
 @NgModule({

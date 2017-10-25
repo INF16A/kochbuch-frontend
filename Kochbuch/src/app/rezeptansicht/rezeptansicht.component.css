@@ -1,16 +1,42 @@
 /**
- * @author Alexander Krieg
- */
+@authors
+Nico Frischkorn
+Alexander Krieg
+*/
+.main-image{
+    height: 600px;
+    width: 100%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    margin-bottom: 50px;
+    background: black;
+}
 
- ul.comments {
-     margin-left: 0px;
-     padding-left: 0px;
- }
- ul.comments > li.card {
-     margin-bottom: 15px;
-     padding: 5px;
-     /* transition: box-shadow 0.15s ease-in-out; */
+.main-image img{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    opacity: 0.8;
+}
+
+h1 {
+    color: #484848;
+}
+
+@media (max-width: 575px) {  /* For mobile  */
+    .main-image{
+        height: 400px;
     }
+}
+
+ul.comments {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+ul.comments > li.card {
+  margin-bottom: 15px;
+  padding: 5px;
+  /* transition: box-shadow 0.15s ease-in-out; */
+}
 ul.comments > li.card:hover {
-    /* box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.3); */
+  /* box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.3); */
 }
