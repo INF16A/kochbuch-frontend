@@ -16,6 +16,10 @@ import { RezeptansichtService } from "./rezeptansicht/rezeptansicht.service";
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import {AuthenticationService} from "./authentication/AuthenticationService";
+
+import { LOCALE_ID } from '@angular/core';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +42,16 @@ import { FooterComponent } from './shared/footer/footer.component';
     AppRoutingModule,
     NgbModule.forRoot()
   ],
-  providers: [RezeptansichtService],
+  providers: [
+    RezeptansichtService,
+    AuthenticationService,
+    /**
+     * @author 💩 Alexander Krieg
+     * Für die DatePipe (deutsches Datumsformat)
+     */
+    { provide: LOCALE_ID, useValue: "de-CH" },
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

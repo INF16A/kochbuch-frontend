@@ -1,7 +1,12 @@
 import {Component, OnInit} from "@angular/core";
 import {RezeptListItem} from "../rezeptliste/RezeptListItem";
-import {Observable} from "rxjs";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Observable} from "rxjs/Rx";
+import {ActivatedRoute, Router, Params} from "@angular/router";
+
+/**
+ * @author Patrick Hahn
+ * @author Armin Beck
+ */
 
 @Component({
   selector: 'app-alle-rezepte',
@@ -58,7 +63,7 @@ export class AlleRezepteComponent implements OnInit {
   getData(): Observable<RezeptListItem[]> {
     return Observable.of([
       {
-        id: "0000-0000-000000-000000",
+        id: "0",
         name: "Maultaschen",
         beschreibung: "Ein sehr leckeres Gericht aus dem Schwabenland.",
         aufwandmin: 20,
@@ -71,7 +76,7 @@ export class AlleRezepteComponent implements OnInit {
         tags: ["Schwäbisch", "lecker"]
       },
       {
-        id: "0000-0000-000000-000000",
+        id: "1",
         name: "Schneckle",
         beschreibung: "Schneckle isst man halt in Frankreich, is halt so. ",
         aufwandmin: 20,
@@ -84,7 +89,7 @@ export class AlleRezepteComponent implements OnInit {
         tags: ["Französisch", "nicht-lecker", "exotisch", "komisch"]
       },
       {
-        id: "0000-0000-000000-000000",
+        id: "2",
         name: "Spaghetti Carbonara",
         beschreibung: "Singularis Porcus!",
         aufwandmin: 20,
@@ -97,7 +102,7 @@ export class AlleRezepteComponent implements OnInit {
         tags: ["Italienisch", "lecker"]
       },
       {
-        id: "0000-0000-000000-000000",
+        id: "3",
         name: "Maultaschen",
         beschreibung: "Ein sehr leckeres Gericht aus dem Schwabenland.",
         aufwandmin: 20,
@@ -110,7 +115,7 @@ export class AlleRezepteComponent implements OnInit {
         tags: ["Schwäbisch", "lecker"]
       },
       {
-        id: "0000-0000-000000-000000",
+        id: "4",
         name: "Schneckle",
         beschreibung: "Schneckle isst man halt in Frankreich, is halt so. ",
         aufwandmin: 20,
@@ -123,7 +128,7 @@ export class AlleRezepteComponent implements OnInit {
         tags: ["Französisch", "nicht-lecker", "exotisch", "komisch"]
       },
       {
-        id: "0000-0000-000000-000000",
+        id: "5",
         name: "Spaghetti Carbonara",
         beschreibung: "Singularis Porcus!",
         aufwandmin: 20,
@@ -136,7 +141,7 @@ export class AlleRezepteComponent implements OnInit {
         tags: ["Italienisch", "lecker"]
       },
       {
-        id: "0000-0000-000000-000000",
+        id: "6",
         name: "Maultaschen",
         beschreibung: "Ein sehr leckeres Gericht aus dem Schwabenland.",
         aufwandmin: 20,
@@ -149,7 +154,7 @@ export class AlleRezepteComponent implements OnInit {
         tags: ["Schwäbisch", "lecker"]
       },
       {
-        id: "0000-0000-000000-000000",
+        id: "7",
         name: "Schneckle",
         beschreibung: "Schneckle isst man halt in Frankreich, is halt so. ",
         aufwandmin: 20,
@@ -162,7 +167,7 @@ export class AlleRezepteComponent implements OnInit {
         tags: ["Französisch", "nicht-lecker", "exotisch", "komisch"]
       },
       {
-        id: "0000-0000-000000-000000",
+        id: "8",
         name: "Spaghetti Carbonara",
         beschreibung: "Singularis Porcus!",
         aufwandmin: 20,
