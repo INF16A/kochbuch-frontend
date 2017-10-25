@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Http, Response, Headers, RequestOptions } from '@angular/http';
+import {User} from '../user.model';
 
 
 /**
@@ -10,20 +11,16 @@ import {Http, Response, Headers, RequestOptions } from '@angular/http';
 // 💩 Alexander Krieg
 export class Comment{
   private id:Number;
+  public user:User;
   constructor(
     public text:String,
-    public userID:Number, // später user object
-    public recipeID:Number, // später rezept objekt sobald es die db gibt
+    public user_id:Number,
+    public recipe_id:Number,
     public creationDate:Date
   ) {}
   public getID():Number{
     return this.id;
   }
-}
-export class Recipe{
-  constructor(
-    public id:Number
-  ) {}
 }
 // 💩 Alexander Krieg
 
@@ -103,13 +100,16 @@ export class RezeptansichtService {
   /**
    * Alle Kommentare zu einem Rezept.
    * Sind vom Server sortiert nach 'creationDate'.
-   * Eventuell umbau zu Observable, wird aber eh nur an einer Stelle gebraucht.
    * @param recipeId 
    * @param callback 
    */
   public getRecipeComments(recipeId:Number, callback: (ar:Comment[]) => void){
     this.fetchRecipeComments(recipeId).subscribe((res:Response) => {
       callback(res.json());
+    }, error => {
+      if(callback){
+        callback([]);
+      }
     });
   }
   private fetchRecipeComments(id:Number){

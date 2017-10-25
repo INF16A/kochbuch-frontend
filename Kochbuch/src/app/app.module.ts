@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import {AuthenticationService} from "./authentication/AuthenticationService";
+import { RecipeServie } from './alle-rezepte/alle-rezepte.service';
 
 import { LOCALE_ID } from '@angular/core';
 
@@ -50,6 +51,8 @@ import { LOCALE_ID } from '@angular/core';
      * Für die DatePipe (deutsches Datumsformat)
      */
     { provide: LOCALE_ID, useValue: "de-CH" },
+    //Daniel Abel
+    RecipeServie
     
   ],
   bootstrap: [AppComponent]
