@@ -23,6 +23,7 @@ export class Recipe {
     pics: Pic[];
     recipeIngredients: RecipeIngredient[];
     tags: Tag[];
+    effort: number;
   }
 
   @Injectable()

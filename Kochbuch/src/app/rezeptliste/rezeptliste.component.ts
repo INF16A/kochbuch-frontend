@@ -17,5 +17,6 @@ export class RezeptlisteComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.rezepte);
   }
 }

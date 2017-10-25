@@ -16,40 +16,40 @@ import {RecipeServie, Recipe} from './alle-rezepte.service';
 })
 export class AlleRezepteComponent implements OnInit {
   searchValue: string;
-  rezeptListe: Observable<RezeptListItem[]>;
-  // rezeptListe: Recipe[];
+  // rezeptListe: Observable<RezeptListItem[]>;
+  rezeptListe: Recipe[];
 
   constructor(private route: ActivatedRoute, private router: Router, private rezeptService: RecipeServie ) {
 
     
-    this.rezeptListe = this.route.queryParams
-      .map(params => params['search'] || '')
-      .debounceTime(250)
-      .do(searchText => this.searchValue = searchText)
-      .map(searchText => searchText.toLowerCase().trim())
-      .flatMap(searchText => {
-        return this.getData()
-          .flatMap(liste => liste)
-          .filter((rezept: RezeptListItem, index: number): boolean => {
-            const name = rezept.name.toLowerCase();
-            const description = rezept.beschreibung.toLowerCase();
-            if (name.includes(searchText)) {
-              return true;
-            }
-            if (description.includes(searchText)) {
-              return true;
-            }
-            return this.findTag(rezept, searchText);
-          }).toArray();
-      });
+    // this.rezeptListe = this.route.queryParams
+    //   .map(params => params['search'] || '')
+    //   .debounceTime(250)
+    //   .do(searchText => this.searchValue = searchText)
+    //   .map(searchText => searchText.toLowerCase().trim())
+    //   .flatMap(searchText => {
+    //     return this.getData()
+    //       .flatMap(liste => liste)
+    //       .filter((rezept: RezeptListItem, index: number): boolean => {
+    //         const name = rezept.name.toLowerCase();
+    //         const description = rezept.beschreibung.toLowerCase();
+    //         if (name.includes(searchText)) {
+    //           return true;
+    //         }
+    //         if (description.includes(searchText)) {
+    //           return true;
+    //         }
+    //         return this.findTag(rezept, searchText);
+    //       }).toArray();
+    //   });
       
   }
 
   ngOnInit() {
-    // this.rezeptService.getAllRecipes(alleRezepte => {
-    //   this.rezeptListe = alleRezepte;
-    //   console.log(this.rezeptListe);
-    // });
+    this.rezeptService.getAllRecipes(alleRezepte => {
+      this.rezeptListe = alleRezepte;
+      console.log(this.rezeptListe);
+    });
   }
 
   public searchTextChanged(newVal) {
