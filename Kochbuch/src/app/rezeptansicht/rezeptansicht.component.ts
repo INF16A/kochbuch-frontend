@@ -69,7 +69,8 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   public saveNewComment(text:String){
     if(!text) return;
     this.commentAdding = true;
-    let c = new Comment(text, 0, this.recipe.id, new Date());
+    let c = new Comment(text, 1, 1, new Date());
+    // let c = new Comment(text, 1, this.recipe.id, new Date());
     console.log("C", c);
     this.rezeptAnsichtService.addComment(c, (fail:boolean, data:any) => {
       if(fail){

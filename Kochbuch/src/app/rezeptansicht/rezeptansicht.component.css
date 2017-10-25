@@ -1,0 +1,16 @@
+/**
+ * @author Alexander Krieg
+ */
+
+ ul.comments {
+     margin-left: 0px;
+     padding-left: 0px;
+ }
+ ul.comments > li.card {
+     margin-bottom: 15px;
+     padding: 5px;
+     /* transition: box-shadow 0.15s ease-in-out; */
+    }
+ul.comments > li.card:hover {
+    /* box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.3); */
+}
