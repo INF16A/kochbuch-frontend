@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RezeptansichtService, Comment, Recipe } from "./rezeptansicht.service";
+import { RezeptansichtService, Comment } from "./rezeptansicht.service";
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, Params } from "@angular/router";
 import { Subscription } from 'rxjs/Subscription';
 import { AuthenticationService } from '../authentication/AuthenticationService';
+import { Recipe } from '../alle-rezepte/alle-rezepte.service'
 
 /**
  * @author Alexander Krieg
