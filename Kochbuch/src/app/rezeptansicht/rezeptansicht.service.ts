@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Http, Response, Headers, RequestOptions } from '@angular/http';
-
+import {User} from '../user.model';
 
 
 /**
@@ -11,20 +11,16 @@ import {Http, Response, Headers, RequestOptions } from '@angular/http';
 // 💩 Alexander Krieg
 export class Comment{
   private id:Number;
+  public user:User;
   constructor(
     public text:String,
-    public user_id:Number, // später user object
-    public recipe_id:Number, // später rezept objekt sobald es die db gibt
+    public user_id:Number,
+    public recipe_id:Number,
     public creationDate:Date
   ) {}
   public getID():Number{
     return this.id;
   }
-}
-export class Recipe{
-  constructor(
-    public id:Number
-  ) {}
 }
 // 💩 Alexander Krieg
 
