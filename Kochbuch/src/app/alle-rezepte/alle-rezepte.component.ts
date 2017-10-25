@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {RezeptListItem} from "../rezeptliste/RezeptListItem";
 import {Observable} from "rxjs/Rx";
 import {ActivatedRoute, Router, Params} from "@angular/router";
+import {RecipeServie, Recipe} from './alle-rezepte.service';
 
 /**
  * @author Patrick Hahn
@@ -16,8 +17,11 @@ import {ActivatedRoute, Router, Params} from "@angular/router";
 export class AlleRezepteComponent implements OnInit {
   searchValue: string;
   rezeptListe: Observable<RezeptListItem[]>;
+  // rezeptListe: Recipe[];
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router, private rezeptService: RecipeServie ) {
+
+    
     this.rezeptListe = this.route.queryParams
       .map(params => params['search'] || '')
       .debounceTime(250)
@@ -38,9 +42,14 @@ export class AlleRezepteComponent implements OnInit {
             return this.findTag(rezept, searchText);
           }).toArray();
       });
+      
   }
 
   ngOnInit() {
+    // this.rezeptService.getAllRecipes(alleRezepte => {
+    //   this.rezeptListe = alleRezepte;
+    //   console.log(this.rezeptListe);
+    // });
   }
 
   public searchTextChanged(newVal) {

@@ -14,6 +14,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RezeptanlegenComponent } from './rezeptanlegen/rezeptanlegen.component';
 import { RezeptansichtService } from "./rezeptansicht/rezeptansicht.service";
 import {AuthenticationService} from "./authentication/AuthenticationService";
+import { RecipeServie } from './alle-rezepte/alle-rezepte.service';
 
 import { LOCALE_ID } from '@angular/core';
 
@@ -43,6 +44,8 @@ import { LOCALE_ID } from '@angular/core';
      * Für die DatePipe (deutsches Datumsformat)
      */
     { provide: LOCALE_ID, useValue: "de-CH" },
+    //Daniel Abel
+    RecipeServie
     
   ],
   bootstrap: [AppComponent]
