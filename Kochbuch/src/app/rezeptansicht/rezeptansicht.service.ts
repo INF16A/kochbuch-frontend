@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {Http, Response, Headers, RequestOptions } from '@angular/http';
 
 
+
 /**
  * @author Alexander Krieg
  */
@@ -103,7 +104,6 @@ export class RezeptansichtService {
   /**
    * Alle Kommentare zu einem Rezept.
    * Sind vom Server sortiert nach 'creationDate'.
-   * Eventuell umbau zu Observable, wird aber eh nur an einer Stelle gebraucht.
    * @param recipeId 
    * @param callback 
    */
