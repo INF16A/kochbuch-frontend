@@ -33,29 +33,41 @@ export class Recipe {
   @Injectable()
   export class RecipeServie {
 
-    constructor(private http:Http) {
+    private currRezept: Recipe[];
+
+    constructor(private http: Http) {
 
     }
 
-    public getRecipeById(id:number, callback: (val:Recipe) => void) {
-      this.fetchRecipeById(id).subscribe((res:Response) => {
+    public getRecipeByIdLocal(id: number) {
+      for (const actRecipe of this.currRezept) {
+        if (actRecipe.id === id) {
+          return actRecipe;
+        }
+      }
+      return null;
+    }
+
+    public getRecipeById(id:number, callback: (val: Recipe) => void) {
+      this.fetchRecipeById(id).subscribe((res: Response) => {
         callback(res.json());
       });
     }
 
 
-    private fetchRecipeById(id:number){
-      let url = 'http://localhost:8080/recipe/{id}?id='+id;
+    private fetchRecipeById(id: number) {
+      const url = 'http://localhost:8080/recipe/{id}?id=' + id;
       return this.http.get(url);
     }
 
-    public getAllRecipes(callback: (ar:Recipe[]) => void){
-      this.fetchRecipe().subscribe((res:Response) => {
+    public getAllRecipes(callback: (ar: Recipe[]) => void) {
+      this.fetchRecipe().subscribe((res: Response) => {
+        this.currRezept = res.json();
         callback(res.json());
       });
     }
-    private fetchRecipe(){
-      let url = 'http://localhost:8080/recipes';
+    private fetchRecipe() {
+      const url = 'http://localhost:8080/recipes';
       return this.http.get(url);
     }
 
