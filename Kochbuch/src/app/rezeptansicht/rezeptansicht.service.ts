@@ -10,7 +10,7 @@ import {User} from '../user.model';
 
 // 💩 Alexander Krieg
 export class Comment{
-  private id:Number;
+  public id:Number;
   public user:User;
   constructor(
     public text:String,
@@ -18,14 +18,13 @@ export class Comment{
     public recipe_id:Number,
     public creationDate:Date
   ) {}
-  public getID():Number{
-    return this.id;
-  }
 }
 // 💩 Alexander Krieg
 
 @Injectable()
 export class RezeptansichtService {
+
+  private static SERVER = "http://localhost:8080";
 
   constructor(private http:Http) {
   }
@@ -105,7 +104,12 @@ export class RezeptansichtService {
    */
   public getRecipeComments(recipeId:Number, callback: (ar:Comment[]) => void){
     this.fetchRecipeComments(recipeId).subscribe((res:Response) => {
-      callback(res.json());
+      let ret = new Array<Comment>();
+      res.json().forEach(element => {
+        ret.push
+      });
+      let coms = res.json() as Comment[];
+      callback(coms);
     }, error => {
       if(callback){
         callback([]);
@@ -113,14 +117,28 @@ export class RezeptansichtService {
     });
   }
   private fetchRecipeComments(id:Number){
-    let url = "http://localhost:8080/comments/"+id;
+    let url = RezeptansichtService.SERVER+"/comments/"+id;
     return this.http.get(url);
   }
   public addComment(comment:Comment, callback?: (fail:boolean, data:any) => void){
-    let url = "http://localhost:8080/comment";
+    let url = RezeptansichtService.SERVER+"/comment";
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     this.http.post(url, JSON.stringify(comment), options).subscribe(data => {
+      if(callback){
+        callback(false, data);
+      }
+    }, error => {
+      if(callback){
+        callback(true, error);
+      }
+    });
+  }
+  public deleteComment(comment:Comment, callback?: (fail:boolean, data:any) => void){
+    let url = RezeptansichtService.SERVER+"/comment/delete";
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    this.http.post(url, JSON.stringify(comment.id), options).subscribe(data => {
       if(callback){
         callback(false, data);
       }
