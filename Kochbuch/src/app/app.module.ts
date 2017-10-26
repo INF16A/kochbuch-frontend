@@ -9,6 +9,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { RegistrierungsmodalComponent } from './registrierungsmodal/registrierungsmodal.component';
 import { RezeptlisteComponent } from './rezeptliste/rezeptliste.component';
 import { DifficultyPipe } from './difficulty.pipe';
+import { IngredientUnitPipe } from './addingredientmodal/ingredientunit.pipe';
 import { AlleRezepteComponent } from './alle-rezepte/alle-rezepte.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RezeptanlegenComponent } from './rezeptanlegen/rezeptanlegen.component';
@@ -18,8 +19,10 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import {AuthenticationService} from "./authentication/AuthenticationService";
 import { RecipeServie } from './alle-rezepte/alle-rezepte.service';
+import { AddingredientmodalComponent } from './addingredientmodal/addingredientmodal.component';
 
 import { LOCALE_ID } from '@angular/core';
+
 
 
 @NgModule({
@@ -29,12 +32,14 @@ import { LOCALE_ID } from '@angular/core';
     RegistrierungsmodalComponent,
     RezeptlisteComponent,
     DifficultyPipe,
+    IngredientUnitPipe,
     AlleRezepteComponent,
     UserProfileComponent,
     RezeptanlegenComponent,
     HomeComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    AddingredientmodalComponent
   ],
   imports: [
     BrowserModule,

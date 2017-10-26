@@ -53,6 +53,11 @@ label {
     -webkit-transition: 0.2s ease all;
 }
 
+.modal-body .form-group label {
+    position: relative;
+    top: 0em;
+}
+
 input:focus~label,
 input:valid~label {
     top: -15px;
