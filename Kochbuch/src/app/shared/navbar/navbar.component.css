@@ -1,0 +1,21 @@
+/**
+@authors
+Nico Frischkorn 
+ 
+*/
+
+.navbar-top {
+    position: absolute;
+    z-index: 9999;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    height: 60px;
+}
+
+.navbar-top img {
+    height: 30px;
+}
+
+#header-img {
+    height: 60px;
+}

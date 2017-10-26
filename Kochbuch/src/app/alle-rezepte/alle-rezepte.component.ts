@@ -7,6 +7,7 @@ import {RecipeServie, Recipe} from './alle-rezepte.service';
 /**
  * @author Patrick Hahn
  * @author Armin Beck
+ * @author Daniel Abel
  */
 
 @Component({

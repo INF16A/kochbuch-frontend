@@ -1,0 +1,35 @@
+/**
+@authors
+Nico Frischkorn 
+ 
+*/
+
+h2 {
+    color: #484848;
+    margin: 0 0 50px 50px;
+}
+
+.header{
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.container{
+    padding-top: 60px;
+}
+
+.background {
+    height: 250px;
+}
+
+.search{
+    top: 125px;
+}
+
+button {
+    background: white;
+    color: #ff2a00;
+}
+ button:hover {
+    background: #ff2a00;
+    color: white;
+}
