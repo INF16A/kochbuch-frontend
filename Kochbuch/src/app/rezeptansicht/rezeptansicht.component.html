@@ -1,18 +1,22 @@
+<!-- Patrick Eichert, Theresa Reus -->
+
 <div class="row">
     <div class="main-image">
       <img src="{{currentRecipe.image}}">
     </div>
   </div>
 <div class="container">
- 
+
   <div class="row">
-      
+
     <div class="col">
 
 
       <h1>{{currentRecipe.name}}</h1>
 
       <hr>
+
+      <p>{{currentRecipe.description}}</p>
 
       <h3>Zutaten</h3>
       <div class="input-group col-5">
@@ -26,9 +30,9 @@
           <th class="text-right">Menge</th>
           <th>Zutat</th>
         </tr>
-        <tr *ngFor="let i of currentRecipe.ingredients">
-          <td class="text-right">{{i.amountPerPerson * personCount}} {{i.unit}}</td>
-          <td>{{i.name}}</td>
+        <tr *ngFor="let i of currentRecipe.recipeIngredients">
+          <td class="text-right">{{i.amountPerPerson * personCount}} {{unit[i.ingredient.unit]}}</td>
+          <td>{{i.ingredient.name}}</td>
         </tr>
       </table>
 
@@ -36,15 +40,29 @@
 
       <h3>Zubereitung</h3>
       <ol>
-        <li *ngFor="let i of currentRecipe.instructions">{{i}}</li>
+        <li *ngFor="let i of currentRecipe.preSteps">
+          {{i.description}}
+          <br>
+          <span class="badge badge-secondary">Zeitaufwand: {{i.effort}} min</span>
+        </li>
       </ol>
     </div>
     <div class="col">
       <div>
-        <span>von {{currentRecipe.creatorName}}</span>
+        <!-- TODO: change email to username if db is changed -->
+        <span>von {{currentRecipe.creator.email}}</span>
       </div>
+      <div class="progress" [ngSwitch]="currentRecipe.difficulty">
+        <div *ngSwitchCase="1" class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">Leicht</div>
+        <div *ngSwitchCase="2" class="progress-bar bg-success" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">Leicht-Mittel</div>
+        <div *ngSwitchCase="3" class="progress-bar bg-info" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">Mittel</div>
+        <div *ngSwitchCase="4" class="progress-bar bg-warning" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">Mittel-Schwer</div>
+        <div *ngSwitchCase="5" class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Schwer</div>
+      </div>
+
       <div>
-        <span class="badge badge-pill badge-primary mr-1" *ngFor="let tag of currentRecipe.tags">{{tag}}</span>
+        <!-- TODO: add Effort and Picture to prestep -->
+        <span class="badge badge-pill badge-primary mr-1" *ngFor="let tag of currentRecipe.tags">{{tag.name}}</span>
       </div>
       <span class="text-danger" *ngIf="currentRecipe.rating < 0">
         <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{-currentRecipe.rating}}
@@ -52,6 +70,7 @@
       <span *ngIf="currentRecipe.rating > 0" class=" text-success">
         <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{currentRecipe.rating}}
       </span>
+
     </div>
   </div>
   <!-- 💩 Alexander Krieg -->
