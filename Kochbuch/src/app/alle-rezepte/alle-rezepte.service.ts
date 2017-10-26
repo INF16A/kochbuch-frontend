@@ -1,6 +1,4 @@
-/**
- * @author Daniel Abel
- */
+
 
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
@@ -14,6 +12,7 @@ import { Comment } from '../rezeptansicht/rezeptansicht.service';
 
 /**
  * @author Daniel Abel
+ * @author Alexander Krieg
  */
 
 export class Recipe {
@@ -41,7 +40,7 @@ export class Recipe {
 
     public getRecipeByIdLocal(id: number) {
       for (const actRecipe of this.currRezept) {
-        if (actRecipe.id === id) {
+        if (actRecipe.id == id) {
           return actRecipe;
         }
       }
