@@ -1,3 +1,7 @@
+/**
+ * @author Daniel Abel
+ */
+
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Http, Response, Headers, RequestOptions } from '@angular/http';
@@ -23,6 +27,7 @@ export class Recipe {
     pics: Pic[];
     recipeIngredients: RecipeIngredient[];
     tags: Tag[];
+    effort: number;
   }
 
   @Injectable()
