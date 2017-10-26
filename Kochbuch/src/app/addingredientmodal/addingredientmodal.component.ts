@@ -19,13 +19,16 @@ export class AddingredientmodalComponent implements OnInit {
   units = IngredientUnit;
   unitKeys;
 
-  constructor(private modalService: NgbModal) {
-    this.ingredient = new Ingredient()
-    this.ingredient.name = "";    
+  constructor(private modalService: NgbModal) {    
     this.unitKeys = Object.keys(this.units).filter(Number)
   }
 
+  private initialize(){
+    this.ingredient = new Ingredient();
+  }
+
   open(content) {
+    this.initialize();
     this.modalService.open(content).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
