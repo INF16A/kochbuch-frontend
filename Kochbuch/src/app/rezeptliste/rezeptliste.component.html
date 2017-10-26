@@ -1,40 +1,4 @@
-<!-- <div class="container-fluid">
-  <div class="card-columns">
-    <div class="card" *ngFor="let rezept of rezepte">
-      <img src="{{rezept.img}}" class="card-img-top " style="object-fit: cover;">
-      <div class="card-body card-block">
-        <h2 class="card-title">{{rezept.name}}</h2>
-        <div class="card-subtitle text-muted">{{rezept.creator}} {{rezept.creatorDate | date:"dd.MM.yyyy"}}</div>
-        <p class="card-text ">{{rezept.beschreibung}}</p>
-        <a class="btn btn-outline-primary" routerLink="/rezeptansicht" [queryParams]="rezept">Jetzt kochen</a>
-        //!-- <a class="btn btn-outline-primary" routerLink="/rezeptansicht">Jetzt kochen</a> --
-      </div>
-      <div class="card-footer d-flex flex-row flex-wrap justify-content-start">
-        <a *ngFor="let tag of rezept.tags" routerLink="./" [queryParams]="{search: tag}" class="btn btn-sm btn-outline-secondary m-1">{{tag}}</a>
-      </div>
-      <div class="card-footer d-flex flex-row justify-content-around">
-        <span class="text-danger" *ngIf="rezept.bewertung < 0">
-          <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{-rezept.bewertung}}
-        </span>
-        <span *ngIf="rezept.bewertung > 0" class=" text-success">
-            <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{rezept.bewertung}}
-          </span>
-        <span [ngClass]="{  'text-success':rezept.schwierigkeit===0, 'text-warning':rezept.schwierigkeit===1,'text-danger':rezept.schwierigkeit===2 }">
-            <i *ngIf="rezept.schwierigkeit > 0" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-              {{rezept.schwierigkeit | difficulty}}
-            </span>
-        <span class="">
-           <i class="fa fa-clock-o" aria-hidden="true"></i> {{rezept.aufwandmin}} min.
-          </span>
-        <span class="">
-            <i [ngClass]="{'fa-user':rezept.forpersons===1, 'fa-users':rezept.forpersons>1}" class="fa" aria-hidden="true"></i> {{rezept.forpersons}}
-        </span>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<!-- Daniel Abel -->
+<!-- @author: Daniel Abel -->
 <div class="container-fluid">
   <div class="card-columns">
     <div class="card" *ngFor="let rezept of rezepte">
