@@ -1,3 +1,7 @@
+/**
+ * @author Daniel Abel
+ */
+
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Http, Response, Headers, RequestOptions } from '@angular/http';

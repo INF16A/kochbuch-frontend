@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {RezeptListItem} from "./RezeptListItem";
+import {Recipe} from '../alle-rezepte/alle-rezepte.service';
 
 /**
  * @author Patrick Hahn
@@ -12,11 +13,10 @@ import {RezeptListItem} from "./RezeptListItem";
   styleUrls: ['./rezeptliste.component.css']
 })
 export class RezeptlisteComponent implements OnInit {
-  @Input() rezepte: RezeptListItem[];
+  @Input() rezepte: Recipe[];
   constructor() {
   }
 
   ngOnInit() {
-    console.log(this.rezepte);
   }
 }
