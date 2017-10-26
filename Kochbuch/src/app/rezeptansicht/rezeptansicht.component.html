@@ -55,7 +55,7 @@
     </div>
   </div>
   <!-- 💩 Alexander Krieg -->
-  <div>
+  <div class="commentdetails">
     <h3>Kommentare</h3>
     <div class="row mt-3" *ngIf="isLoggedIn">
       <div class="col">
@@ -88,6 +88,9 @@
           <div *ngIf="comments.length > 0">
             <ul class="comments">
               <li *ngFor="let c of comments" class="card">
+                <div class="commentDeletion" *ngIf="(isLoggedIn && (authService.currentUser) && (c.user.id == authService.currentUser.id))">
+                  <div (click)="deleteComment(c)">X</div>
+                </div>
                 <p>{{c.text}}</p>
                 <p class="small">geschrieben von {{c.user.id}}  - ( registriert seit {{c.user.creationDate | date:'mediumDate'}} )</p>
                 <p class="small">{{c.creationDate | date:'medium'}}</p>
