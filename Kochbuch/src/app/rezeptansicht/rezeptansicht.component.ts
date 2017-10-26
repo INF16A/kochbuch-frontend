@@ -28,6 +28,12 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   currentRecipe = {};
   personCount: number = 4;
 
+  //Kühnlein
+  upratings:number=0;
+  downratings:number=0;
+  givenRating:number=0;
+  //!Kühnlein
+
   // --> 💩 Alexander Krieg
   private commentsLoading = true;
   private comments:Comment[] = [];
@@ -50,10 +56,12 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
       if(serviceRe == null) return;
       this.recipe = serviceRe;
       this.loadComments();
+      this.updateRating();
     });
 
     this.authService.authenticated.subscribe((params:boolean) => {
       this.isLoggedIn = params;
+      this.updateGivenRating();
     });
     this.authService.debugSetLogin(true);
   }
@@ -117,4 +125,25 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     return items;
   }
 
+
+  //Kühnlein
+  private updateRating(){
+    this.rezeptAnsichtService.countRatingUp(this.recipe.id, amount => {
+      this.upratings = amount;
+      console.log("Upratings: "+this.upratings);
+    });
+
+    this.rezeptAnsichtService.countRatingDown(this.recipe.id, amount => {
+      this.downratings = amount;
+      console.log("Downratings: "+this.downratings);
+    });
+  }
+
+  private updateGivenRating(){
+    this.rezeptAnsichtService.getGivenRating(this.recipe.id, 1 /*TODO: currentuser.id*/,givenRating => {
+      this.givenRating = givenRating;
+      console.log("GivenRating: "+this.givenRating);
+    });
+  }
+  //!Kühnlein
 }
