@@ -32,9 +32,26 @@ ul.comments {
   margin-left: 0px;
   padding-left: 0px;
 }
+.commentdetails p {
+    color: #000;
+}
+.commentdetails .commentDeletion {
+    position: absolute;
+    right:5px;
+    top: 5px;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: 0.25em;
+    color: rgba(0, 0, 0, .125);
+    font-weight: bold;
+    cursor: pointer;
+}
+.commentdetails .commentDeletion:hover {
+    color: #000;
+}
 ul.comments > li.card {
   margin-bottom: 15px;
   padding: 5px;
+  position: relative;
   /* transition: box-shadow 0.15s ease-in-out; */
 }
 ul.comments > li.card:hover {

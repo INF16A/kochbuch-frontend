@@ -4,7 +4,7 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, Params } from "@angular/router";
 import { Subscription } from 'rxjs/Subscription';
 import { AuthenticationService } from '../authentication/AuthenticationService';
-import { Recipe } from '../alle-rezepte/alle-rezepte.service'
+import { Recipe, RecipeServie} from '../alle-rezepte/alle-rezepte.service'
 import {Ingredient} from "../ingredient.model";
 
 /**
@@ -25,7 +25,8 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private rezeptAnsichtService: RezeptansichtService,
-    private authService: AuthenticationService ) {
+    private authService: AuthenticationService,
+    private reService:RecipeServie) {
   }
 
   currentRecipe = {};
@@ -74,6 +75,13 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     //   console.log(this.recipeid);
     //   //this.loadComments();
     // });
+// TODO: Nachgucken
+    /*this.sub = this.route.queryParams.subscribe((params: {id: number}) => {
+      let serviceRe = this.reService.getRecipeByIdLocal(params.id);
+      if(serviceRe == null) return;
+      this.recipe = serviceRe;
+      this.loadComments();
+    });*/
 
     this.authService.authenticated.subscribe((params:boolean) => {
       this.isLoggedIn = params;
@@ -109,8 +117,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   public saveNewComment(text:String){
     if(!text) return;
     this.commentAdding = true;
-    let c = new Comment(text, 1, 1, new Date());
-    // let c = new Comment(text, 1, this.recipe.id, new Date());
+    let c = new Comment(text, 1 /*User*/, this.recipe.id, new Date());
     console.log("C", c);
     this.rezeptAnsichtService.addComment(c, (fail:boolean, data:any) => {
       if(fail){
@@ -121,6 +128,19 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
       }
       this.commentAdding = false;
     });
+  }
+  public deleteComment(comemnt:Comment){
+    if(!this.authService.currentUser) return;
+    console.dir(comemnt);
+    if(comemnt.user.id === this.authService.currentUser.id){
+      this.rezeptAnsichtService.deleteComment(comemnt, (fail:boolean, data:any) => {
+        if(fail){
+          console.log(JSON.stringify(data));
+        }else{
+          this.loadComments();
+        }
+      });
+    }
   }
   // <-- 💩 Alexander Krieg
 
