@@ -57,13 +57,13 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
       if(serviceRe == null) return;
       this.recipe = serviceRe;
       this.loadComments();
-      this.updateRating();
     });
 
     this.authService.authenticated.subscribe((params:boolean) => {
       this.isLoggedIn = params;
     });
     this.authService.debugSetLogin(true);
+    this.updateRating();
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
