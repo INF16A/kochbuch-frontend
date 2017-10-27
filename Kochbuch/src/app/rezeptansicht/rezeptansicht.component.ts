@@ -51,6 +51,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     });
     console.log(this.authService.authenticated);
 
+
     this.sub = this.route.queryParams.subscribe((params: {id: number}) => {
       let serviceRe = this.reService.getRecipeByIdLocal(params.id);
       if(serviceRe == null) return;
@@ -61,7 +62,6 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
 
     this.authService.authenticated.subscribe((params:boolean) => {
       this.isLoggedIn = params;
-      this.updateGivenRating();
     });
     this.authService.debugSetLogin(true);
   }

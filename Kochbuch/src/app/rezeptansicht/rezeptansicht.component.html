@@ -46,13 +46,14 @@
       <div>
         <span class="badge badge-pill badge-primary mr-1" *ngFor="let tag of currentRecipe.tags">{{tag}}</span>
       </div>
+      <!--Kühnlein-->
       <!--span class="text-danger" *ngIf="currentRecipe.rating < 0">
         <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{-currentRecipe.rating}}
       </span>
       <span *ngIf="currentRecipe.rating > 0" class=" text-success">
         <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{currentRecipe.rating}}
       </span-->
-      <span *ngIf="!this.givenRating == 0">
+      <span *ngIf="this.givenRating == 0">
         <span class="text-success">
           <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{this.upratings}}
         </span>
@@ -78,6 +79,7 @@
           <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{-this.downratings}}
         </span>
       </span>
+      <!--!Kühnlein-->
     </div>
   </div>
   <!-- 💩 Alexander Krieg -->
