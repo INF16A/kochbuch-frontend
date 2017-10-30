@@ -1,10 +1,22 @@
 <!-- Patrick Eichert, Theresa Reus -->
 
 <div class="row">
-    <div class="main-image">
-      <img src="{{currentRecipe.image}}">
+    <div class="main-image" *ngFor="let i of currentRecipe.pics">
+      <img src="data:image/jpeg;base64,{{i.picData}}">
     </div>
-  </div>
+</div>
+
+<!--TODO: image with ngb carousel
+<ngb-carousel>
+  <ng-template ngbSlide>
+    <img src="data:image/jpeg;base64,{{i.picData}}">
+    <div class="carousel-caption">
+      <h3>10 seconds between slides...</h3>
+      <p>This carousel uses customized default values.</p>
+    </div>
+  </ng-template>
+</ngb-carousel> -->
+
 <div class="container">
 
   <div class="row">
