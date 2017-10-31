@@ -119,7 +119,7 @@
                   <div (click)="deleteComment(c)">X</div>
                 </div>
                 <p>{{c.text}}</p>
-                <p class="small">geschrieben von {{c.user.id}}  - ( registriert seit {{c.user.creationDate | date:'mediumDate'}} )</p>
+                <p class="small">geschrieben von {{c.user.email}}  - ( registriert seit {{c.user.creationDate | date:'mediumDate'}} )</p>
                 <p class="small">{{c.creationDate | date:'medium'}}</p>
               </li>
             </ul>

@@ -29,7 +29,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     private reService:RecipeServie) {
   }
 
-  currentRecipe = {};
+  currentRecipe : Recipe = new Recipe;
   unit : String [] = [];
   personCount: number = 4;
 
@@ -70,18 +70,6 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
 
     this.loadRecipe(this.recipeid);
 
-    // this.sub = this.route.queryParams.subscribe((id: number) => {
-    //   this.recipeid = id;
-    //   console.log(this.recipeid);
-    //   //this.loadComments();
-    // });
-// TODO: Nachgucken
-    /*this.sub = this.route.queryParams.subscribe((params: {id: number}) => {
-      let serviceRe = this.reService.getRecipeByIdLocal(params.id);
-      if(serviceRe == null) return;
-      this.recipe = serviceRe;
-      this.loadComments();
-    });*/
 
     this.authService.authenticated.subscribe((params:boolean) => {
       this.isLoggedIn = params;
@@ -96,6 +84,9 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   private loadRecipe(id: number) {
     this.rezeptAnsichtService.getRecipeData(id, recipe => {
       this.currentRecipe = recipe;
+      this.recipe = recipe;
+      this.loadComments();
+      console.log(this.recipe);
     });
   }
 
