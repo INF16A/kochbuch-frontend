@@ -1,21 +1,16 @@
 <!-- Patrick Eichert, Theresa Reus -->
 
 <div class="row">
-    <div class="main-image" *ngFor="let i of currentRecipe.pics">
-      <img src="data:image/jpeg;base64,{{i.picData}}">
+    <div class="main-image" >
+      <ngb-carousel >
+        <ng-template ngbSlide *ngFor="let i of currentRecipe.pics">
+          <img src="data:image/jpeg;base64,{{i.picData}}">
+        </ng-template>
+      </ngb-carousel>
     </div>
 </div>
 
-<!--TODO: image with ngb carousel
-<ngb-carousel>
-  <ng-template ngbSlide>
-    <img src="data:image/jpeg;base64,{{i.picData}}">
-    <div class="carousel-caption">
-      <h3>10 seconds between slides...</h3>
-      <p>This carousel uses customized default values.</p>
-    </div>
-  </ng-template>
-</ngb-carousel> -->
+
 
 <div class="container">
 
@@ -29,6 +24,8 @@
       <hr>
 
       <p>{{currentRecipe.description}}</p>
+
+      <span class="badge badge-secondary">Zeitaufwand: {{currentRecipe.effort}} min</span>
 
       <h3>Zutaten</h3>
       <div class="input-group col-5">
@@ -73,7 +70,6 @@
       </div>
 
       <div>
-        <!-- TODO: add Effort and Picture to prestep -->
         <span class="badge badge-pill badge-primary mr-1" *ngFor="let tag of currentRecipe.tags">{{tag.name}}</span>
       </div>
       <span class="text-danger" *ngIf="currentRecipe.rating < 0">
