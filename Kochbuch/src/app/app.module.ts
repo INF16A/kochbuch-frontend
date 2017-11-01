@@ -1,3 +1,4 @@
+import { IngredientService } from './addingredientmodal/ingredient.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -57,8 +58,8 @@ import { LOCALE_ID } from '@angular/core';
      */
     { provide: LOCALE_ID, useValue: "de-CH" },
     //Daniel Abel
-    RecipeServie
-    
+    RecipeServie,
+    IngredientService
   ],
   bootstrap: [AppComponent]
 })

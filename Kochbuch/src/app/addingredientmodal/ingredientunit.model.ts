@@ -3,10 +3,10 @@
  */
 
 export enum IngredientUnit {
-    Stk = 0,
-    Gramm = 1,
-    Prise = 2,
-    Teelöffel = 3,
-    Esslöffel = 4,
-    ml = 5
+    Stk = 1,
+    Gramm = 2,
+    Prise = 3,
+    Teelöffel = 4,
+    Esslöffel = 5,
+    ml = 6
   }
