@@ -1,6 +1,6 @@
-import { IngredientService } from './ingredient.service';
-import { IngredientUnit } from './ingredientunit.model';
-import { Ingredient } from './ingredient.model';
+import { IngredientService } from '../ingredient.service';
+import { IngredientUnit } from '../ingredientunit.model';
+import { Ingredient } from '../ingredient.model';
 import { ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit } from '@angular/core';
@@ -22,14 +22,13 @@ export class AddingredientmodalComponent implements OnInit {
   service: IngredientService;
   modalRef: NgbModalRef;
 
-  constructor(private modalService: NgbModal, service: IngredientService) {    
+  constructor(private modalService: NgbModal, service: IngredientService) {
     this.unitKeys = Object.keys(this.units).filter(Number);
     this.service = service;
   }
 
-  private initialize(){
+  private initialize() {
     this.ingredient = new Ingredient();
-    this.ingredient.unit = 1;
   }
 
   open(content) {
@@ -52,12 +51,12 @@ export class AddingredientmodalComponent implements OnInit {
     }
   }
 
-  public addNewIngredient(){
+  public addNewIngredient() {
     this.service.createIngredient(this.ingredient);
     this.modalRef.close();
   }
 
-  ngOnInit() {
+  ngOnInit() {   
   }
 
 }

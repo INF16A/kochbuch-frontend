@@ -2,6 +2,10 @@ import { Http, Response, Headers, RequestOptions  } from '@angular/http';
 import { Ingredient } from './ingredient.model';
 import { Injectable } from '@angular/core';
 
+/**
+ * @author André Berberich
+ */
+
 @Injectable()
 export class IngredientService {
 

@@ -1,4 +1,3 @@
-import { IngredientService } from './addingredientmodal/ingredient.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -10,7 +9,9 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { RegistrierungsmodalComponent } from './registrierungsmodal/registrierungsmodal.component';
 import { RezeptlisteComponent } from './rezeptliste/rezeptliste.component';
 import { DifficultyPipe } from './difficulty.pipe';
-import { IngredientUnitPipe } from './addingredientmodal/ingredientunit.pipe';
+import { IngredientService } from './ingredient/ingredient.service';
+import { AddingredientmodalComponent } from './ingredient/addingredientmodal/addingredientmodal.component';
+import { IngredientUnitPipe } from './ingredient/ingredientunit.pipe';
 import { AlleRezepteComponent } from './alle-rezepte/alle-rezepte.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RezeptanlegenComponent } from './rezeptanlegen/rezeptanlegen.component';
@@ -20,7 +21,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import {AuthenticationService} from "./authentication/AuthenticationService";
 import { RecipeServie } from './alle-rezepte/alle-rezepte.service';
-import { AddingredientmodalComponent } from './addingredientmodal/addingredientmodal.component';
+
 
 import { LOCALE_ID } from '@angular/core';
 
