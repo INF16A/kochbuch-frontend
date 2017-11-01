@@ -16,7 +16,14 @@ export class IngredientService {
   getIngredients(): Promise<Ingredient[]>{
     return this.http.get(IngredientService.SERVER + '/ingredients')
     .toPromise()
-    .then(response => response.json().data as Ingredient[])
+    .then(response => response.json() as Ingredient[])
+    .catch(this.handleError);
+  }
+
+  getIngredient(id: number): Promise<Ingredient>{
+    return this.http.get(IngredientService.SERVER + '/ingredient/' +id)
+    .toPromise()
+    .then(response => response.json() as Ingredient)
     .catch(this.handleError);
   }
 
@@ -26,7 +33,7 @@ export class IngredientService {
     return this.http
       .post(IngredientService.SERVER + '/ingredient', JSON.stringify(ingredient), options)
     .toPromise()
-    .then(res => res.json().data as Ingredient)
+    .then(res => res.json() as Ingredient)
     .catch(this.handleError);
   }
 
