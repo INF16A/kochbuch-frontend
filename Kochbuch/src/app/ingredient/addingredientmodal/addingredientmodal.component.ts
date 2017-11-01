@@ -30,9 +30,10 @@ export class AddingredientmodalComponent implements OnInit {
 
   private initialize() {
     this.ingredient = new Ingredient();
+    this.createdIngredient = undefined;
   }
 
-  open(content) {
+  open(content): Promise<Ingredient> {
     this.initialize();
     this.modalRef = this.modalService.open(content);
     this.modalRef.result.then((result) => {
@@ -40,6 +41,7 @@ export class AddingredientmodalComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+    return this.createdIngredient;
   }
 
   private getDismissReason(reason: any): string {
