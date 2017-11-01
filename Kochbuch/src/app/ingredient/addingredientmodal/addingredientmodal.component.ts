@@ -16,6 +16,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddingredientmodalComponent implements OnInit {
   closeResult: string;
+  createdIngredient: Promise<Ingredient>;
   ingredient: Ingredient;
   units = IngredientUnit;
   unitKeys;
@@ -51,12 +52,13 @@ export class AddingredientmodalComponent implements OnInit {
     }
   }
 
-  public addNewIngredient() {
-    this.service.createIngredient(this.ingredient);
+  public addNewIngredient() : Promise<Ingredient> {
+    this.createdIngredient = this.service.createIngredient(this.ingredient);
     this.modalRef.close();
+    return this.createdIngredient;
   }
 
-  ngOnInit() {   
+  ngOnInit() {
   }
 
 }
