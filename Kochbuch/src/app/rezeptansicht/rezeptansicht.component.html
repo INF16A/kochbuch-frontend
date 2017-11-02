@@ -4,7 +4,7 @@
     <div class="main-image" >
       <ngb-carousel >
         <ng-template ngbSlide *ngFor="let i of currentRecipe.pics">
-          <img src="data:image/jpeg;base64,{{i.picData}}">
+          <img src="data:{{i.picType}};base64,{{i.picData}}">
         </ng-template>
       </ngb-carousel>
     </div>
