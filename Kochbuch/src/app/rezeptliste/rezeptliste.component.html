@@ -8,7 +8,8 @@
         <h2 class="card-title">{{rezept.name}}</h2>
         <div class="card-subtitle text-muted">{{rezept.creator.id}} {{rezept.createDate | date:"dd.MM.yyyy"}}</div>
         <p class="card-text ">{{rezept.description}}</p>
-        <a class="btn btn-outline-primary" routerLink="/rezeptansicht" [queryParams]="{id:rezept.id}">Jetzt kochen</a>
+        <a class="btn btn-outline-primary" routerLink="/rezeptansicht/{{rezept.id}}" >Jetzt kochen</a>
+
         <!-- <a class="btn btn-outline-primary" routerLink="/rezeptansicht">Jetzt kochen</a> -->
       </div>
       <div class="card-footer d-flex flex-row flex-wrap justify-content-start">

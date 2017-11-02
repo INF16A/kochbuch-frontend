@@ -4,11 +4,15 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, Params } from "@angular/router";
 import { Subscription } from 'rxjs/Subscription';
 import { AuthenticationService } from '../authentication/AuthenticationService';
-import { Recipe, RecipeServie } from '../alle-rezepte/alle-rezepte.service'
+import { Recipe, RecipeServie} from '../alle-rezepte/alle-rezepte.service'
+import {Ingredient} from "../ingredient.model";
 
 /**
  * @author Alexander Krieg
+ * @author Theresa Reus
+ * @author Patrick Eichert
  */
+
 
 @Component({
   selector: 'app-rezeptansicht',
@@ -25,7 +29,8 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     private reService:RecipeServie) {
   }
 
-  currentRecipe = {};
+  currentRecipe : Recipe = new Recipe;
+  unit : String [] = [];
   personCount: number = 4;
 
   //Kühnlein
@@ -39,25 +44,37 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   private comments:Comment[] = [];
   private sub: Subscription;
   private recipe: Recipe;
+  private recipeid: number;
   private newCommentText: String = "";
   private commentAdding:boolean = false;
   private isLoggedIn:boolean = false;
+  private ingredients: Ingredient[];
+
 
   ngOnInit() {
 
     // TODO: MockData kann dann raus sobald es eine ordentliche Rezeptklasse gibt
-    this.rezeptAnsichtService.getRecipeData(0).subscribe(data => {
-      this.currentRecipe = data;
-    });
+    // this.rezeptAnsichtService.getRecipeData(0).subscribe(data => {
+    //   this.currentRecipe = data;
+    // });
     console.log(this.authService.authenticated);
+    this.unit[0] = "";
+    this.unit[1] = "Stck";
+    this.unit[2] = "g";
+    this.unit[3] = "Prise";
+    this.unit[4] = "TL";
+    this.unit[5] = "EL";
+    this.unit[6] = "ml";
 
+    // Patrick Eichert, Theresa Reus
+    // holt ID aus der URL
+    this.sub = this.route.params.subscribe(
+      (params:Params) => {
+       this.recipeid = + params["id"];
+      }
+    );
 
-    this.sub = this.route.queryParams.subscribe((params: {id: number}) => {
-      let serviceRe = this.reService.getRecipeByIdLocal(params.id);
-      if(serviceRe == null) return;
-      this.recipe = serviceRe;
-      this.loadComments();
-    });
+    this.loadRecipe(this.recipeid);
 
     this.authService.authenticated.subscribe((params:boolean) => {
       this.isLoggedIn = params;
@@ -68,6 +85,23 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
+
+  // Theresa Reus, Patrick Eichert
+  private loadRecipe(id: number) {
+    this.rezeptAnsichtService.getRecipeData(id, recipe => {
+      this.currentRecipe = recipe;
+      this.recipe = recipe;
+      this.loadComments();
+      console.log(this.recipe);
+    });
+  }
+
+  private loadIngredients(id:number) {
+    this.rezeptAnsichtService.getIngredientByRecipe(id, ingredients => {
+      this.ingredients = ingredients;
+    });
+  }
+
   private loadComments(){
     this.commentsLoading = true;
     this.rezeptAnsichtService.getRecipeComments(this.recipe.id, comments => {
