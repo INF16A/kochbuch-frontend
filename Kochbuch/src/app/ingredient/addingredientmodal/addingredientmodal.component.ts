@@ -33,6 +33,20 @@ export class AddingredientmodalComponent implements OnInit {
     this.createdIngredient = undefined;
   }
 
+  openWithIngredientName(content, ingredientName: string): Promise<Ingredient> {
+    this.initialize();
+    this.ingredient.name = ingredientName;
+    alert(ingredientName);
+    alert(this.ingredient.name);
+    this.modalRef = this.modalService.open(content);
+    this.modalRef.result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+    return this.createdIngredient;
+  }
+
   open(content): Promise<Ingredient> {
     this.initialize();
     this.modalRef = this.modalService.open(content);
