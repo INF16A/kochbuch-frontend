@@ -1,6 +1,8 @@
 import { Http, Response, Headers, RequestOptions  } from '@angular/http';
 import { Ingredient } from './ingredient.model';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * @author André Berberich
@@ -10,6 +12,7 @@ import { Injectable } from '@angular/core';
 export class IngredientService {
 
   private static SERVER = 'http://localhost:8080';
+  private subject = new Subject<any>();
 
   constructor(private http: Http) { }
 
@@ -33,9 +36,20 @@ export class IngredientService {
     return this.http
       .post(IngredientService.SERVER + '/ingredient', JSON.stringify(ingredient), options)
     .toPromise()
-    .then(res => res.json() as Ingredient)
+    .then(res => this.ingredientCreated(res.json() as Ingredient))
     .catch(this.handleError);
   }
+
+  private ingredientCreated(ingredient: Ingredient){
+    //alert(ingredient.id);
+    this.subject.next(ingredient);
+    return ingredient;
+  }
+
+  getCreatedIngredients(): Observable<Ingredient> {
+    return this.subject.asObservable();
+}
+
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
