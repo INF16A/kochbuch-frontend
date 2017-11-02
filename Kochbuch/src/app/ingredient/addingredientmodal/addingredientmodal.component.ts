@@ -22,6 +22,7 @@ export class AddingredientmodalComponent implements OnInit {
   unitKeys;
   service: IngredientService;
   modalRef: NgbModalRef;
+  selectedUnit: number;
 
   constructor(private modalService: NgbModal, service: IngredientService) {
     this.unitKeys = Object.keys(this.units).filter(Number);
@@ -31,6 +32,7 @@ export class AddingredientmodalComponent implements OnInit {
   private initialize() {
     this.ingredient = new Ingredient();
     this.createdIngredient = undefined;
+    this.selectedUnit = this.unitKeys[0];
   }
 
   openWithIngredientName(content, ingredientName: string): Promise<Ingredient> {
@@ -66,7 +68,8 @@ export class AddingredientmodalComponent implements OnInit {
     }
   }
 
-  public addNewIngredient() : Promise<Ingredient> {
+  public addNewIngredient(): Promise<Ingredient> {
+    this.ingredient.unit = this.selectedUnit;
     this.createdIngredient = this.service.createIngredient(this.ingredient);
     this.modalRef.close();
     return this.createdIngredient;

@@ -19,7 +19,7 @@
  </div>
       <div class="form-group">
         <label for="unit">Einheit</label>
-        <select [(ngModel)]="ingredient.unit" [ngClass]="{'border border-danger': unit.invalid}" id="unit" name="unit" class="form-control" #unit="ngModel" required>
+        <select [(ngModel)]="selectedUnit" [ngClass]="{'border border-danger': unit.invalid}" id="unit" name="unit" class="form-control" #unit="ngModel" required>
           <option *ngFor="let unit of unitKeys" [ngValue]="unit">{{unit | ingredientunit}}</option>
         </select>
       </div>
