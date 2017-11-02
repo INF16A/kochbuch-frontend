@@ -1,7 +1,7 @@
 import { Ingredient } from '../ingredient/ingredient.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RezeptansichtService, Comment } from "./rezeptansicht.service";
-import { DatePipe } from '@angular/common';
+import { DatePipe,DecimalPipe } from '@angular/common';
 import { ActivatedRoute, Router, Params } from "@angular/router";
 import { Subscription } from 'rxjs/Subscription';
 import { AuthenticationService } from '../authentication/AuthenticationService';
@@ -100,6 +100,14 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     this.rezeptAnsichtService.getIngredientByRecipe(id, ingredients => {
       this.ingredients = ingredients;
     });
+  }
+
+  private sumkcalpp():number {
+    let sum : number = 0;
+    for (let recipeIngredients of this.currentRecipe.recipeIngredients) {
+      sum += (recipeIngredients.amountPerPerson * recipeIngredients.ingredient.kcalPerUnit);
+    }
+    return sum;
   }
 
   private loadComments(){

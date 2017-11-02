@@ -4,7 +4,7 @@
     <div class="main-image" >
       <ngb-carousel >
         <ng-template ngbSlide *ngFor="let i of currentRecipe.pics">
-          <img src="data:image/jpeg;base64,{{i.picData}}">
+          <img src="data:{{i.picType}};base64,{{i.picData}}">
         </ng-template>
       </ngb-carousel>
     </div>
@@ -26,6 +26,7 @@
       <p>{{currentRecipe.description}}</p>
 
       <span class="badge badge-secondary">Zeitaufwand: {{currentRecipe.effort}} min</span>
+      <span class="badge badge-dark">Kcal p.P.: {{this.sumkcalpp() | number:'1.0-2'}}</span>
 
       <h3>Zutaten</h3>
       <div class="input-group col-5">
