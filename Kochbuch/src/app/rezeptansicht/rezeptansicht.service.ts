@@ -181,4 +181,41 @@ export class RezeptansichtService {
   }
   // 💩 Alexander Krieg
 
+
+  //Kühnlein
+  public countRatingUp(recipeid: number, callback?:(amount:number)=>void){
+    this.countRating(recipeid,1, callback);
+  }
+  public countRatingDown(recipeid: number, callback?:(amount:number)=>void){
+    this.countRating(recipeid, -1, callback);
+  }
+  private countRating(recipeid: number, count: number, callback?: (amount:number)=> void){
+    let url = RezeptansichtService.SERVER+"/rating/";
+    let method = (count == 1)?"/count/up":"/count/down";
+    let headers = new Headers({'Accept':'*/*'});
+    let options = new RequestOptions({headers});
+    this.http.get(url+recipeid+method, options).subscribe((res:Response) =>{
+      if(callback)
+        callback(res.json());
+    }, error => {
+      if(callback){
+        callback(0);
+      }
+    });
+  }
+
+  public getGivenRating(recipeid:number,userid:number,callback?: (givenRating:number) => void){
+    let url = RezeptansichtService.SERVER+"/rating/";
+    let headers = new Headers({'Accept':'*/*'});
+    let options = new RequestOptions({headers});
+    this.http.get(url+recipeid+"/"+userid,options).subscribe((res:Response)=>{
+      if(callback)
+        callback(res.json());
+    }, error => {
+      if(callback){
+        callback(0);
+      }
+    });
+  }
+  //!Kühnlein
 }
