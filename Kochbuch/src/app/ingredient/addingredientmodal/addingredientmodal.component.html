@@ -1,0 +1,40 @@
+<!-- @author: André Berberich -->
+<button class="btn btn-success" (click)="open(content)">Neu Zutat hinzufügen</button>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Neue Zutat hinzufügen</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form>
+  <div class="modal-body">
+    <div class="form-group">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input [(ngModel)]="ingredient.name" [ngClass]="{'border border-danger': name.invalid && name.touched}" #name="ngModel" name="name" type="text" class="form-control" id="name" placeholder="Name" required>
+      </div>     
+ 
+ </div>
+      <div class="form-group">
+        <label for="unit">Einheit</label>
+        <select [(ngModel)]="ingredient.unit" [ngClass]="{'border border-danger': unit.invalid}" id="unit" name="unit" class="form-control" #unit="ngModel" required>
+          <option *ngFor="let unit of unitKeys" [ngValue]="unit">{{unit | ingredientunit}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="kCalPerUnit">Kilokalorien pro Einheit</label>
+        <input  type="number" [(ngModel)]="ingredient.kCalPerUnit" [ngClass]="{'border border-danger': kCalPerUnit.invalid && kCalPerUnit.touched}" #kCalPerUnit="ngModel" id="kCalPerUnit"  name="kCalPerUnit" placeholder="Anzahl der Kalorien pro Einheit" min="0" class="form-control" required/>
+      </div>  
+      <div class="form-group">
+        <label for="costPerUnit">Kosten pro Einheit</label>
+        <input type="number" [(ngModel)]="ingredient.costPerUnit" [ngClass]="{'border border-danger': costPerUnit.invalid && costPerUnit.touched}"  #costPerUnit="ngModel" id="costPerUnit" name="costPerUnit" placeholder="Kosten pro Einheit" min="0.00" step="0.01" class="form-control" required/>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c('Close click')">Abbrechen</button>
+    <button type="button" class="btn btn-outline-dark" [disabled]="kCalPerUnit.invalid || unit.invalid" (click)="addNewIngredient()">Hinzufügen</button>
+  </div>
+</form>
+</ng-template>

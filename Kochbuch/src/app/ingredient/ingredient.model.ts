@@ -1,6 +1,6 @@
-/**
- * @author André Berberich
- */
+ /*
+'@author Theresa Reus, Patrick Eichert, André Berberich
+*/
 
 export class Ingredient {
     id: number;
