@@ -2,10 +2,14 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Http, Response, Headers, RequestOptions } from '@angular/http';
 import {User} from '../user.model';
+import {Recipe} from "app/alle-rezepte/alle-rezepte.service";
+import {Ingredient} from "../ingredient.model";
 
 
 /**
  * @author Alexander Krieg
+ * @author Patrick Eichert
+ * @author Theresa Reus
  */
 
 // 💩 Alexander Krieg
@@ -90,8 +94,35 @@ export class RezeptansichtService {
     return Observable.of(this.mockData);
   }
 
-  getRecipeData(recipeId) {
-    return this.getMockRecipeData();
+  // Theresa Reus, Patrick Eichert
+  getRecipeData(recipeId:number, callback: (ar:Recipe) => void){
+    this.fetchRecipe(recipeId).subscribe((res:Response) => {
+      callback(res.json());
+    }, error => {
+      if(callback){
+        callback(null);
+      }
+    });
+  }
+
+  private fetchRecipe(id:Number){
+    let url = "http://localhost:8080/recipe/"+id;
+    return this.http.get(url);
+  }
+
+  getIngredientByRecipe(recipeId:number, callback: (ar:Ingredient[]) => void){
+    this.fetchIngredientsByRecipe(recipeId).subscribe((res:Response) => {
+      callback(res.json());
+    }, error => {
+      if(callback){
+        callback([]);
+      }
+    });
+  }
+
+  private fetchIngredientsByRecipe(id:Number){
+    let url = "http://localhost:8080/recipe/"+id;
+    return this.http.get(url);
   }
 
 
