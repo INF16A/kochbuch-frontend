@@ -10,6 +10,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Recipe} from "./rezept.classes";
 import {Form, FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {isUndefined} from "util";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-rezeptanlegen',
@@ -22,6 +23,8 @@ export class RezeptanlegenComponent implements OnInit, OnDestroy {
    * main form
    */
   public createRecipe: FormGroup;
+
+  public pics;
 
   constructor(private _fb: FormBuilder) {
   }
@@ -37,7 +40,8 @@ export class RezeptanlegenComponent implements OnInit, OnDestroy {
         ])
       }
     )
-  }
+    this.pics=new Array();
+ }
 
   ngOnDestroy() {
 
@@ -63,5 +67,24 @@ export class RezeptanlegenComponent implements OnInit, OnDestroy {
 
   save(model: Recipe) {
     console.log("save");
+  }
+
+  removePicture(index: number)
+  {
+      console.log("removePicture "+index);
+      this.pics = this.pics.filter((value, index2) => {
+        return index2!=index;
+      });
+  }
+
+  handlePicInclude(event){
+      if (event.target.files && event.target.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = (event:any) => {
+          this.pics.push(event.target.result);
+        }
+        reader.readAsDataURL(event.target.files[0]);
+      }
   }
 }
