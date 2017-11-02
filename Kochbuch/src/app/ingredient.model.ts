@@ -7,8 +7,7 @@ export class Ingredient {
     id: number;
     name: String;
     unit: number;
-    kCalPerUnit:number;
+    kcalPerUnit:number;
     costPerUnit:number;
-    pic: Pic;
 
   }

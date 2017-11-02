@@ -26,6 +26,7 @@
       <p>{{currentRecipe.description}}</p>
 
       <span class="badge badge-secondary">Zeitaufwand: {{currentRecipe.effort}} min</span>
+      <span class="badge badge-dark">Kcal p.P.: {{this.sumkcalpp() | number:'1.0-2'}}</span>
 
       <h3>Zutaten</h3>
       <div class="input-group col-5">
