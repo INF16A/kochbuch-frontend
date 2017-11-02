@@ -1,9 +1,9 @@
+import { Ingredient } from '../ingredient/ingredient.model';
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Http, Response, Headers, RequestOptions } from '@angular/http';
 import {User} from '../user.model';
 import {Recipe} from "app/alle-rezepte/alle-rezepte.service";
-import {Ingredient} from "../ingredient.model";
 
 
 /**
