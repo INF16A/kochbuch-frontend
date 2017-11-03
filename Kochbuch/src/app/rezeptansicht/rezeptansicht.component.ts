@@ -105,7 +105,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   private sumkcalpp():number {
     let sum : number = 0;
     for (let recipeIngredients of this.currentRecipe.recipeIngredients) {
-      sum += (recipeIngredients.amountPerPerson * recipeIngredients.ingredient.kCalPerUnit);
+      sum += (recipeIngredients.amountPerPerson * recipeIngredients.ingredient.kcalPerUnit);
     }
     return sum;
   }
