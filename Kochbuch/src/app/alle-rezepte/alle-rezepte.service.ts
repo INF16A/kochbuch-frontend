@@ -13,6 +13,7 @@ import { Comment } from '../rezeptansicht/rezeptansicht.service';
 /**
  * @author Daniel Abel
  * @author Alexander Krieg
+ * @author Endrit Çallaki
  */
 
 export class Recipe {
@@ -56,6 +57,16 @@ export class Recipe {
 
     private fetchRecipeById(id: number) {
       const url = 'http://localhost:8080/recipe/{id}?id=' + id;
+      return this.http.get(url);
+    }
+
+    private fetchRecipeByTag(tag: string) {
+      const url = 'http://localhost:8080/recipe/{tag}?tag=' + tag;
+      return this.http.get(url);
+    }
+
+    private fetchRecipeByKeyword(keyword: string) {
+      const url = 'http://localhost:8080/recipe/{keyword}?keyword=' + keyword;
       return this.http.get(url);
     }
 
