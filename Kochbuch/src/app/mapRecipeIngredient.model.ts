@@ -5,7 +5,7 @@
  */
 
 
-import {Ingredient} from "./ingredient.model";
+import { Ingredient } from 'app/ingredient/ingredient.model';
 export class RecipeIngredient {
     amount: number;
     amountPerPerson: number;
