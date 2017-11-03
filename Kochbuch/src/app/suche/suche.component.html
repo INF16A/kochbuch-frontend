@@ -1,0 +1,47 @@
+<!--
+@author Team Chrocorg: Yoco Harrmann, Christian Werner, Georg Frey
+-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="radio" name="rezeptsuche" id="rezeptenamen" [value]="1"  [(ngModel)]="option" checked> Suche nach
+          Rezeptnamen
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="radio" name="rezeptsuche" id="rezeptetag" [value]="2"  [(ngModel)]="option"> Suche nach Tag
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="radio" name="rezeptsuche" id="rezeptekeyword" [value]="3"  [(ngModel)]="option">  Suche
+          nach Keyword
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="radio" name="rezeptsuche" id="rezeptezutat" [value]="4" [(ngModel)]="option"> Suche nach
+          Zutat
+        </label>
+      </div>
+
+      <div class="input-group col-md-5 center">
+          <input type="text" placeholder="" [(ngModel)]="suchtext"/>
+          <span class="input-group-btn">
+                <button class="btn btn-default" type="button" (click)="suchen()">
+                  <i class="material-icons">search</i>
+                </button>
+              </span>
+        </div>
+
+    <div *ngFor="let rezept of liste">
+      Rezeptname: {{rezept.name}}
+    </div>
+
+    </div>
+
+  </div>
+</div>
