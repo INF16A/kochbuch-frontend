@@ -81,11 +81,14 @@
           </li>
         </ul>
       </div>
-      <input class="form-control" type="text" placeholder="Suche nach Zutat"
+      <input class="form-control" type="text" placeholder="Suche nach Zutat" #inputIngredSearch
              [ngbTypeahead]="searchIngredient"
              [inputFormatter]="formatterIngredient"
              [resultFormatter]="formatterIngredient"
-             (selectItem)="ingredientSelected($event)">
+             (selectItem)="ingredientSelected($event)"
+             (keydown.enter)="createNewIngredient()"
+             [(ngModel)]="tempIngredentSearch"
+             [ngModelOptions]="{standalone: true}">
     </div>
 
     <div class="form-group">
@@ -113,7 +116,6 @@
     </div>
 
     <button type="submit" class="btn btn-primary" [disabled]="!recipeForm.valid || !recipeForm.dirty">Speichern</button>
-
   </div>
 
   <div class="clearfix"></div>

@@ -22,6 +22,8 @@ export class RezeptanlegenComponent {
   recipeFormPrepStepsArray: FormArray;
   recipeFormIngredientsArray: FormArray;
 
+  tempIngredentSearch: string;
+
   submitted = false;
 
   constructor(private _tss: TagSearchService, private _iss: IngredientSearchService, private _fb: FormBuilder) {
@@ -99,6 +101,9 @@ export class RezeptanlegenComponent {
     this.recipeFormTagArray = <FormArray> this.recipeForm.controls['tags'];
     this.recipeFormPrepStepsArray = <FormArray> this.recipeForm.controls['prepSteps'];
     this.recipeFormIngredientsArray = <FormArray> this.recipeForm.controls['ingredients'];
+
+    this.tempIngredentSearch = '';
+
   }
 
   createRecipe() {
@@ -151,7 +156,7 @@ export class RezeptanlegenComponent {
    * Ingredients
    */
 
-  removeIngredient(indexToRemove: number){
+  removeIngredient(indexToRemove: number) {
     this.recipeFormIngredientsArray.removeAt(indexToRemove);
   }
 
@@ -170,7 +175,7 @@ export class RezeptanlegenComponent {
 
   ingredientSelected($event) {
     $event.preventDefault();
-
+    this.tempIngredentSearch = "";
     this.recipeFormIngredientsArray.push(
       this._fb.group({
         ingredientId: new FormControl($event.item.ingredientId,
@@ -196,6 +201,15 @@ export class RezeptanlegenComponent {
             RecipeValidators.minMaxValidator(1, 10000)
           ])
       }));
+  }
+
+  addingNewIngredient = false;
+
+  createNewIngredient(){
+    this.addingNewIngredient = true;
+
+      console.log("test");
+    return null;
   }
 
   /*
