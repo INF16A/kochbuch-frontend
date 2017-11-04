@@ -31,11 +31,10 @@ export class ShowerrorsComponent {
     }
     let control = form.get(this.path);
     let messages = [];
-    if (!control || !control.dirty || !control.touched || !control.errors) {
+    if (!control || control.pristine || control.untouched || !control.errors) {
       return null;
     }
     for (let code in control.errors) {
-      console.log(code);
       if (control.errors.hasOwnProperty(code)) {
         let error = control.errors[code];
         let message = '';
@@ -60,6 +59,9 @@ export class ShowerrorsComponent {
             break;
           case 'max':
             message = `${this.displayName} muss kleiner als ${error.max} sein`;
+            break;
+          case 'negativ':
+            message = `${this.displayName} darf nicht negativ sein!`;
             break;
           default:
             message = `${this.displayName} ist nicht valide`;
