@@ -3,7 +3,7 @@ import { IngredientUnit } from '../ingredientunit.model';
 import { Ingredient } from '../ingredient.model';
 import { ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 /**
  * @author André Berberich
@@ -16,6 +16,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddingredientmodalComponent implements OnInit {
 
+  
+  @Input() preselectedIngredientName: string;
   closeResult: string;
   createdIngredient: Promise<Ingredient>;
   ingredient: Ingredient;
@@ -36,20 +38,10 @@ export class AddingredientmodalComponent implements OnInit {
     this.createdIngredient = undefined;
     this.selectedUnit = this.unitKeys[0];
     this.invalidFields = [];
+    if(this.preselectedIngredientName !== undefined && this.preselectedIngredientName.length > 0){
+      this.ingredient.name = this.preselectedIngredientName;
+    }
   }
-
-  openWithIngredientName(content, ingredientName: string): Promise<Ingredient> {
-    this.initialize();
-    this.ingredient.name = ingredientName;
-    this.modalRef = this.modalService.open(content);
-    this.modalRef.result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-    return this.createdIngredient;
-  }
-
   open(content): Promise<Ingredient> {
     this.initialize();
     this.modalRef = this.modalService.open(content);
