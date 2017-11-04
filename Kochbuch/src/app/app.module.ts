@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {AppRoutingModule} from './app-routing.module';
@@ -21,9 +21,6 @@ import {NavbarComponent} from './shared/navbar/navbar.component';
 import {FooterComponent} from './shared/footer/footer.component';
 import {AuthenticationService} from "./authentication/AuthenticationService";
 import {RecipeServie} from './alle-rezepte/alle-rezepte.service';
-
-
-import {LOCALE_ID} from '@angular/core';
 import {Autosize} from "angular2-autosize";
 import {ShowerrorsComponent} from './rezeptanlegen/showerrors.component';
 
@@ -71,6 +68,10 @@ import {ShowerrorsComponent} from './rezeptanlegen/showerrors.component';
     RecipeServie,
     IngredientService
   ],
+  /**
+   * @author Thomas Hörner
+   */
+  entryComponents: [AddingredientmodalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {
