@@ -21,7 +21,8 @@
     <div class="form-group">
       <label>Einheit</label>
       <select formControlName="unit" class="form-control">
-        <option *ngFor="let unitKey of unitKeys; let i = index;" [value]="unitKey" [attr.selected]="i == 0 ? true : false">
+        <option *ngFor="let unitKey of unitKeys; let i = index;" [value]="unitKey"
+                [attr.selected]="i == 0 ? true : false">
           {{unitKey | ingredientunit}}
         </option>
       </select>
@@ -43,8 +44,11 @@
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="activeModal.close('Close click')">Abbrechen</button>
-  <button type="submit" class="btn btn-outline-dark"
+  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="activeModal.close('Close click')">
+    Abbrechen
+  </button>
+  <button type="submit" class="btn"
+          [ngClass]="{'btn-outline-dark':!newIngredient.valid || !newIngredient.touched, 'btn-secondary':newIngredient.valid}"
           [disabled]="!newIngredient.valid || !newIngredient.touched"
           (click)="addNewIngredient()">Hinzufügen
   </button>
