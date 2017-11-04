@@ -41,7 +41,6 @@ export class IngredientService {
   }
 
   private ingredientCreated(ingredient: Ingredient){
-    //alert(ingredient.id);
     this.subject.next(ingredient);
     return ingredient;
   }

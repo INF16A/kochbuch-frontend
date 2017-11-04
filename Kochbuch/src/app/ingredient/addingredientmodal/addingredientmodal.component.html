@@ -13,28 +13,28 @@
     <div class="form-group">
       <div class="form-group">
         <label for="name">Name</label>
-        <input [(ngModel)]="ingredient.name" [ngClass]="{'border border-danger': name.invalid && name.touched}" #name="ngModel" name="name" type="text" class="form-control" id="name" placeholder="Name" required>
+        <input [(ngModel)]="ingredient.name" [ngClass]="{'border border-danger': (name.invalid && name.touched) || fieldIsInvalid('name')}" #name="ngModel" name="name" type="text" class="form-control" id="name" placeholder="Name" (ngModelChange)="inputValueChanged('name')" required>
       </div>     
  
  </div>
       <div class="form-group">
         <label for="unit">Einheit</label>
-        <select [(ngModel)]="ingredient.unit" [ngClass]="{'border border-danger': unit.invalid}" id="unit" name="unit" class="form-control" #unit="ngModel" required>
+        <select [(ngModel)]="selectedUnit" [ngClass]="{'border border-danger': unit.invalid}" id="unit" name="unit" class="form-control" #unit="ngModel" required>
           <option *ngFor="let unit of unitKeys" [ngValue]="unit">{{unit | ingredientunit}}</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="kCalPerUnit">Kilokalorien pro Einheit</label>
-        <input  type="number" [(ngModel)]="ingredient.kCalPerUnit" [ngClass]="{'border border-danger': kCalPerUnit.invalid && kCalPerUnit.touched}" #kCalPerUnit="ngModel" id="kCalPerUnit"  name="kCalPerUnit" placeholder="Anzahl der Kalorien pro Einheit" min="0" class="form-control" required/>
+        <label for="kcalPerUnit">Kilokalorien pro Einheit</label>
+        <input  type="number" [(ngModel)]="ingredient.kcalPerUnit" [ngClass]="{'border border-danger': (kcalPerUnit.invalid && kcalPerUnit.touched) || fieldIsInvalid('kcalPerUnit')}" #kcalPerUnit="ngModel" id="kcalPerUnit"  name="kcalPerUnit" placeholder="Anzahl der Kalorien pro Einheit" min="0" class="form-control" (ngModelChange)="inputValueChanged('kcalPerUnit')" required/>
       </div>  
       <div class="form-group">
         <label for="costPerUnit">Kosten pro Einheit</label>
-        <input type="number" [(ngModel)]="ingredient.costPerUnit" [ngClass]="{'border border-danger': costPerUnit.invalid && costPerUnit.touched}"  #costPerUnit="ngModel" id="costPerUnit" name="costPerUnit" placeholder="Kosten pro Einheit" min="0.00" step="0.01" class="form-control" required/>
+        <input type="number" [(ngModel)]="ingredient.costPerUnit" [ngClass]="{'border border-danger': (costPerUnit.invalid && costPerUnit.touched) || fieldIsInvalid('costPerUnit')}"  #costPerUnit="ngModel" id="costPerUnit" name="costPerUnit" placeholder="Kosten pro Einheit" min="0.00" step="0.01" class="form-control" (ngModelChange)="inputValueChanged('costPerUnit')" required/>
       </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c('Close click')">Abbrechen</button>
-    <button type="button" class="btn btn-outline-dark" [disabled]="kCalPerUnit.invalid || unit.invalid" (click)="addNewIngredient()">Hinzufügen</button>
+    <button type="button" class="btn btn-outline-dark" [disabled]="kcalPerUnit.invalid || unit.invalid || costPerUnit.invalid || invalidFields.length > 0" (click)="addNewIngredient()">Hinzufügen</button>
   </div>
 </form>
 </ng-template>

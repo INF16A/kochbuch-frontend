@@ -58,6 +58,10 @@ label {
     top: 0em;
 }
 
+.modal-content{
+    margin-top: 5em;
+}
+
 input:focus~label,
 input:valid~label {
     top: -15px;
