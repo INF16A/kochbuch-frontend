@@ -24,6 +24,8 @@ import { RecipeServie } from './alle-rezepte/alle-rezepte.service';
 
 
 import { LOCALE_ID } from '@angular/core';
+import { SucheComponent } from './suche/suche.component';
+import {AjaxService} from "./_services/ajax.service";
 
 
 
@@ -41,7 +43,8 @@ import { LOCALE_ID } from '@angular/core';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    AddingredientmodalComponent
+    AddingredientmodalComponent,
+    SucheComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,9 @@ import { LOCALE_ID } from '@angular/core';
     { provide: LOCALE_ID, useValue: "de-CH" },
     //Daniel Abel
     RecipeServie,
-    IngredientService
+    IngredientService,
+    /** @author Yoco Harrmann */
+    AjaxService
   ],
   bootstrap: [AppComponent]
 })
