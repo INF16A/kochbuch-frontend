@@ -10,6 +10,7 @@ import {Recipe} from "app/alle-rezepte/alle-rezepte.service";
  * @author Alexander Krieg
  * @author Patrick Eichert
  * @author Theresa Reus
+ * @author Leandro Späth
  */
 
 // 💩 Alexander Krieg
@@ -33,6 +34,10 @@ export class RezeptansichtService {
   constructor(private http:Http) {
   }
 
+  /**
+   * @author Leandro Späth
+   * Beispieldaten, wie sie die Seite erwartet
+   */
   /*mockRecipe = {
    id: 0,
    name: 'Gebratenes Lachsfilet',
