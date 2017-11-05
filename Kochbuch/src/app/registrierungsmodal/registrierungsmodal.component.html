@@ -1,137 +1,55 @@
-<button class="btn btn-success" (click)="open(content)">Neu Registrieren</button>
+<!-->
+@authors
+Annika Schatz
+Irina Eurich
+Tobias Bloch
 
-<ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title">Registrierung</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
+<-->
+<div class="modal-header">
+</div>
+<div class="modal-body">
+  <h4>Registrierung</h4>
+  <div class="input-group" class="container">
+    <span class="input-group-addon" id="basic-addon1" for="benutzername">Benutzername</span>
+    <input type="text" class="form-control" name="username" id="benutzername" placeholder="Benutzername">
   </div>
-  <div class="modal-body">
-    <h5>Registrieren mit:</h5>
+  <br>
+  <div class="input-group" class="container">
+    <span class="input-group-addon" id="basic-addon1" for="email">E-Mail</span>
+    <input type="email" class="form-control" name="email" id="email" placeholder="E-Mail">
+  </div>
+  <br>
+  <div class="input-group" class="container">
+    <span class="input-group-addon" id="basic-addon1" for="passwort1">Passwort</span>
+    <input type="password" class="form-control" name="passwort1" id="passwort1" placeholder="Passwort">
+    <input type="password" class="form-control" name="passwort2" id="passwort2" placeholder="Passwort wiederholen">
+  </div>
+  <br>
 
-    <br>
+  <div class="container">
+  <h5>Nutzungsbedingungen</h5>
 
-    <button class="btn btn-social btn-facebook"><span class="fa fa-facebook"></span> Facebook</button>
-    <button class="btn btn-social btn-google"><span class="fa fa-google"></span> Google+</button>
-    <button class="btn btn-social btn-pinterest"><span class="fa fa-pinterest"></span> Pinterest</button>
-    <button class="btn btn-social btn-instagram"><span class="fa fa-instagram"></span> Instagram</button>
+  <div class="col-sm-10">
+    <div class="form-check">
+      <label class="form-check-label">
+        <table class="table">
+          <tbody>
+          <tr>
+            <th scope="col">        <input class="form-check-input" type="checkbox" name="nutzungsbedingungen" value="nutzungsbedingungen">
+            </th>
+            <th scope="col">Ich habe die <a href="https://de.wikipedia.org/wiki/Allgemeine_Gesch%C3%A4ftsbedingungen"
+                                            target="_blank" rel="noopener"> &nbsp;Nutzungsbedingungen&nbsp;</a> gelesen
+              und bin damit einverstanden.</th>
+          </tr>
+          </tbody>
+        </table>
 
-    <br>
-    <br>
-
-    <div id="neueRegistrierung" class="form-group">
-      <h5>Oder bei uns neu registrieren:</h5>
-
-      <div class="form-group">
-        <label for="vorname">Vorname</label>
-        <input type="text" class="form-control" id="vorname" placeholder="Vorname">
-      </div>
-      <div class="form-group">
-        <label for="nachname">Nachname</label>
-        <input type="text" id="nachname" name="nachname" placeholder="Nachname" class="form-control"/>
-      </div>
-      <div class="form-group">
-        <label for="gebdat">Geburtsdatum</label>
-        <input type="date" id="gebdat" name="gebdat" class="form-control"/>
-      </div>
-
-      <legend class="col-form-legend">Geschlecht</legend>
-      <div class="form-check form-check-inline">
-        <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="geschlecht" id="weiblich" value="w"> weiblich
-        </label>
-      </div>
-      <div class="form-check form-check-inline">
-        <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="geschlecht" id="maennlich" value="m"> männlich
-        </label>
-      </div>
-
-      <legend class="col-form-legend">Geschlecht</legend>
-      <div class="row">
-        <div class="form-check form-check-inline col-lg-5">
-          <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" id="kochen" value="kochen"> Kochen
-          </label>
-        </div>
-        <div class="form-check form-check-inline col-lg-5">
-          <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" id="backen" value="backen"> Backen
-          </label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-check form-check-inline col-lg-5">
-          <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" id="cocktails" value="cocktails"> Cocktails
-          </label>
-        </div>
-        <div class="form-check form-check-inline col-lg-5">
-          <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" id="desserts" value="desserts"> Desserts
-          </label>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="form-check form-check-inline col-lg-5">
-          <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" id="vegetarisch" value="vegetarisch"> vegetarisch
-          </label>
-        </div>
-        <div class="form-check form-check-inline col-lg-5">
-          <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" id="vegan" value="vegan"> vegan
-          </label>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="form-check form-check-inline col-lg-5">
-          <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" id="bio" value="bio"> bio
-          </label>
-        </div>
-        <div class="form-check form-check-inline col-lg-5">
-          <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" id="kalorienarm" value="kalorienarm"> kalorienarm
-          </label>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="email">E-Mail</label>
-        <input type="email" class="form-control" name="email" id="email" placeholder="E-Mail">
-      </div>
-
-      <div class="form-group">
-        <label for="benutzername">Benutzername</label>
-        <input type="text" class="form-control" name="username" id="benutzername" placeholder="Benutzername">
-      </div>
-
-      <div class="form-group">
-        <label for="passwort1">Passwort</label>
-        <input type="password" class="form-control" name="passwort1" id="passwort1" placeholder="Passwort">
-        <input type="password" class="form-control" name="passwort2" id="passwort2" placeholder="Passwort wiederholen">
-      </div>
-
-      <label>Nutzungsbedingungen</label>
-
-      <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" name="nutzungsbedingungen" value="nutzungsbedingungen">
-          Ich habe die <a href="https://de.wikipedia.org/wiki/Allgemeine_Gesch%C3%A4ftsbedingungen"
-                          target="_blank" rel="noopener"> &nbsp;Nutzungsbedingungen&nbsp;</a> gelesen
-          und bin damit einverstanden.
-        </label>
-      </div>
-
+      </label>
     </div>
 
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c('Close click')">Abbrechen</button>
-    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Registrieren</button>
-  </div>
-</ng-template>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-dark" (click)="c('Close click')">Registrieren</button>
+</div>
