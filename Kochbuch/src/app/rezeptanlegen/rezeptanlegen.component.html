@@ -1,5 +1,8 @@
 <!--
-  Authors:
+  Authors: Thomas Hörner
+  Enrico Greßer
+  Florian Eder
+  Patrick Eichert
 -->
 <div class="background">
   <div class="search">
@@ -157,12 +160,6 @@
       </button>
       <show-errors text="Zubereitung" path="prepSteps"></show-errors>
     </div>
-
-
-    <pre>{{recipeForm.value | json}}</pre>
-    <pre>{{recipeForm.valid | json}}</pre>
-    <pre>{{recipeForm.dirty | json}}</pre>
-    <pre>{{recipeForm.touched | json}}</pre>
 
     <button type="submit" class="btn btn-primary" [disabled]="!recipeForm.valid">Speichern</button>
   </div>

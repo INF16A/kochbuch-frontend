@@ -25,9 +25,6 @@ export class Tag {
   public name: string;
 }
 
-/**
- * @author Thomas Hörner
- */
 export class IngredientLight {
   public ingredientId: number; //ist die ID von der tatsächlichen Zutat
   public ingredientName: string;
@@ -35,9 +32,6 @@ export class IngredientLight {
   public unitId: number; //ID der Einheit
 }
 
-/**
- * @author Thomas Hörner
- */
 export class PreperationStep {
   public effort: number;
   public stepNumber: number;
