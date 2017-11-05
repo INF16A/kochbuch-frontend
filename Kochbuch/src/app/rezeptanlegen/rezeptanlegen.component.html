@@ -20,14 +20,14 @@
     <!--Anzahl Personen-->
     <div class="form-group">
       <label>Anzahl Personen</label>
-      <input formControlName="persons" class="form-control" type="number" min="1" max="1000" trim="blur">
+      <input formControlName="persons" class="form-control" type="number" min="1" max="1000">
       <show-errors text="Personenanzahl" path="persons"></show-errors>
     </div>
 
     <!--Schwierigkeit-->
     <div class="form-group">
       <label>Schwierigkeit</label>
-      <input formControlName="difficulty" class="form-control" type="number" min="1" max="10" trim="blur">
+      <input formControlName="difficulty" class="form-control" type="number" min="1" max="10">
       <show-errors text="Schwierigkeit" path="difficulty"></show-errors>
     </div>
 
@@ -116,7 +116,7 @@
           <li *ngFor="let ingredient of recipeFormIngredientsArray.controls; let i = index;" class="mb-2">
             <div class="input-group" formGroupName="{{i}}">
               <span class="input-group-addon">{{ingredient.value.ingredientName}}</span>
-              <input formControlName="amount" class="form-control" type="number" min="0" trim="blur"/>
+              <input formControlName="amount" class="form-control" type="number" min="0"/>
               <span class="input-group-addon">{{ingredient.value.unitId | ingredientunit}}</span>
               <span class="input-group-addon"><i class="fa fa-trash" (click)="removeIngredient(i)"></i></span>
             </div>
@@ -142,7 +142,7 @@
                            [hidden]="recipeFormPrepStepsArray.length <= 1" (click)="removePrepStep(i)"></i></span><br/>
           <div class="form-group">
             <label>Aufwand</label>
-            <input formControlName="effort" class="form-control" type="number" min="0" trim="blur"/>
+            <input formControlName="effort" class="form-control" type="number" min="0"/>
             <show-errors text="Aufwand" path="prepSteps.{{i}}.effort"></show-errors>
           </div>
           <div class="form-group">
@@ -153,12 +153,18 @@
         </li>
       </ol>
       <button class="btn btn-primary" type="button" (click)="addPrepStep()"
-              [disabled]="!recipeFormPrepStepsArray.valid && recipeFormPrepStepsArray.length > 0">Schritt hinzufügen
+              [disabled]="!recipeFormPrepStepsArray.valid">Schritt hinzufügen
       </button>
       <show-errors text="Zubereitung" path="prepSteps"></show-errors>
     </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="!recipeForm.valid || !recipeForm.dirty">Speichern</button>
+
+    <pre>{{recipeForm.value | json}}</pre>
+    <pre>{{recipeForm.valid | json}}</pre>
+    <pre>{{recipeForm.dirty | json}}</pre>
+    <pre>{{recipeForm.touched | json}}</pre>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!recipeForm.valid">Speichern</button>
   </div>
 
 </form>

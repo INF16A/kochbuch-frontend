@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
-import {Recipe} from "./rezeptanlegen.model";
-import {IngredientSearchService, TagSearchService} from "./rezeptanlegen.service";
+import {IngredientSearchService, RezeptanlegenService, TagSearchService} from "./rezeptanlegen.service";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {RecipeValidators} from "./rezeptanlegen.validator";
 import {Observable} from "rxjs/Observable";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AddingredientmodalComponent} from "../ingredient/addingredientmodal/addingredientmodal.component";
 import {IngredientService} from "../ingredient/ingredient.service";
+import {Router} from "@angular/router";
 
 /**
  * @author Thomas Hörner
@@ -15,11 +15,10 @@ import {IngredientService} from "../ingredient/ingredient.service";
   selector: 'app-rezeptanlegen',
   templateUrl: './rezeptanlegen.component.html',
   styleUrls: ['./rezeptanlegen.component.css'],
-  providers: [TagSearchService, IngredientSearchService]
+  providers: [TagSearchService, IngredientSearchService, RezeptanlegenService]
 })
 export class RezeptanlegenComponent {
 
-  recipeModel: Recipe = new Recipe();
   recipeForm: FormGroup;
   recipeFormTagArray: FormArray;
   recipeFormPrepStepsArray: FormArray;
@@ -30,7 +29,14 @@ export class RezeptanlegenComponent {
   tempTagSearch: string;
 
 
-  constructor(private _tss: TagSearchService, private _iss: IngredientSearchService, private modalService: NgbModal, private _fb: FormBuilder, private _is: IngredientService) {
+  constructor(private _tss: TagSearchService,
+              private _iss: IngredientSearchService,
+              private modalService: NgbModal,
+              private _fb: FormBuilder,
+              private _is: IngredientService,
+              private _rss: RezeptanlegenService,
+              private router: Router) {
+
     this.recipeForm = _fb.group({
       name: ['',
         [
@@ -92,12 +98,20 @@ export class RezeptanlegenComponent {
 
   }
 
-  private submitted: boolean = false;
+  private submitting: boolean   = false;
 
   createRecipe() {
-    this.submitted = true;
-    console.log("creating recipe");
-    this.submitted = false;
+    if (this.recipeForm.valid) {
+      this.submitting = true;
+      let result = this._rss.create(Object.assign({}, this.recipeForm.value));
+      result.then(value => {
+        this.submitting = false;
+        this.router.navigate(['/']);
+      }).catch(reason => {
+        this.submitting = false;
+        alert("interner Fehler aufgetreten");
+      })
+    }
   }
 
   /*

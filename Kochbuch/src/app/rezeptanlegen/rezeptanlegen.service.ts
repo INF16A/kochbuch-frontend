@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, RequestOptions, Headers} from '@angular/http';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
@@ -18,7 +18,8 @@ export class TagSearchService {
 
   private baseUrl = 'http://localhost:8080/tag/search?q=';  // URL to web api
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+  }
 
   search(text: string): Promise<Tag[]> {
     let url = this.baseUrl + text;
@@ -40,7 +41,8 @@ export class IngredientSearchService {
 
   private baseUrl = 'http://localhost:8080/ingredient/search?q=';  // URL to web api
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+  }
 
   search(text: string): Promise<IngredientLight[]> {
     let url = this.baseUrl + text;
@@ -61,10 +63,14 @@ export class IngredientSearchService {
 export class RezeptanlegenService {
   private baseUrl = 'http://localhost:8080/recipe/create';  // URL to web api
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+  }
 
   create(recipe: Recipe): Promise<Recipe> {
-    return this.http.post(this.baseUrl, JSON.stringify(recipe))
+    let headers: Headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+
+    return this.http.post(this.baseUrl, JSON.stringify(recipe), options)
       .toPromise()
       .then(response => {
         return response.json() as Recipe;
