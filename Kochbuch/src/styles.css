@@ -1,4 +1,3 @@
-/*
 body {
     height: 100vh;
     width: 100vw;
@@ -167,7 +166,7 @@ input:focus~.bar:after {
     transform: translateX(-50%);
 }
 
-@media (max-width: 575px) {  !* For mobile  *!
+@media (max-width: 575px) {  /* For mobile  */
     .background {
         height: 500px;
         background-position-y: -150px;
@@ -240,4 +239,3 @@ input:focus~.bar:after {
       height: 0%;
     }
   }
-*/
