@@ -39,7 +39,6 @@ export class PreperationStep {
 }
 
 export class Pic {
-  public id: number;
   public picData: String;
   public picType: String;
 }
