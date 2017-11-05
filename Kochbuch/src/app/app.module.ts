@@ -1,3 +1,4 @@
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component'
 import {BrowserModule} from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -47,7 +48,8 @@ import {InputTextareaTexTrimDirective} from "./rezeptanlegen/trim.directive";
     Autosize,
     ShowerrorsComponent,
     DragAndDropDirective,
-    InputTextareaTexTrimDirective
+    InputTextareaTexTrimDirective,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
