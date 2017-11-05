@@ -1,9 +1,12 @@
 import {Component} from '@angular/core';
-import {Ingredient, Recipe} from "./rezeptanlegen.model";
+import {Recipe} from "./rezeptanlegen.model";
 import {IngredientSearchService, TagSearchService} from "./rezeptanlegen.service";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {RecipeValidators} from "./rezeptanlegen.validator";
 import {Observable} from "rxjs/Observable";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AddingredientmodalComponent} from "../ingredient/addingredientmodal/addingredientmodal.component";
+import {IngredientService} from "../ingredient/ingredient.service";
 
 /**
  * @author Thomas Hörner
@@ -21,12 +24,13 @@ export class RezeptanlegenComponent {
   recipeFormTagArray: FormArray;
   recipeFormPrepStepsArray: FormArray;
   recipeFormIngredientsArray: FormArray;
+  recipeFormPictureArray: FormArray;
 
-  tempIngredentSearch: string;
+  tempIngredientSearch: string;
+  tempTagSearch: string;
 
-  submitted = false;
 
-  constructor(private _tss: TagSearchService, private _iss: IngredientSearchService, private _fb: FormBuilder) {
+  constructor(private _tss: TagSearchService, private _iss: IngredientSearchService, private modalService: NgbModal, private _fb: FormBuilder, private _is: IngredientService) {
     this.recipeForm = _fb.group({
       name: ['',
         [
@@ -54,32 +58,10 @@ export class RezeptanlegenComponent {
           RecipeValidators.minMaxValidator(1, 1000)
         ]
       ],
-      tags: _fb.array([
-          _fb.group({
-            name: new FormControl('',
-              [
-                Validators.required,
-                Validators.minLength(3),
-                Validators.maxLength(15)
-              ])
-          })],
+      tags: _fb.array([],
         RecipeValidators.minLengthArray(1)
       ),
-      ingredients: _fb.array([
-        // this._fb.group({
-        //   ingredientId: new FormControl(''),
-        //   unitId: new FormControl(''),
-        //   unitName: new FormControl(''),
-        //
-        //   ingredientName: new FormControl('', [
-        //     Validators.required
-        //   ]),
-        //   amount: new FormControl('', [
-        //     Validators.required,
-        //     RecipeValidators.minMaxValidator(1, 10000)
-        //   ])
-        // })
-      ]),
+      ingredients: _fb.array([], RecipeValidators.minLengthArray(1)),
       prepSteps: _fb.array([
           _fb.group({
             effort: new FormControl('',
@@ -96,15 +78,21 @@ export class RezeptanlegenComponent {
           })],
         RecipeValidators.minLengthArray(1)
       ),
+      pics:
+        _fb.array([], RecipeValidators.minLengthArray(1))
     });
 
     this.recipeFormTagArray = <FormArray> this.recipeForm.controls['tags'];
     this.recipeFormPrepStepsArray = <FormArray> this.recipeForm.controls['prepSteps'];
     this.recipeFormIngredientsArray = <FormArray> this.recipeForm.controls['ingredients'];
+    this.recipeFormPictureArray = <FormArray> this.recipeForm.controls['pics'];
 
-    this.tempIngredentSearch = '';
+    this.tempIngredientSearch = '';
+    this.tempIngredientSearch = '';
 
   }
+
+  private submitted: boolean = false;
 
   createRecipe() {
     this.submitted = true;
@@ -116,45 +104,79 @@ export class RezeptanlegenComponent {
    * Tags
    */
 
-  addTag() {
-    this.recipeFormTagArray.push(this.createTagControl());
-  }
+  private needNewTag: boolean = false;
 
   removeTag(indexToRemove: number) {
     this.recipeFormTagArray.removeAt(indexToRemove);
-  }
-
-  private createTagControl(): FormGroup {
-    return new FormGroup({
-      name: new FormControl('',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(25)
-        ])
-    })
   }
 
   searchTag = (text$: Observable<string>) =>
     text$
       .debounceTime(200)
       .distinctUntilChanged()
-      .switchMap(term => term.length < 2 ? [] :
-        this._tss.search(term)
-          .then(value => {
-            let rtn: string[] = [];
-            value.forEach(value2 => {
-              return rtn.push(value2.name)
+      .switchMap(term => {
+          if (term.length < 2) {
+            return [];
+          } else {
+            let temp = this._tss.search(term)
+            temp.then(value => {
+              if (value.length == 0) {
+                this.needNewTag = true;
+              } else {
+                this.needNewTag = false;
+              }
+              return value;
             });
-            return rtn;
-          })
-          .catch(() => {
-            return Observable.of([]);
-          }));
+            return temp;
+          }
+        }
+      )
+      .catch(() => {
+        this.needNewTag = true;
+        return Observable.of([]);
+      });
+
+  formatterTag = (x: { name: string }) => x.name;
+
+  tagSelected($event) {
+    $event.preventDefault();
+    this.tempTagSearch = "";
+    this.recipeFormTagArray.push(
+      this._fb.group({
+        id: new FormControl($event.item.id,
+          [
+            Validators.required
+          ]),
+        name: new FormControl($event.item.name,
+          [
+            Validators.required
+          ])
+      }));
+  }
+
+  createNewTag() {
+    if (this.tempTagSearch != null && this.tempTagSearch.length >= 3 && this.tempTagSearch.length <= 25) {
+      this.recipeFormTagArray.push(
+        this._fb.group({
+          id: new FormControl(-1,
+            [
+              Validators.required
+            ]),
+          name: new FormControl(this.tempTagSearch,
+            [
+              Validators.required
+            ])
+        })
+      );
+      this.tempTagSearch = '';
+    }
+  }
 
   /*
    * Ingredients
    */
+
+  private needNewIngredient: boolean = false;
 
   removeIngredient(indexToRemove: number) {
     this.recipeFormIngredientsArray.removeAt(indexToRemove);
@@ -164,10 +186,25 @@ export class RezeptanlegenComponent {
     text$
       .debounceTime(200)
       .distinctUntilChanged()
-      .switchMap(term => term.length < 2 ? [] :
-        this._iss.search(term)
+      .switchMap(term => {
+          if (term.length < 2) {
+            return [];
+          } else {
+            let temp = this._iss.search(term)
+            temp.then(value => {
+              if (value.length == 0) {
+                this.needNewIngredient = true;
+              } else {
+                this.needNewIngredient = false;
+              }
+              return value;
+            });
+            return temp;
+          }
+        }
       )
       .catch(() => {
+        this.needNewIngredient = true;
         return Observable.of([]);
       });
 
@@ -175,7 +212,7 @@ export class RezeptanlegenComponent {
 
   ingredientSelected($event) {
     $event.preventDefault();
-    this.tempIngredentSearch = "";
+    this.tempIngredientSearch = "";
     this.recipeFormIngredientsArray.push(
       this._fb.group({
         ingredientId: new FormControl($event.item.ingredientId,
@@ -183,10 +220,6 @@ export class RezeptanlegenComponent {
             Validators.required
           ]),
         unitId: new FormControl($event.item.unitId,
-          [
-            Validators.required
-          ]),
-        unitName: new FormControl($event.item.unitName,
           [
             Validators.required
           ]),
@@ -203,13 +236,37 @@ export class RezeptanlegenComponent {
       }));
   }
 
-  addingNewIngredient = false;
-
-  createNewIngredient(){
-    this.addingNewIngredient = true;
-
-      console.log("test");
-    return null;
+  createNewIngredient(i) {
+    i.blur();
+    let modalRef = this.modalService.open(AddingredientmodalComponent);
+    modalRef.componentInstance.preselectedIngredientName = this.tempIngredientSearch.trim();
+    let tempSubs = this._is.getCreatedIngredients().subscribe(msg => {
+      //set and close
+      this.recipeFormIngredientsArray.push(
+        this._fb.group({
+          ingredientId: new FormControl(msg.ingredientId,
+            [
+              Validators.required
+            ]),
+          unitId: new FormControl(msg.unitId,
+            [
+              Validators.required
+            ]),
+          ingredientName: new FormControl(msg.ingredientName,
+            [
+              Validators.required
+            ]
+          ),
+          amount: new FormControl('',
+            [
+              Validators.required,
+              RecipeValidators.minMaxValidator(1, 10000)
+            ])
+        })
+      );
+      tempSubs.unsubscribe();
+    });
+    this.tempIngredientSearch = '';
   }
 
   /*
@@ -238,6 +295,34 @@ export class RezeptanlegenComponent {
           Validators.maxLength(250)
         ])
     })
+  }
+
+
+  /*
+   * Pics
+   */
+
+  onFilesChangePics(fileList: Array<File>) {
+    fileList.forEach(file => {
+      if (file.type.match("image/*")) {
+        let reader = new FileReader();
+        reader.onload = (event: any) => {
+          let result: string = event.target.result;
+          this.recipeFormPictureArray.push(this._fb.group({
+            picData: result.split(",").pop(),
+            picType: result.split(":").pop().split(";").shift()
+          }));
+          this.recipeFormPictureArray.markAsTouched();
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  removePicture(indexToRemove: number) {
+    this.recipeFormPictureArray.removeAt(indexToRemove);
+    //trigger validation
+    this.recipeFormPictureArray.markAsTouched();
   }
 
 }

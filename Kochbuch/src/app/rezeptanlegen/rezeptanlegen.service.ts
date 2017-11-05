@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Jsonp, URLSearchParams} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
+import {Http} from '@angular/http';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
@@ -9,7 +8,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/merge';
-import {Ingredient, Tag} from "./rezeptanlegen.model";
+import {IngredientLight, Recipe, Tag} from "./rezeptanlegen.model";
 
 /**
  * @author Thomas Hörner
@@ -26,8 +25,7 @@ export class TagSearchService {
     return this.http.get(url)
       .toPromise()
       .then(response => {
-        let t : Tag[] = response.json();
-        return t;
+        return response.json() as Tag[];
       })
       .catch(this.handleError);
   }
@@ -44,12 +42,12 @@ export class IngredientSearchService {
 
   constructor(private http: Http) { }
 
-  search(text: string): Promise<Ingredient[]> {
+  search(text: string): Promise<IngredientLight[]> {
     let url = this.baseUrl + text;
     return this.http.get(url)
       .toPromise()
       .then(response => {
-        return response.json() as Ingredient[];
+        return response.json() as IngredientLight[];
       })
       .catch(this.handleError);
   }
@@ -57,4 +55,25 @@ export class IngredientSearchService {
   private handleError(error: any): Promise<any> {
     return Promise.reject(error.message || error);
   }
+}
+
+@Injectable()
+export class RezeptanlegenService {
+  private baseUrl = 'http://localhost:8080/recipe/create';  // URL to web api
+
+  constructor(private http: Http) { }
+
+  create(recipe: Recipe): Promise<Recipe> {
+    return this.http.post(this.baseUrl, JSON.stringify(recipe))
+      .toPromise()
+      .then(response => {
+        return response.json() as Recipe;
+      })
+      .catch(this.handleError);
+  }
+
+  private handleError(error: any): Promise<any> {
+    return Promise.reject(error.message || error);
+  }
+
 }

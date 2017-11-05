@@ -7,13 +7,15 @@ export class Recipe {
   public difficulty: number;
   public persons: number;
   public tags: Tag[];
-  public ingredients: Ingredient[];
+  public ingredients: IngredientLight[];
   public prepSteps: PreperationStep[];
+  public pics: Pic[];
 
   constructor() {
-    this.ingredients = new Array();
-    this.tags = new Array();
-    this.prepSteps = new Array();
+    this.ingredients = [];
+    this.tags = [];
+    this.prepSteps = [];
+    this.pics = [];
   }
 
 }
@@ -26,12 +28,11 @@ export class Tag {
 /**
  * @author Thomas Hörner
  */
-export class Ingredient {
+export class IngredientLight {
   public ingredientId: number; //ist die ID von der tatsächlichen Zutat
   public ingredientName: string;
   public amount: number;
   public unitId: number; //ID der Einheit
-  public unitName: string;
 }
 
 /**
@@ -41,4 +42,10 @@ export class PreperationStep {
   public effort: number;
   public stepNumber: number;
   public instruction: string;
+}
+
+export class Pic {
+  public id: number;
+  public picData: String;
+  public picType: String;
 }

@@ -13,29 +13,63 @@
     <!--RezeptTitel-->
     <div class="form-group">
       <label>Rezeptname</label>
-      <input formControlName="name" class="form-control" type="text"/>
+      <input formControlName="name" class="form-control" type="text" trim="blur"/>
       <show-errors text="Rezeptname" path="name"></show-errors>
     </div>
 
     <!--Anzahl Personen-->
     <div class="form-group">
       <label>Anzahl Personen</label>
-      <input formControlName="persons" class="form-control" type="number" min="1" max="1000">
+      <input formControlName="persons" class="form-control" type="number" min="1" max="1000" trim="blur">
       <show-errors text="Personenanzahl" path="persons"></show-errors>
     </div>
 
     <!--Schwierigkeit-->
     <div class="form-group">
       <label>Schwierigkeit</label>
-      <input formControlName="difficulty" class="form-control" type="number" min="1" max="10">
+      <input formControlName="difficulty" class="form-control" type="number" min="1" max="10" trim="blur">
       <show-errors text="Schwierigkeit" path="difficulty"></show-errors>
     </div>
 
     <!--Beschreibung-->
     <div class="form-group">
       <label>Kurzbeschreibung</label>
-      <textarea formControlName="description" class="form-control" autosize></textarea>
+      <textarea formControlName="description" class="form-control" autosize trim="blur"></textarea>
       <show-errors text="Beschreibung" path="description"></show-errors>
+    </div>
+
+    <!--bilder-->
+    <div class="form-group">
+      <label>Bilder</label>
+      <ngb-carousel formArrayName="pics">
+        <ng-template ngbSlide *ngIf="recipeFormPictureArray.controls.length == 0">
+          <div dadDirective
+               (filesChangeEmiter)="onFilesChangePics($event)"
+               [allowed_extensions]="['png', 'jpg', 'jpeg']">
+            <img src="assets/blank.jpg" class="img-responsive" width="100%" height="100%">
+            <div class="carousel-caption">
+              <p></p>
+            </div>
+          </div>
+        </ng-template>
+        <div *ngIf="recipeFormPictureArray.controls.length > 0">
+          <ng-template ngbSlide *ngFor="let image of recipeFormPictureArray.controls ; let i=index;"
+                       formGroupName="{{i}}">
+            <div dadDirective
+                 (filesChangeEmiter)="onFilesChangePics($event)"
+                 [allowed_extensions]="['png', 'jpg', 'jpeg']">
+              <img src="data:{{image.value.picType}};base64,{{image.value.picData}}" class="img-responsive" width="100%"
+                   height="100%">
+              <div class="carousel-caption bg-primary">
+                <i class="fa fa-trash" aria-hidden="true" (click)="removePicture(i)"></i>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </ngb-carousel>
+      <small *ngIf="recipeFormPictureArray.length == 0 && recipeFormPictureArray.touched" class="text-danger">
+        <div>Es wird mindestens ein Bild benötigt</div>
+      </small>
     </div>
 
     <!--tags-->
@@ -45,27 +79,36 @@
         <div *ngFor="let tag of recipeFormTagArray.controls; let i = index; first as isFirst; last as isLast;"
              formGroupName="{{i}}" class="mb-2 mr-2">
           <!--anzeigen-->
-          <div class="input-group" *ngIf="!isLast && recipeFormTagArray.controls.length > 1">
+          <div class="input-group">
             <span class="form-control">{{tag.value.name}}</span>
             <span class="input-group-addon">
                 <i class="fa fa-trash" (click)="removeTag(i)" aria-hidden="true"></i>
               </span>
           </div>
-          <!--neu-->
-          <div class="input-group" *ngIf="isLast || recipeFormTagArray.controls.length == 0">
-            <input formControlName="name" class="form-control" type="text" placeholder="Tag hinzufügen"
-                   (keydown.enter)="tag.valid && addTag()" [ngbTypeahead]="searchTag">
-            <span class="input-group-addon">
-                <i class="fa fa-check" aria-hidden="true" [hidden]="tag.valid"></i>
-                <i class="fa fa-check" (click)="addTag()" aria-hidden="true" [hidden]="!tag.valid"></i>
-            </span>
-          </div>
-          <show-errors text="Tag" path="tags.{{i}}.name"></show-errors>
+        </div>
+
+        <!--neu-->
+        <div class="input-group">
+          <input class="form-control" type="text" placeholder="Tag hinzufügen/suchen"
+                 [ngbTypeahead]="searchTag"
+                 [inputFormatter]="formatterTag"
+                 [resultFormatter]="formatterTag"
+                 (selectItem)="tagSelected($event)"
+                 [(ngModel)]="tempTagSearch"
+                 (keydown.enter)="needNewTag && createNewTag()"
+                 [ngModelOptions]="{standalone: true}"
+                 required
+                 minlength="3"
+                 maxlength="25">
+          <span class="input-group-addon">
+            <i class="fa fa-check" (click)="needNewTag && createNewTag()" aria-hidden="true"></i>
+          </span>
         </div>
       </div>
       <show-errors text="Tags" path="tags"></show-errors>
     </div>
 
+    <!--zutaten-->
     <div class="form-group">
       <label>Zutaten</label>
       <div formArrayName="ingredients">
@@ -73,8 +116,8 @@
           <li *ngFor="let ingredient of recipeFormIngredientsArray.controls; let i = index;" class="mb-2">
             <div class="input-group" formGroupName="{{i}}">
               <span class="input-group-addon">{{ingredient.value.ingredientName}}</span>
-              <input formControlName="amount" class="form-control" type="number" min="0"/>
-              <span class="input-group-addon">{{ingredient.value.unitName}}</span>
+              <input formControlName="amount" class="form-control" type="number" min="0" trim="blur"/>
+              <span class="input-group-addon">{{ingredient.value.unitId | ingredientunit}}</span>
               <span class="input-group-addon"><i class="fa fa-trash" (click)="removeIngredient(i)"></i></span>
             </div>
             <show-errors path="ingredients.{{i}}.amount" text="Menge"></show-errors>
@@ -86,8 +129,8 @@
              [inputFormatter]="formatterIngredient"
              [resultFormatter]="formatterIngredient"
              (selectItem)="ingredientSelected($event)"
-             (keydown.enter)="createNewIngredient()"
-             [(ngModel)]="tempIngredentSearch"
+             (keydown.enter)="needNewIngredient && createNewIngredient(inputIngredSearch)"
+             [(ngModel)]="tempIngredientSearch"
              [ngModelOptions]="{standalone: true}">
     </div>
 
@@ -99,12 +142,12 @@
                            [hidden]="recipeFormPrepStepsArray.length <= 1" (click)="removePrepStep(i)"></i></span><br/>
           <div class="form-group">
             <label>Aufwand</label>
-            <input formControlName="effort" class="form-control" type="number" min="0"/>
+            <input formControlName="effort" class="form-control" type="number" min="0" trim="blur"/>
             <show-errors text="Aufwand" path="prepSteps.{{i}}.effort"></show-errors>
           </div>
           <div class="form-group">
             <label>Beschreibung</label>
-            <textarea formControlName="instruction" class="form-control" autosize></textarea>
+            <textarea formControlName="instruction" class="form-control" autosize trim="blur"></textarea>
             <show-errors text="Beschreibung" path="prepSteps.{{i}}.instruction"></show-errors>
           </div>
         </li>
@@ -118,9 +161,4 @@
     <button type="submit" class="btn btn-primary" [disabled]="!recipeForm.valid || !recipeForm.dirty">Speichern</button>
   </div>
 
-  <div class="clearfix"></div>
-  <div class="margin-20">
-    <pre>valid?: <br>{{recipeForm.valid | json}}</pre>
-    <pre>{{recipeForm.value | json}}</pre>
-  </div>
 </form>
