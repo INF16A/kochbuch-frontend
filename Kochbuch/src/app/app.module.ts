@@ -23,6 +23,8 @@ import {AuthenticationService} from "./authentication/AuthenticationService";
 import {RecipeServie} from './alle-rezepte/alle-rezepte.service';
 import {Autosize} from "angular2-autosize";
 import {ShowerrorsComponent} from './rezeptanlegen/showerrors.component';
+import {DragAndDropDirective} from "./rezeptanlegen/dnd.directive";
+import {InputTextareaTexTrimDirective} from "./rezeptanlegen/trim.directive";
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import {ShowerrorsComponent} from './rezeptanlegen/showerrors.component';
      * @author Thomas Hörner
      */
     Autosize,
-    ShowerrorsComponent
+    ShowerrorsComponent,
+    DragAndDropDirective,
+    InputTextareaTexTrimDirective
   ],
   imports: [
     BrowserModule,
