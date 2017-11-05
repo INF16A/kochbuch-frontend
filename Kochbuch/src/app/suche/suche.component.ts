@@ -15,7 +15,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class SucheComponent implements OnInit {
 
-  private liste: any[];
+  private liste: any[]; //Warning hier ignorieren, liste wird im HTML gebraucht um alle Ergebnisse der Suche anzuzeigen
   private option: any;
   private suchtext: string;
 
@@ -24,14 +24,14 @@ export class SucheComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.option = 1;    //Erster Radiobutton ist bei Seitenaufruf ausgefüllt
+    this.suchtext = this.route.snapshot.params['suchtext'];  //Holt den Parameter aus der URL und speichert ihn in die lokale Variable
+    this.getRezeptebyName(this.suchtext);
   }
 
-  janstest() {
-    console.log("irgendwas");
-  }
 
   suchen() {
-    if (this.suchtext) {        //Suche wird nur ausgeführt, wenn auch was im Suchfeld steht
+    if (this.suchtext) {        //Suche wird nur ausgeführt, wenn auch etwas im Suchfeld steht
       switch (this.option) {    //Je nach Radiobutton wird eine andere Suchfunktion angesteuert
         case 1:
           this.getRezeptebyName(this.suchtext);
@@ -46,6 +46,8 @@ export class SucheComponent implements OnInit {
       }
     }
   }
+
+  //* Nachfolgend die Funktionen, mit denen die Rezeptergebnisse geholt werden */
 
   getRezeptebyTag(tag: string) {
     this.ajaxService.getRezepteByTag(tag).subscribe((response) => {

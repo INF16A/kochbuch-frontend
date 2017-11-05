@@ -25,6 +25,10 @@ const routes: Routes = [
   {
     path: 'suche',
     component: SucheComponent
+  },
+  {
+    path: 'rezeptansicht/:id',
+    component: RezeptansichtComponent
   }
   /* Ende Yoco-san */
 ];
