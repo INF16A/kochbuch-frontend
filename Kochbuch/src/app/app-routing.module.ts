@@ -5,8 +5,10 @@ import {AlleRezepteComponent} from "./alle-rezepte/alle-rezepte.component";
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {RezeptanlegenComponent} from "./rezeptanlegen/rezeptanlegen.component";
 import {HomeComponent} from './home/home.component';
+import {RegistrierungsmodalComponent} from "./registrierungsmodal/registrierungsmodal.component";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {SucheComponent} from './suche/suche.component';
+
 
 const routes: Routes = [
   {
@@ -22,6 +24,7 @@ const routes: Routes = [
   },
   {path: 'rezeptanlegen', component: RezeptanlegenComponent},
   {path: 'home', component: HomeComponent},
+  {path: 'registrieren', component: RegistrierungsmodalComponent},
   /** @author Yoco Harrmann*/
   {
     path: 'suche',
