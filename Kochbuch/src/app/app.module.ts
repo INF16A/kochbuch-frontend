@@ -46,8 +46,7 @@ import {AjaxService} from "./_services/ajax.service";
     NavbarComponent,
     FooterComponent,
     AddingredientmodalComponent,
-    SucheComponent
-    AddingredientmodalComponent,
+    SucheComponent,
     /**
      * @author Thomas Hörner
      */
