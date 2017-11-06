@@ -144,7 +144,7 @@
           <span>Schritt <i class="fa fa-trash pull-right" aria-hidden="true"
                            [hidden]="recipeFormPrepStepsArray.length <= 1" (click)="removePrepStep(i)"></i></span><br/>
           <div class="form-group">
-            <label>Aufwand</label>
+            <label>Aufwand in Minuten</label>
             <input formControlName="effort" class="form-control" type="number" min="0"/>
             <show-errors text="Aufwand" path="prepSteps.{{i}}.effort"></show-errors>
           </div>
