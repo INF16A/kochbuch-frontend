@@ -4,9 +4,10 @@ import {AjaxService} from "../_services/ajax.service";
 import {isNullOrUndefined} from "util";
 import {ActivatedRoute, Router} from "@angular/router";
 
-/*
-@author Team Chrocorg: Yoco Harrmann, Christian Werner, Georg Frey
-*/
+/**
+ * @author Team Chrocorg: Christian Werner, Yoco Harrmann und Georg Frey
+ *         Philipp Steigler, Roman Würtemberger und Jarno Wagner
+ */
 
 @Component({
   selector: 'app-suche',
@@ -40,8 +41,10 @@ export class SucheComponent implements OnInit {
           this.getRezeptebyTag(this.suchtext);
           break;
         case 3:
+          this.getRezeptebyUser(this.suchtext);
           break;
         case 4:
+          this.getRezeptebyIngredient(this.suchtext);
           break;
       }
     }
@@ -58,6 +61,20 @@ export class SucheComponent implements OnInit {
 
   getRezeptebyName(name: string) {
     this.ajaxService.getRezepteByName(name).subscribe((response) => {
+      console.log(response);
+      this.liste = response;
+    });
+  }
+
+  getRezeptebyIngredient(ingredient: string) {
+    this.ajaxService.getRezepteByTag(ingredient).subscribe((response) => {
+      console.log(response);
+      this.liste = response;
+    });
+  }
+
+  getRezeptebyUser(user: string) {
+    this.ajaxService.getRezepteByTag(user).subscribe((response) => {
       console.log(response);
       this.liste = response;
     });
