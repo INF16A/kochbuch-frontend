@@ -22,7 +22,7 @@
         <span *ngIf="rezept.bewertung > 0" class=" text-success">
             <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{rezept.bewertung}}
           </span>
-        <span [ngClass]="{  'text-success':rezept.difficulty===0, 'text-warning':rezept.difficulty===1,'text-danger':rezept.difficulty===2 }">
+        <span [ngClass]="{  'text-success':rezept.difficulty===1,'text-warning':rezept.difficulty===2 || rezept.difficulty===3||rezept.difficulty===4, 'text-danger':rezept.difficulty===5 }">
             <i *ngIf="rezept.difficulty > 0" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
               {{rezept.difficulty | difficulty}}
             </span>

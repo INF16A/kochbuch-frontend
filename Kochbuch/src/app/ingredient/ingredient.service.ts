@@ -1,11 +1,13 @@
-import { Http, Response, Headers, RequestOptions  } from '@angular/http';
-import { Ingredient } from './ingredient.model';
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { Observable } from 'rxjs/Observable';
+import {Headers, Http, RequestOptions} from '@angular/http';
+import {Ingredient} from './ingredient.model';
+import {Injectable} from '@angular/core';
+import {Subject} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
+import {IngredientSmall} from "../rezeptanlegen/rezeptanlegen.model";
 
 /**
  * @author André Berberich
+ * @author Thomas Hörner - Rückgabewert beim Anlegen geändert
  */
 
 @Injectable()
@@ -30,29 +32,26 @@ export class IngredientService {
     .catch(this.handleError);
   }
 
-  createIngredient(ingredient: Ingredient): Promise<Ingredient> {
+  createIngredient(ingredient: Ingredient): Promise<IngredientSmall> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
     return this.http
       .post(IngredientService.SERVER + '/ingredient', JSON.stringify(ingredient), options)
     .toPromise()
-    .then(res => this.ingredientCreated(res.json() as Ingredient))
+    .then(res => this.ingredientCreated(res.json() as IngredientSmall))
     .catch(this.handleError);
   }
 
-  private ingredientCreated(ingredient: Ingredient){
-    //alert(ingredient.id);
+  private ingredientCreated(ingredient: IngredientSmall){
     this.subject.next(ingredient);
     return ingredient;
   }
 
-  getCreatedIngredients(): Observable<Ingredient> {
+  getCreatedIngredients(): Observable<IngredientSmall> {
     return this.subject.asObservable();
 }
 
-
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
 
