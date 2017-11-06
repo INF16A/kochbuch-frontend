@@ -11,6 +11,9 @@ import {Recipe} from "app/alle-rezepte/alle-rezepte.service";
  * @author Patrick Eichert
  * @author Theresa Reus
  * @author Leandro Späth
+ * @author Tim Kühnlein
+ * @author Adrian Haase
+ * @author Adrian Dumke
  */
 
 // 💩 Alexander Krieg
