@@ -70,3 +70,7 @@ ul.comments > li.card:hover {
 .anzahlPortionen {
   min-width: 70px;
 }
+
+.tag_rezeptansicht{
+  margin-top: 5px;
+}

@@ -68,8 +68,8 @@
         <div *ngSwitchCase="5" class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Schwer</div>
       </div>
 
-      <div>
-        <span class="badge badge-pill badge-primary mr-1" *ngFor="let tag of currentRecipe.tags">{{tag.name}}</span>
+      <div class="tag_rezeptansicht">
+        <span class="btn btn-sm btn-outline-secondary mr-1" *ngFor="let tag of currentRecipe.tags">{{tag.name}}</span>
       </div>
       <!--Kühnlein-->
       <span *ngIf="this.givenRating == 0">
