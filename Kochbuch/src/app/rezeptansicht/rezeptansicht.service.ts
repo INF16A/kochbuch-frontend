@@ -16,7 +16,12 @@ import {Recipe} from "app/alle-rezepte/alle-rezepte.service";
  * @author Adrian Dumke
  */
 
-// 💩 Alexander Krieg
+// 
+
+/**
+ * 💩 Alexander Krieg
+ * Representiert ein Kommentar-Objekt
+ */
 export class Comment{
   public id:Number;
   public user:User;
@@ -27,7 +32,6 @@ export class Comment{
     public creationDate:Date
   ) {}
 }
-// 💩 Alexander Krieg
 
 @Injectable()
 export class RezeptansichtService {
@@ -134,9 +138,9 @@ export class RezeptansichtService {
   }
 
 
-  // 💩 Alexander Krieg
   /**
-   * Alle Kommentare zu einem Rezept.
+   * 💩 Alexander Krieg
+   * Öffentliche Methode holt alle Kommentare zu einem Rezept.
    * Sind vom Server sortiert nach 'creationDate'.
    * @param recipeId
    * @param callback
@@ -155,10 +159,24 @@ export class RezeptansichtService {
       }
     });
   }
+
+  /**
+   * 💩 Alexander Krieg
+   * Private Methode holt alle Kommentare zu einem Rezept.
+   * @param recipeId
+   * @return HTTPPromise
+   */
   private fetchRecipeComments(id:Number){
     let url = RezeptansichtService.SERVER+"/comments/"+id;
     return this.http.get(url);
   }
+
+  /**
+   * 💩 Alexander Krieg
+   * Führt einen Post-Request aus, um ein neuen Kommentar hinzuzufügen.
+   * @param comment: Der Kommentar der hinzugefügt werden soll.
+   * @param callback: Wird aufgerufen sobald eine Antwort vom Server kommt
+   */
   public addComment(comment:Comment, callback?: (fail:boolean, data:any) => void){
     let url = RezeptansichtService.SERVER+"/comment";
     let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -173,6 +191,12 @@ export class RezeptansichtService {
       }
     });
   }
+  /**
+   * 💩 Alexander Krieg
+   * Führt einen Post-Request aus, um ein Kommenar zu löschen.
+   * @param comment: Der Kommentar der hinzugefügt werden soll.
+   * @param callback: Wird aufgerufen sobald eine Antwort vom Server kommt
+   */
   public deleteComment(comment:Comment, callback?: (fail:boolean, data:any) => void){
     let url = RezeptansichtService.SERVER+"/comment/delete";
     let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -187,7 +211,6 @@ export class RezeptansichtService {
       }
     });
   }
-  // 💩 Alexander Krieg
 
 
   //Kühnlein
