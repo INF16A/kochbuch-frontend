@@ -7,9 +7,9 @@
       <h1>Entdecke neue Rezepte</h1>
       <p>Schnell, lecker und einfach</p>
       <div class="input-group col-md-5 center">
-        <input type="text" placeholder="" />
+        <input type="text" placeholder="" [(ngModel)]="suchtext"/>
         <span class="input-group-btn">
-          <button class="btn btn-default" type="button">
+          <button class="btn btn-default" type="button" [routerLink]="['/suche', {suchtext:suchtext}]">
             <i class="material-icons">search</i>
           </button>
         </span>

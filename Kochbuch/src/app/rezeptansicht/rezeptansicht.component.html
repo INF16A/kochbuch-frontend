@@ -1,4 +1,4 @@
-<!-- Patrick Eichert, Theresa Reus -->
+<!-- Patrick Eichert, Theresa Reus, Leandro Späth, Annika Schatz -->
 
 <div class="row">
     <div class="main-image" >
@@ -15,9 +15,8 @@
 <div class="container">
 
   <div class="row">
-
+    <!-- Leandro Späth, Theresa Reus -->
     <div class="col">
-
 
       <h1>{{currentRecipe.name}}</h1>
 
@@ -73,35 +72,29 @@
         <span class="badge badge-pill badge-primary mr-1" *ngFor="let tag of currentRecipe.tags">{{tag.name}}</span>
       </div>
       <!--Kühnlein-->
-      <!--span class="text-danger" *ngIf="currentRecipe.rating < 0">
-        <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{-currentRecipe.rating}}
-      </span>
-      <span *ngIf="currentRecipe.rating > 0" class=" text-success">
-        <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{currentRecipe.rating}}
-      </span-->
       <span *ngIf="this.givenRating == 0">
-        <span class="text-success">
+        <span class="text-success" (click)="giveRating(1)">
           <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{this.upratings}}
         </span>
-        <span class="text-danger">
+        <span class="text-danger" (click)="giveRating(-1)">
           <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{this.downratings}}
         </span>
       </span>
 
       <span *ngIf="this.givenRating > 0">
-        <span class="text-success">
+        <span class="text-success" (click)="giveRating(1)">
           <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{this.upratings}}
         </span>
-        <span class="text-muted">
+        <span class="text-muted" (click)="giveRating(-1)">
           <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{this.downratings}}
         </span>
       </span>
 
       <span *ngIf="this.givenRating < 0">
-        <span class="text-muted">
+        <span class="text-muted" (click)="giveRating(1)">
           <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{this.upratings}}
         </span>
-        <span class="text-danger">
+        <span class="text-danger" (click)="giveRating(-1)">
           <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{this.downratings}}
         </span>
       </span>
