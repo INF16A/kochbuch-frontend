@@ -4,6 +4,8 @@
 @author André Berberich
 */
 import { Component, OnInit } from '@angular/core';
+import { UserProfileService } from './user-profile.service';
+import { Recipe, RecipeServie } from '../alle-rezepte/alle-rezepte.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -12,9 +14,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor() { }
+  rezepte: Recipe[];
+
+  constructor( private service: RecipeServie ) { }
 
   ngOnInit() {
+      this.loadRecipiesForUser();
   }
 
+  private loadRecipiesForUser(){
+    this.service.getAllRecipes( rezepte => {
+      this.rezepte = rezepte;
+    });
+  }
 }
