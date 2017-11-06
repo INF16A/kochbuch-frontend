@@ -24,9 +24,16 @@ export class SucheComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.option = 1;    //Erster Radiobutton ist bei Seitenaufruf ausgefüllt
-    this.suchtext = this.route.snapshot.params['suchtext'];  //Holt den Parameter aus der URL und speichert ihn in die lokale Variable
-    this.getRezeptebyName(this.suchtext);
+    //Legt fest, welcher Radiobutton ausgefüllt wird bei Seitenaufruf
+    if( this.route.snapshot.params['option'] == undefined || this.route.snapshot.params['option'] == null){
+      this.option = 1;
+    }
+    else {
+      this.option = this.route.snapshot.params['option'];
+    }
+
+    this.suchtext = this.route.snapshot.params['suchtext']; //Holt den Parameter aus der URL und speichert ihn in die lokale Variable
+    this.suchen();
   }
 
 

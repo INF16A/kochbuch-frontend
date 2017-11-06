@@ -71,7 +71,7 @@
       </div>
 
       <div>
-        <span class="badge badge-pill badge-primary mr-1" *ngFor="let tag of currentRecipe.tags">{{tag.name}}</span>
+        <span class="badge badge-pill badge-primary mr-1" *ngFor="let tag of currentRecipe.tags"><a [routerLink]="['/suche', {suchtext:suchtext, option:2}]">{{tag.name}}</a></span>
       </div>
       <!--Kühnlein-->
       <!--span class="text-danger" *ngIf="currentRecipe.rating < 0">
