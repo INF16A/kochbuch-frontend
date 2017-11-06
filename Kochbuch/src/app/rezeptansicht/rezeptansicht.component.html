@@ -1,4 +1,4 @@
-<!-- Patrick Eichert, Theresa Reus -->
+<!-- Patrick Eichert, Theresa Reus, Leandro Späth, Annika Schatz -->
 
 <div class="row">
     <div class="main-image" >
@@ -15,9 +15,8 @@
 <div class="container">
 
   <div class="row">
-
+    <!-- Leandro Späth, Theresa Reus -->
     <div class="col">
-
 
       <h1>{{currentRecipe.name}}</h1>
 
@@ -59,8 +58,7 @@
     </div>
     <div class="col">
       <div>
-        <!-- TODO: change email to username if db is changed -->
-        <span>von {{currentRecipe.creator.email}}</span>
+        <span>von {{currentRecipe.creator.username}}</span>
       </div>
       <div class="progress" [ngSwitch]="currentRecipe.difficulty">
         <div *ngSwitchCase="1" class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">Leicht</div>
@@ -74,35 +72,29 @@
         <span class="badge badge-pill badge-primary mr-1" *ngFor="let tag of currentRecipe.tags">{{tag.name}}</span>
       </div>
       <!--Kühnlein-->
-      <!--span class="text-danger" *ngIf="currentRecipe.rating < 0">
-        <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{-currentRecipe.rating}}
-      </span>
-      <span *ngIf="currentRecipe.rating > 0" class=" text-success">
-        <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{currentRecipe.rating}}
-      </span-->
       <span *ngIf="this.givenRating == 0">
-        <span class="text-success">
+        <span class="text-success" (click)="giveRating(1)">
           <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{this.upratings}}
         </span>
-        <span class="text-danger">
+        <span class="text-danger" (click)="giveRating(-1)">
           <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{this.downratings}}
         </span>
       </span>
 
       <span *ngIf="this.givenRating > 0">
-        <span class="text-success">
+        <span class="text-success" (click)="giveRating(1)">
           <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{this.upratings}}
         </span>
-        <span class="text-muted">
+        <span class="text-muted" (click)="giveRating(-1)">
           <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{this.downratings}}
         </span>
       </span>
 
       <span *ngIf="this.givenRating < 0">
-        <span class="text-muted">
+        <span class="text-muted" (click)="giveRating(1)">
           <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{this.upratings}}
         </span>
-        <span class="text-danger">
+        <span class="text-danger" (click)="giveRating(-1)">
           <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{this.downratings}}
         </span>
       </span>
@@ -148,7 +140,7 @@
                   <div (click)="deleteComment(c)">X</div>
                 </div>
                 <p>{{c.text}}</p>
-                <p class="small">geschrieben von {{c.user.email}}  - ( registriert seit {{c.user.creationDate | date:'mediumDate'}} )</p>
+                <p class="small">geschrieben von {{c.user.username}}  - ( registriert seit {{c.user.creationDate | date:'mediumDate'}} )</p>
                 <p class="small">{{c.creationDate | date:'medium'}}</p>
               </li>
             </ul>

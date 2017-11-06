@@ -1,13 +1,15 @@
-/** 
+/**
  * @author Daniel Abel
  * @author Alexander Krieg
+ * @author Theresa Reus
+ * @author Patrick Eichert
  */
 export class User {
     id: number;
-    email: String;
+    username: string;
     creationDate: Date;
     deletionDate: Date;
-    pwHash: String;
+    password: String;
     constructor(id:number){
       this.id = id;
     }
