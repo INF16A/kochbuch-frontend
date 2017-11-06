@@ -24,6 +24,7 @@ import { RecipeServie } from './alle-rezepte/alle-rezepte.service';
 
 
 import { LOCALE_ID } from '@angular/core';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -41,7 +42,8 @@ import { LOCALE_ID } from '@angular/core';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    AddingredientmodalComponent
+    AddingredientmodalComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
