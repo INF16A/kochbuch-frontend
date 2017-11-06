@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -25,10 +25,10 @@ import {Autosize} from "angular2-autosize";
 import {ShowerrorsComponent} from './rezeptanlegen/showerrors.component';
 import {DragAndDropDirective} from "./rezeptanlegen/dnd.directive";
 import {InputTextareaTexTrimDirective} from "./rezeptanlegen/trim.directive";
-import {RecipeServie} from './alle-rezepte/alle-rezepte.service';
 import {LOCALE_ID} from '@angular/core';
 import {SucheComponent} from './suche/suche.component';
 import {AjaxService} from "./_services/ajax.service";
+import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 
 
 @NgModule({
