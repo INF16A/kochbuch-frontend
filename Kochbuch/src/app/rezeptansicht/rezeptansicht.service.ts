@@ -16,7 +16,7 @@ import {Recipe} from "app/alle-rezepte/alle-rezepte.service";
  * @author Adrian Dumke
  */
 
-// 
+//
 
 /**
  * 💩 Alexander Krieg
@@ -57,6 +57,7 @@ export class RezeptansichtService {
   //wanted to start building complete mock api here, but didn't
   //just built an object structure as it should be generated later
 
+  /*
   mockData = {
     id: 0,
     name: 'Gebratenes Lachsfilet',
@@ -104,7 +105,7 @@ export class RezeptansichtService {
 
   getMockRecipeData() {
     return Observable.of(this.mockData);
-  }
+  }*/
 
   // Theresa Reus, Patrick Eichert
   getRecipeData(recipeId:number, callback: (ar:Recipe) => void){
@@ -214,6 +215,12 @@ export class RezeptansichtService {
 
 
   //Kühnlein
+  /**
+   * Two wrapper methods which calls countRating with parameter 1 / -1
+   * Method to run corresponding GET requests
+   * @param {number} recipeid
+   * @param {(amount: number) => void} callback to get the amount of up-/ downratings when loaded
+   */
   public countRatingUp(recipeid: number, callback?:(amount:number)=>void){
     this.countRating(recipeid,1, callback);
   }
@@ -235,6 +242,11 @@ export class RezeptansichtService {
     });
   }
 
+  /**
+   * @param {number} recipeid
+   * @param {number} userid
+   * @param {(givenRating: number) => void} callback to get the previously given rating by the current user or 0 if there is none
+   */
   public getGivenRating(recipeid:number,userid:number,callback?: (givenRating:number) => void){
     let url = RezeptansichtService.SERVER+"/rating/";
     let headers = new Headers({'Accept':'*/*'});
@@ -249,7 +261,13 @@ export class RezeptansichtService {
     });
   }
 
-
+  /**
+   * Posts rating
+   * @param {number} recipeid
+   * @param {number} userid
+   * @param {number} givenRating
+   * @param {(update) => void} callback
+   */
   public giveRating(recipeid: number, userid: number, givenRating: number, callback?: (update) => void){
     let url = RezeptansichtService.SERVER+"/rating";
     let json = "{\"recipeId\":" + recipeid + ",\"userId\":" + userid + ",\"value\":" + givenRating + "}";
