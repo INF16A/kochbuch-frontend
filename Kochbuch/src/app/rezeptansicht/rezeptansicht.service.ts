@@ -224,19 +224,17 @@ export class RezeptansichtService {
   }
 
 
-  public giveRating(recipeid: number, userid: number, givenRating: number, callback?: (fail:boolean, data:any) => void){
+  public giveRating(recipeid: number, userid: number, givenRating: number, callback?: (update) => void){
     let url = RezeptansichtService.SERVER+"/rating";
     let json = "{\"recipeId\":" + recipeid + ",\"userId\":" + userid + ",\"value\":" + givenRating + "}";
-    let headers = new Headers({'Accept':'*/*', 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
+    let headers = new Headers({'Accept':'*/*', 'Content-Type': 'application/json'});
     let options = new RequestOptions({headers});
     this.http.post(url,json,options).subscribe(data => {
       if(callback){
-        console.log("false"+data);
+        callback(1);
       }
     }, error => {
-      if(callback){
-        console.log("true" + error);
-      }
+      console.log("true" + error);
     });;
   }
   //!Kühnlein

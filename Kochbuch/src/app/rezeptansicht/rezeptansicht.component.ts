@@ -78,7 +78,6 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
 
     this.loadRecipe(this.recipeid);
 
-    //this.updateRating();
 
     this.authService.authenticated.subscribe((params:boolean) => {
       this.isLoggedIn = params;
@@ -96,6 +95,8 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
       this.recipe = recipe;
       this.loadComments();
       this.sumkcalpp();
+      this.updateRating();
+      //this.updateGivenRating();
       console.log(this.recipe);
     });
   }
@@ -195,8 +196,9 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
 
   private giveRating(rating: number){
     this.givenRating = rating;
-    this.rezeptAnsichtService.giveRating(this.recipeid, 1 /*TODO: currentuser.id*/, rating);
-    this.updateRating();
+    this.rezeptAnsichtService.giveRating(this.recipeid, 1 /*TODO: currentuser.id*/, rating, update => {
+      this.updateRating();
+    });
   }
   //!Kühnlein
 }
