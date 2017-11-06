@@ -12,6 +12,9 @@ import { Recipe, RecipeServie} from '../alle-rezepte/alle-rezepte.service'
  * @author Theresa Reus
  * @author Patrick Eichert
  * @author Leandro Späth
+ * @author Tim Kühnlein
+ * @author Adrian Haase
+ * @author Adrian Dumke
  */
 
 
