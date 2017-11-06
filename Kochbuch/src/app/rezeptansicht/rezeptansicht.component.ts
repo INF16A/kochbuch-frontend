@@ -50,6 +50,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   private commentAdding:boolean = false;
   private isLoggedIn:boolean = false;
   private ingredients: Ingredient[];
+  private sumkcal:number = 0;
 
 
   ngOnInit() {
@@ -94,6 +95,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
       this.currentRecipe = recipe;
       this.recipe = recipe;
       this.loadComments();
+      this.sumkcalpp();
       console.log(this.recipe);
     });
   }
@@ -104,12 +106,12 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     });
   }
 
-  private sumkcalpp():number {
+  private sumkcalpp() {
     let sum : number = 0;
     for (let recipeIngredients of this.currentRecipe.recipeIngredients) {
       sum += (recipeIngredients.amountPerPerson * recipeIngredients.ingredient.kcalPerUnit);
     }
-    return sum;
+    this.sumkcal = sum;
   }
 
   private loadComments(){
