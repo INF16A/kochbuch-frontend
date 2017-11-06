@@ -24,7 +24,7 @@ const routes: Routes = [
   },
   {path: 'rezeptanlegen', component: RezeptanlegenComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
   {path: 'registrieren', component: RegistrierungsmodalComponent},
   /** @author Yoco Harrmann*/
   {
