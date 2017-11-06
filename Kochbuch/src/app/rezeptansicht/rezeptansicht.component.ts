@@ -11,6 +11,7 @@ import { Recipe, RecipeServie} from '../alle-rezepte/alle-rezepte.service'
  * @author Alexander Krieg
  * @author Theresa Reus
  * @author Patrick Eichert
+ * @author Leandro Späth
  */
 
 
@@ -150,6 +151,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   // <-- 💩 Alexander Krieg
 
   /**
+   * @author Leandro Späth
    *  Generates an array containing all numbers from min to max
    *
    *  e.g. range(1,4) returns [1, 2, 3, 4]

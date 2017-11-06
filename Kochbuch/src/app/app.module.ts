@@ -1,7 +1,6 @@
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component'
 import {BrowserModule} from '@angular/platform-browser';
-import {LOCALE_ID, NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -26,6 +25,11 @@ import {Autosize} from "angular2-autosize";
 import {ShowerrorsComponent} from './rezeptanlegen/showerrors.component';
 import {DragAndDropDirective} from "./rezeptanlegen/dnd.directive";
 import {InputTextareaTexTrimDirective} from "./rezeptanlegen/trim.directive";
+import {RecipeServie} from './alle-rezepte/alle-rezepte.service';
+import {LOCALE_ID} from '@angular/core';
+import {SucheComponent} from './suche/suche.component';
+import {AjaxService} from "./_services/ajax.service";
+
 
 @NgModule({
   declarations: [
@@ -41,6 +45,8 @@ import {InputTextareaTexTrimDirective} from "./rezeptanlegen/trim.directive";
     HomeComponent,
     NavbarComponent,
     FooterComponent,
+    AddingredientmodalComponent,
+    SucheComponent
     AddingredientmodalComponent,
     /**
      * @author Thomas Hörner
@@ -72,7 +78,9 @@ import {InputTextareaTexTrimDirective} from "./rezeptanlegen/trim.directive";
     {provide: LOCALE_ID, useValue: "de-CH"},
     //Daniel Abel
     RecipeServie,
-    IngredientService
+    IngredientService,
+    /** @author Yoco Harrmann */
+    AjaxService
   ],
   /**
    * @author Thomas Hörner
