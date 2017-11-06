@@ -99,7 +99,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
       this.loadComments();
       this.sumkcalpp();
       this.updateRating();
-      //this.updateGivenRating();
+      this.updateGivenRating();
       console.log(this.recipe);
     });
   }
