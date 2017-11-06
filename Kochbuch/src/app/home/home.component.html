@@ -9,7 +9,7 @@
       <div class="input-group col-md-5 center">
         <input type="text" placeholder="" [(ngModel)]="suchtext"/>
         <span class="input-group-btn">
-          <button class="btn btn-default" type="button" [routerLink]="['/suche', {suchtext:suchtext}]">
+          <button class="btn btn-default" type="button" [routerLink]="['/suche', {suchtext:suchtext,option:1}]">
             <i class="material-icons">search</i>
           </button>
         </span>

@@ -1,12 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-/*import * as http from "http";*/
-import {AjaxService} from "../_services/ajax.service";
-import {isNullOrUndefined} from "util";
-import {ActivatedRoute, Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { AjaxService } from "../_services/ajax.service";
+import { ActivatedRoute } from "@angular/router";
 
-/*
-@author Team Chrocorg: Yoco Harrmann, Christian Werner, Georg Frey
-*/
+/**
+ @author Team Chrocorg: Yoco Harrmann, Christian Werner, Georg Frey
+ */
 
 @Component({
   selector: 'app-suche',
@@ -15,7 +13,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class SucheComponent implements OnInit {
 
-  private liste: any[]; //Warning hier ignorieren, liste wird im HTML gebraucht um alle Ergebnisse der Suche anzuzeigen
+  private liste: any[];     //Warning hier ignorieren, liste wird im HTML gebraucht um alle Ergebnisse der Suche anzuzeigen
   private option: any;
   private suchtext: string;
 
@@ -24,16 +22,26 @@ export class SucheComponent implements OnInit {
   }
 
   ngOnInit() {
-    //Legt fest, welcher Radiobutton ausgefüllt wird bei Seitenaufruf
-    if( this.route.snapshot.params['option'] == undefined || this.route.snapshot.params['option'] == null){
-      this.option = 1;
+    //Legt fest, welcher Radiobutton ausgewählt wird, wenn die Seite aufgerufen wird
+    if (this.route.snapshot.params['option'] == undefined ||    //Alle möglichen versuchten User-Sabotagen abfangen.
+      this.route.snapshot.params['option'] == "undefined" ||
+      this.route.snapshot.params['option'] == null ||
+      this.route.snapshot.params['option'] == "null")
+    {
+      this.option = 1;                                          //Default
     }
-    else {
-      this.option = this.route.snapshot.params['option'];
+    else {                                                    //Andere Radio-Buttons als das Default
+      this.option = Number.parseInt(this.route.snapshot.params['option']);
+      console.log(this.option);
     }
 
-    this.suchtext = this.route.snapshot.params['suchtext']; //Holt den Parameter aus der URL und speichert ihn in die lokale Variable
-    this.suchen();
+    this.suchtext = this.route.snapshot.params['suchtext'];     //Holt den Parameter aus der URL und speichert ihn in die lokale Variable
+
+    if (this.suchtext == "undefined") {
+      this.suchtext = '';
+    }
+
+    this.suchen();        //Nach dem laden der Website die Suche ausführen
   }
 
 
