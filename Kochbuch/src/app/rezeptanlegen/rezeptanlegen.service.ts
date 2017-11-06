@@ -8,7 +8,8 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/merge';
-import {IngredientLight, Recipe, Tag} from "./rezeptanlegen.model";
+import {IngredientSmall} from "./rezeptanlegen.model";
+import {Tag} from "../tag.model";
 
 /**
  * @author Thomas Hörner
@@ -44,12 +45,12 @@ export class IngredientSearchService {
   constructor(private http: Http) {
   }
 
-  search(text: string): Promise<IngredientLight[]> {
+  search(text: string): Promise<IngredientSmall[]> {
     let url = this.baseUrl + text;
     return this.http.get(url)
       .toPromise()
       .then(response => {
-        return response.json() as IngredientLight[];
+        return response.json() as IngredientSmall[];
       })
       .catch(this.handleError);
   }
@@ -66,14 +67,14 @@ export class RezeptanlegenService {
   constructor(private http: Http) {
   }
 
-  create(recipe: Recipe): Promise<Recipe> {
+  create(recipe: string): Promise<any> {
     let headers: Headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
 
     return this.http.post(this.baseUrl, JSON.stringify(recipe), options)
       .toPromise()
       .then(response => {
-        return response.json() as Recipe;
+        return response.json();
       })
       .catch(this.handleError);
   }

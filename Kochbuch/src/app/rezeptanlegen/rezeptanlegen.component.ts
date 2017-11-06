@@ -103,13 +103,12 @@ export class RezeptanlegenComponent {
   createRecipe() {
     if (this.recipeForm.valid) {
       this.submitting = true;
-      let result = this._rss.create(Object.assign({}, this.recipeForm.value));
+      let result = this._rss.create(this.recipeForm.value);
       result.then(value => {
         this.submitting = false;
         this.router.navigate(['/']);
       }).catch(reason => {
         this.submitting = false;
-        alert("interner Fehler aufgetreten");
       })
     }
   }

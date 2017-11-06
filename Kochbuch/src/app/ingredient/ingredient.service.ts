@@ -3,7 +3,7 @@ import {Ingredient} from './ingredient.model';
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 import {Observable} from 'rxjs/Observable';
-import {IngredientLight} from "../rezeptanlegen/rezeptanlegen.model";
+import {IngredientSmall} from "../rezeptanlegen/rezeptanlegen.model";
 
 /**
  * @author André Berberich
@@ -32,22 +32,22 @@ export class IngredientService {
     .catch(this.handleError);
   }
 
-  createIngredient(ingredient: Ingredient): Promise<IngredientLight> {
+  createIngredient(ingredient: Ingredient): Promise<IngredientSmall> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
     return this.http
       .post(IngredientService.SERVER + '/ingredient', JSON.stringify(ingredient), options)
     .toPromise()
-    .then(res => this.ingredientCreated(res.json() as IngredientLight))
+    .then(res => this.ingredientCreated(res.json() as IngredientSmall))
     .catch(this.handleError);
   }
 
-  private ingredientCreated(ingredient: IngredientLight){
+  private ingredientCreated(ingredient: IngredientSmall){
     this.subject.next(ingredient);
     return ingredient;
   }
 
-  getCreatedIngredients(): Observable<IngredientLight> {
+  getCreatedIngredients(): Observable<IngredientSmall> {
     return this.subject.asObservable();
 }
 
