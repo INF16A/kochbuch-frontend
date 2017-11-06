@@ -69,7 +69,7 @@
       </div>
 
       <div>
-        <span class="badge badge-pill badge-primary mr-1" *ngFor="let tag of currentRecipe.tags"><a [routerLink]="['/suche', {suchtext:suchtext, option:2}]">{{tag.name}}</a></span>
+        <span class="badge badge-pill badge-primary mr-1" *ngFor="let tag of currentRecipe.tags"><a [routerLink]="['/suche', {suchtext:tag.name, option:2}]">{{tag.name}}</a></span>
       </div>
       <!--Kühnlein-->
       <span *ngIf="this.givenRating == 0">

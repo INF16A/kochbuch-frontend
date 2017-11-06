@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AjaxService } from "../_services/ajax.service";
 import { ActivatedRoute } from "@angular/router";
+import {MessageService} from "../_services/message.service";
+
 
 /**
  @author Team Chrocorg: Yoco Harrmann, Christian Werner, Georg Frey
@@ -18,8 +20,11 @@ export class SucheComponent implements OnInit {
   private suchtext: string;
 
   constructor(private ajaxService: AjaxService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private messageService: MessageService) {
   }
+
+
 
   ngOnInit() {
     //Legt fest, welcher Radiobutton ausgewählt wird, wenn die Seite aufgerufen wird
@@ -32,7 +37,6 @@ export class SucheComponent implements OnInit {
     }
     else {                                                    //Andere Radio-Buttons als das Default
       this.option = Number.parseInt(this.route.snapshot.params['option']);
-      console.log(this.option);
     }
 
     this.suchtext = this.route.snapshot.params['suchtext'];     //Holt den Parameter aus der URL und speichert ihn in die lokale Variable
@@ -69,13 +73,26 @@ export class SucheComponent implements OnInit {
       console.log(response);
       this.liste = response;
     });
+    this.sendMessage();
   }
 
   getRezeptebyName(name: string) {
     this.ajaxService.getRezepteByName(name).subscribe((response) => {
       console.log(response);
       this.liste = response;
+      return
     });
+    this.sendMessage();
+  }
+
+
+  //Diese beiden Funktionen werden benötigt, um Daten das andere Component (Rezeptliste) zu "senden"
+  sendMessage(): void {
+    this.messageService.sendMessage( this.liste );
+  }
+
+  clearMessage(): void {
+    this.messageService.clearMessage();
   }
 
 }

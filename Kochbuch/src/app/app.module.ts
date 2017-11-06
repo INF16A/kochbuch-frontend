@@ -29,6 +29,7 @@ import {LOCALE_ID} from '@angular/core';
 import {SucheComponent} from './suche/suche.component';
 import {AjaxService} from "./_services/ajax.service";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
+import {MessageService} from "./_services/message.service";
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
     RecipeServie,
     IngredientService,
     /** @author Yoco Harrmann */
-    AjaxService
+    AjaxService,
+    MessageService
   ],
   /**
    * @author Thomas Hörner
