@@ -5,7 +5,8 @@ import {AlleRezepteComponent} from "./alle-rezepte/alle-rezepte.component";
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {RezeptanlegenComponent} from "./rezeptanlegen/rezeptanlegen.component";
 import {HomeComponent} from './home/home.component';
-import { SucheComponent } from './suche/suche.component';
+import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
+import {SucheComponent} from './suche/suche.component';
 
 const routes: Routes = [
   {
@@ -26,11 +27,10 @@ const routes: Routes = [
     path: 'suche',
     component: SucheComponent
   },
-  {
-    path: 'rezeptansicht/:id',
-    component: RezeptansichtComponent
-  }
   /* Ende Yoco-san */
+  {path: 'home', component: HomeComponent},
+  {path: '404', component: PageNotFoundComponent},
+  {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({
