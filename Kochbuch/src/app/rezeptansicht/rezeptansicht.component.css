@@ -4,6 +4,7 @@ Nico Frischkorn
 Alexander Krieg
 Theresa Reus
 Patrick Eichert
+Leandro Späth
 */
 
 .main-image{
@@ -32,7 +33,7 @@ h1 {
 
 @media (max-width: 575px) {  /* For mobile  */
     .main-image{
-        height: 400px;
+        height: 600px;
     }
 }
 
@@ -64,4 +65,12 @@ ul.comments > li.card {
 }
 ul.comments > li.card:hover {
   /* box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.3); */
+}
+
+.anzahlPortionen {
+  min-width: 70px;
+}
+
+.tag_rezeptansicht{
+  margin-top: 5px;
 }

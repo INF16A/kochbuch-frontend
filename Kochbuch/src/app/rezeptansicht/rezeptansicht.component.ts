@@ -11,6 +11,10 @@ import { Recipe, RecipeServie} from '../alle-rezepte/alle-rezepte.service'
  * @author Alexander Krieg
  * @author Theresa Reus
  * @author Patrick Eichert
+ * @author Leandro Späth
+ * @author Tim Kühnlein
+ * @author Adrian Haase
+ * @author Adrian Dumke
  */
 
 
@@ -49,6 +53,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   private commentAdding:boolean = false;
   private isLoggedIn:boolean = false;
   private ingredients: Ingredient[];
+  private sumkcal:number = 0;
 
 
   ngOnInit() {
@@ -76,11 +81,11 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
 
     this.loadRecipe(this.recipeid);
 
+
     this.authService.authenticated.subscribe((params:boolean) => {
       this.isLoggedIn = params;
     });
     this.authService.debugSetLogin(true);
-    this.updateRating();
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
@@ -92,6 +97,9 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
       this.currentRecipe = recipe;
       this.recipe = recipe;
       this.loadComments();
+      this.sumkcalpp();
+      this.updateRating();
+      //this.updateGivenRating();
       console.log(this.recipe);
     });
   }
@@ -102,12 +110,12 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     });
   }
 
-  private sumkcalpp():number {
+  private sumkcalpp() {
     let sum : number = 0;
     for (let recipeIngredients of this.currentRecipe.recipeIngredients) {
       sum += (recipeIngredients.amountPerPerson * recipeIngredients.ingredient.kcalPerUnit);
     }
-    return sum;
+    this.sumkcal = sum;
   }
 
   private loadComments(){
@@ -150,6 +158,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   // <-- 💩 Alexander Krieg
 
   /**
+   * @author Leandro Späth
    *  Generates an array containing all numbers from min to max
    *
    *  e.g. range(1,4) returns [1, 2, 3, 4]
@@ -185,6 +194,13 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     this.rezeptAnsichtService.getGivenRating(this.recipe.id, 1 /*TODO: currentuser.id*/,givenRating => {
       this.givenRating = givenRating;
       console.log("GivenRating: "+this.givenRating);
+    });
+  }
+
+  private giveRating(rating: number){
+    this.givenRating = rating;
+    this.rezeptAnsichtService.giveRating(this.recipeid, 1 /*TODO: currentuser.id*/, rating, update => {
+      this.updateRating();
     });
   }
   //!Kühnlein

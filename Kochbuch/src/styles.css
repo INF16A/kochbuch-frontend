@@ -1,3 +1,4 @@
+
 /*
 @author Armin Beck
 @author Patrick Hahn
@@ -23,6 +24,7 @@ h2,
 h3 {
     color: #484848;
 }
+
 /*
 .group {
     display: inline-block;
@@ -62,10 +64,10 @@ label {
     position: relative;
     top: 0em;
 }
-
 .modal-content{
     margin-top: 5em;
 }
+
 
 input:focus~label,
 input:valid~label {
@@ -106,6 +108,7 @@ input:focus~.bar:after {
     width: 50%;
 }
 /*
+
 .background {
     height: 600px;
     align-content: center;
@@ -127,6 +130,7 @@ input:focus~.bar:after {
     transform: translateX(-50%);
     z-index: 3;
 }
+
 
 .search h1 {
     text-align: center;
@@ -196,7 +200,7 @@ input:focus~.bar:after {
     border: 4px solid #ff2a00;
     animation: loader 2s infinite ease;
   }
-  
+
   .loader-inner {
     vertical-align: top;
     display: inline-block;
@@ -204,46 +208,46 @@ input:focus~.bar:after {
     background-color: #ff2a00;
     animation: loader-inner 2s infinite ease-in;
   }
-  
+
   @keyframes loader {
     0% {
       transform: rotate(0deg);
     }
-    
+
     25% {
       transform: rotate(180deg);
     }
-    
+
     50% {
       transform: rotate(180deg);
     }
-    
+
     75% {
       transform: rotate(360deg);
     }
-    
+
     100% {
       transform: rotate(360deg);
     }
   }
-  
+
   @keyframes loader-inner {
     0% {
       height: 0%;
     }
-    
+
     25% {
       height: 0%;
     }
-    
+
     50% {
       height: 100%;
     }
-    
+
     75% {
       height: 100%;
     }
-    
+
     100% {
       height: 0%;
     }

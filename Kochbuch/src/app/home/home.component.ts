@@ -8,6 +8,8 @@ import { RecipeServie, Recipe } from "../alle-rezepte/alle-rezepte.service";
 export class HomeComponent implements OnInit {
 
   constructor(private RecipeService: RecipeServie) { }
+  private suchtext : string;
+
 
   Rezepte: Recipe[];
   NewestRecipes: Recipe[];

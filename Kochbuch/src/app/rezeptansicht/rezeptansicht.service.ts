@@ -10,6 +10,10 @@ import {Recipe} from "app/alle-rezepte/alle-rezepte.service";
  * @author Alexander Krieg
  * @author Patrick Eichert
  * @author Theresa Reus
+ * @author Leandro Späth
+ * @author Tim Kühnlein
+ * @author Adrian Haase
+ * @author Adrian Dumke
  */
 
 // 💩 Alexander Krieg
@@ -33,6 +37,10 @@ export class RezeptansichtService {
   constructor(private http:Http) {
   }
 
+  /**
+   * @author Leandro Späth
+   * Beispieldaten, wie sie die Seite erwartet
+   */
   /*mockRecipe = {
    id: 0,
    name: 'Gebratenes Lachsfilet',
@@ -216,6 +224,21 @@ export class RezeptansichtService {
         callback(0);
       }
     });
+  }
+
+
+  public giveRating(recipeid: number, userid: number, givenRating: number, callback?: (update) => void){
+    let url = RezeptansichtService.SERVER+"/rating";
+    let json = "{\"recipeId\":" + recipeid + ",\"userId\":" + userid + ",\"value\":" + givenRating + "}";
+    let headers = new Headers({'Accept':'*/*', 'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers});
+    this.http.post(url,json,options).subscribe(data => {
+      if(callback){
+        callback(1);
+      }
+    }, error => {
+      console.log("true" + error);
+    });;
   }
   //!Kühnlein
 }
