@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
  * @author Patrick Hahn
  * @author Alexander Krieg
  * @author Armin Beck
+ * @author Leandro Späth
  */
 
 @Injectable()
@@ -50,6 +51,7 @@ export class AuthenticationService implements HttpInterceptor {
 					this.currentUser = new User(data.id);
 					this.currentUser.username = data.username;
 					this.token = xtoken;
+					this.authenticated.next(true);
 				}
 				else {
 					throw new Error("insufficient data loaded");
@@ -59,6 +61,7 @@ export class AuthenticationService implements HttpInterceptor {
 	public logout() {
 		this.currentUser = null;
 		this.token = null;
+		this.authenticated.next(false);
 	}
 	public debugSetLogin(loggedIn: boolean): void {
 		this.authenticated.next(loggedIn);
