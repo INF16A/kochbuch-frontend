@@ -10,12 +10,11 @@ import { Injectable } from '@angular/core';
  * @author Armin Beck
  */
 
- @Injectable()
+@Injectable()
 export class AuthenticationService implements HttpInterceptor {
 	public authenticated: Subject<boolean>;
 	public currentUser: User = null;
 	public token: string;
-
 	public constructor(private http: Http) {
 		this.authenticated = new BehaviorSubject(false);
 	}
@@ -32,15 +31,21 @@ export class AuthenticationService implements HttpInterceptor {
 		return next.handle(req);
 	}
 	public tryAuthentification(username: string, password: string) {
-		const backendLoginUrl = "https://localhost:8080/login";
-		this.http.post(backendLoginUrl, `username=${encodeURI(username)}&password=${encodeURI(password)}`,
-			{
-				params: {
-					"ContentType": "application/x-www-form-urlencoded"
-				}
-			})._do(z => {
+		const backendLoginUrl = "http://localhost:8080/login";
+		console.log("tick");
+		let headers = new Headers();
+		headers.append("Content-Type", 'application/x-www-form-urlencoded');
+
+		let reqOptions = new RequestOptions({
+			headers: headers
+		})
+		return this.http.post(backendLoginUrl, `username=${encodeURI(username)}&password=${encodeURI(password)}`,
+			reqOptions).do(z => {
+				console.log("done", z, z.headers.values());
+
 				let xtoken = z.headers.get("X-Token");
 				let data = z.json()
+				console.log(xtoken, data.id, data.username);
 				if (data.id && data.username && xtoken) {
 					this.currentUser = new User(data.id);
 					this.currentUser.username = data.username;
@@ -51,7 +56,10 @@ export class AuthenticationService implements HttpInterceptor {
 				}
 			});
 	}
-
+	public logout() {
+		this.currentUser = null;
+		this.token = null;
+	}
 	public debugSetLogin(loggedIn: boolean): void {
 		this.authenticated.next(loggedIn);
 		if (loggedIn) {
