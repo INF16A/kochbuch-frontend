@@ -1,38 +1,38 @@
-<!-- @author: Daniel Abel, Patrick Eichert, Theresa Reus -->
+<!-- @author: Daniel Abel, Patrick Eichert, Theresa Reus, Robert Zebec -->
 <div class="container-fluid">
-  <div class="card-columns">
-    <div class="card" *ngFor="let rezept of rezepte">
+    <div class="card-columns">
+        <div class="card" *ngFor="let rezept of rezepte">
 
-      <img src="data:{{rezept.pics[0].picType}};base64,{{rezept.pics[0].picData}}" *ngIf=rezept.pics[0] class="card-img-top " style="object-fit: cover;">
-      <div class="card-body card-block">
-        <h2 class="card-title">{{rezept.name}}</h2>
-        <div class="card-subtitle text-muted">{{rezept.creator.id}} {{rezept.createDate | date:"dd.MM.yyyy"}}</div>
-        <p class="card-text ">{{rezept.description}}</p>
-        <a class="btn btn-outline-primary" routerLink="/rezeptansicht/{{rezept.id}}" >Jetzt kochen</a>
+            <img src="data:{{rezept.pics[0].picType}};base64,{{rezept.pics[0].picData}}" *ngIf=rezept.pics[0] class="card-img-top " style="object-fit: cover;">
+            <div class="card-body card-block">
+                <h2 class="card-title">{{rezept.name}}</h2>
+                <div class="card-subtitle text-muted">{{rezept.creator.username}} {{rezept.createDate | date:"dd.MM.yyyy"}}</div>
+                <p class="card-text ">{{rezept.description}}</p>
+                <a class="btn btn-outline-primary" routerLink="/rezeptansicht/{{rezept.id}}">Jetzt kochen</a>
 
-        <!-- <a class="btn btn-outline-primary" routerLink="/rezeptansicht">Jetzt kochen</a> -->
-      </div>
-      <div class="card-footer d-flex flex-row flex-wrap justify-content-start">
-        <a *ngFor="let tag of rezept.tags" routerLink="./" [queryParams]="{search: tag}" class="btn btn-sm btn-outline-secondary m-1">{{tag.name}}</a>
-      </div>
-      <div class="card-footer d-flex flex-row justify-content-around">
-        <span class="text-danger" *ngIf="rezept.bewertung < 0">
+                <!-- <a class="btn btn-outline-primary" routerLink="/rezeptansicht">Jetzt kochen</a> -->
+            </div>
+            <div class="card-footer d-flex flex-row flex-wrap justify-content-start">
+                <a *ngFor="let tag of rezept.tags" routerLink="./" [queryParams]="{search: tag}" class="btn btn-sm btn-outline-secondary m-1">{{tag.name}}</a>
+            </div>
+            <div class="card-footer d-flex flex-row justify-content-around">
+                <span class="text-danger" *ngIf="rezept.bewertung < 0">
           <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{-rezept.bewertung}}
         </span>
-        <span *ngIf="rezept.bewertung > 0" class=" text-success">
+                <span *ngIf="rezept.bewertung > 0" class=" text-success">
             <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{rezept.bewertung}}
           </span>
-        <span [ngClass]="{  'text-success':rezept.difficulty===1,'text-warning':rezept.difficulty===2 || rezept.difficulty===3||rezept.difficulty===4, 'text-danger':rezept.difficulty===5 }">
+                <span [ngClass]="{  'text-success':rezept.difficulty===1,'text-warning':rezept.difficulty===2 || rezept.difficulty===3||rezept.difficulty===4, 'text-danger':rezept.difficulty===5 }">
             <i *ngIf="rezept.difficulty > 0" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
               {{rezept.difficulty | difficulty}}
             </span>
-        <span class="">
+                <span class="">
            <i class="fa fa-clock-o" aria-hidden="true"></i> {{rezept.effort}} min.
           </span>
-        <span class="">
+                <span class="">
             <i [ngClass]="{'fa-user':rezept.forpersons===1, 'fa-users':rezept.forpersons>1}" class="fa" aria-hidden="true"></i> {{rezept.forpersons}}
         </span>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
