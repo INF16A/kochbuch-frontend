@@ -4,3 +4,7 @@
 .container {
   padding-top: 100px;
 }
+
+input, button  {
+  margin-bottom : 30px;
+}
