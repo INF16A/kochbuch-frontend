@@ -20,6 +20,12 @@ import {HomeComponent} from './home/home.component';
 import {NavbarComponent} from './shared/navbar/navbar.component';
 import {FooterComponent} from './shared/footer/footer.component';
 import {AuthenticationService} from "./authentication/AuthenticationService";
+// import { RecipeServie } from './alle-rezepte/alle-rezepte.service';
+
+
+// import { LOCALE_ID } from '@angular/core';
+import { LoginComponent } from './login/login.component';
+
 import {RecipeServie} from './alle-rezepte/alle-rezepte.service';
 import {Autosize} from "angular2-autosize";
 import {ShowerrorsComponent} from './rezeptanlegen/showerrors.component';
@@ -30,6 +36,12 @@ import {SucheComponent} from './suche/suche.component';
 import {AjaxService} from "./_services/ajax.service";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 
+
+/**
+ * @author Thomas Hörner
+ * @author Alexander Krieg
+ * @author Armin Beck
+ */
 
 @NgModule({
   declarations: [
@@ -46,6 +58,7 @@ import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
     NavbarComponent,
     FooterComponent,
     AddingredientmodalComponent,
+    LoginComponent,
     SucheComponent,
     /**
      * @author Thomas Hörner

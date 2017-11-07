@@ -10,6 +10,8 @@ import {Router} from "@angular/router";
 
 /**
  * @author Thomas Hörner
+ * @author Enrico Greßer
+ * @author Florian Eder
  */
 @Component({
   selector: 'app-rezeptanlegen',
