@@ -34,11 +34,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   ngOnInit() {
       this.sub = this.route.params.subscribe(
         (params:Params) => {
-         this.userId = + params['id'];
+          this.updateUserData(params);
         }
       );
-      this.loadUser(this.userId);
-      this.loadRecipiesForUser(this.userId);
 
       this.authService.authenticated.subscribe((params: boolean) => {
         this.isLoggedIn = params;
@@ -48,6 +46,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  private updateUserData(params: Params) {
+    this.userId = + params['id'];
+    this.loadUser(this.userId);
+    this.loadRecipiesForUser(this.userId);
   }
 
   private loadRecipiesForUser(userId: Number) {
