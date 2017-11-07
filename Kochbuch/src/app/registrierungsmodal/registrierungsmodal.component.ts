@@ -1,6 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 
+
+/**
+@authors
+Annika Schatz
+Irina Eurich
+Tobias Bloch
+Endrit Çallaki
+
+ */
 
 @Component({
   selector: 'app-registrierungsmodal',
@@ -10,15 +20,17 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 export class RegistrierungsmodalComponent implements OnInit {
   closeResult: string;
 
-  constructor(private modalService: NgbModal) {}
+  form: FormGroup;
+  constructor(public modalService: NgbModal, public activeModal: NgbActiveModal, private _fb: FormBuilder) {
 
-  open(content) {
-    this.modalService.open(content).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
   }
+
+  ngOnInit() {
+    //initial value setzen
+
+  }
+
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -26,12 +38,12 @@ export class RegistrierungsmodalComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
 
-  ngOnInit() {
-  }
+  private creatingIngredient: boolean = false;
+
 
 }
 

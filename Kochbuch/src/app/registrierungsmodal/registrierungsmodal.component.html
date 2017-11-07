@@ -1,55 +1,57 @@
-<!-->
+<!--
 @authors
 Annika Schatz
 Irina Eurich
 Tobias Bloch
+Endrit Çallaki
+-->
 
-<-->
+
+
+    <!-- Modal Header -->
 <div class="modal-header">
+  <h4 class="modal-title">Registrierung</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
-<div class="modal-body">
-  <h4>Registrierung</h4>
-  <div class="input-group" class="container">
-    <span class="input-group-addon" id="basic-addon1" for="benutzername">Benutzername</span>
-    <input type="text" class="form-control" name="username" id="benutzername" placeholder="Benutzername">
-  </div>
-  <br>
-  <div class="input-group" class="container">
-    <span class="input-group-addon" id="basic-addon1" for="email">E-Mail</span>
-    <input type="email" class="form-control" name="email" id="email" placeholder="E-Mail">
-  </div>
-  <br>
-  <div class="input-group" class="container">
-    <span class="input-group-addon" id="basic-addon1" for="passwort1">Passwort</span>
-    <input type="password" class="form-control" name="passwort1" id="passwort1" placeholder="Passwort">
-    <input type="password" class="form-control" name="passwort2" id="passwort2" placeholder="Passwort wiederholen">
-  </div>
-  <br>
 
-  <div class="container">
-  <h5>Nutzungsbedingungen</h5>
+    <!-- Modal Body -->
+    <div class="modal-body">
 
-  <div class="col-sm-10">
-    <div class="form-check">
-      <label class="form-check-label">
-        <table class="table">
-          <tbody>
-          <tr>
-            <th scope="col">        <input class="form-check-input" type="checkbox" name="nutzungsbedingungen" value="nutzungsbedingungen">
-            </th>
-            <th scope="col">Ich habe die <a href="https://de.wikipedia.org/wiki/Allgemeine_Gesch%C3%A4ftsbedingungen"
-                                            target="_blank" rel="noopener"> &nbsp;Nutzungsbedingungen&nbsp;</a> gelesen
-              und bin damit einverstanden.</th>
-          </tr>
-          </tbody>
-        </table>
 
-      </label>
+      <div class="form-group">
+        <label for="benutzername">Benutzername</label>
+        <input type="text" class="form-control" name="username" id="benutzername" placeholder="exampleuser">
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-Mail</label>
+        <input type="email" class="form-control" name="email" id="email" placeholder="example@mail.de">
+      </div>
+
+      <div class="form-group">
+        <label for="passwort1">Passwort</label>
+        <input type="password" class="form-control" name="passwort1" id="passwort1" placeholder="start123">
+        <br>
+        <input type="password" class="form-control" name="passwort2" id="passwort2" placeholder="start123">
+      </div>
+      <br>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" name="nutzungsbedingungen" value="nutzungsbedingungen">
+          Ich habe die <a href="https://de.wikipedia.org/wiki/Allgemeine_Gesch%C3%A4ftsbedingungen"
+                          target="_blank" rel="noopener"> &nbsp;Nutzungsbedingungen&nbsp;</a> gelesen
+          und bin damit einverstanden.
+        </label>
+      </div>
     </div>
 
-  </div>
+    <!-- Modal Footer -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success btn-lg btn-block" (click)="c('Close click')"><b>Registrieren</b></button>
+    </div>
 
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-dark" (click)="c('Close click')">Registrieren</button>
-</div>
+
+

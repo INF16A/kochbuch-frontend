@@ -83,8 +83,9 @@ import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
   ],
   /**
    * @author Thomas Hörner
+   * Endrit Çallaki
    */
-  entryComponents: [AddingredientmodalComponent],
+  entryComponents: [AddingredientmodalComponent, RegistrierungsmodalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {
