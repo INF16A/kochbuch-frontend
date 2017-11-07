@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'rezeptansicht/:id', component: RezeptansichtComponent},
   {path: 'rezeptliste', component: AlleRezepteComponent},
   {
-    path: 'user-profile',
+    path: 'user-profile/:id',
     component: UserProfileComponent
   },
   {path: 'rezeptanlegen', component: RezeptanlegenComponent},
