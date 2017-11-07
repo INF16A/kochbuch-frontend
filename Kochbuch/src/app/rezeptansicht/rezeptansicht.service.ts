@@ -199,7 +199,7 @@ export class RezeptansichtService {
    * @param callback: Wird aufgerufen sobald eine Antwort vom Server kommt
    */
   public deleteComment(comment:Comment, callback?: (fail:boolean, data:any) => void){
-    let url = RezeptansichtService.SERVER+"/comment/delete/"+comment.id;
+    let url = RezeptansichtService.SERVER+"/comment/"+comment.id;
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
