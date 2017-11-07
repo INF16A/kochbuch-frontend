@@ -5,15 +5,15 @@ import {MessageService} from "../_services/message.service";
 
 
 /**
- @author Team Chrocorg: Yoco Harrmann, Christian Werner, Georg Frey
- */
+   @author Team Chrocorg: Yoco Harrmann, Christian Werner, Georg Frey
+   */
 
-@Component({
-  selector: 'app-suche',
-  templateUrl: './suche.component.html',
-  styleUrls: ['./suche.component.css']
-})
-export class SucheComponent implements OnInit {
+  @Component({
+    selector: 'app-suche',
+    templateUrl: './suche.component.html',
+    styleUrls: ['./suche.component.css']
+  })
+  export class SucheComponent implements OnInit {
 
   private liste: any[];     //Warning hier ignorieren, liste wird im HTML gebraucht um alle Ergebnisse der Suche anzuzeigen
   private option: any;

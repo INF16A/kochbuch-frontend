@@ -8,7 +8,7 @@ import {Subscription} from "rxjs/Subscription";
 /**
  * @author Patrick Hahn
  * @author Armin Beck
- * @author Yoco Harrmann
+ * @author Yoco Harrmann, Christian Werner, Georg Frey
  */
 
 @Component({
@@ -27,9 +27,8 @@ export class RezeptlisteComponent implements OnInit, OnDestroy {
     this.subscription = this.messageService.getMessage().subscribe(
       message => {
         this.rezepte = message;
-        console.log(message);
         console.log(this.rezepte);
-        return
+        return this.rezepte;
       }
     );
   }
@@ -38,6 +37,6 @@ export class RezeptlisteComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // this.subscription.unsubscribe(); // MemoryLeaks vorbeugen
+    this.subscription.unsubscribe(); // MemoryLeaks vorbeugen
   }
 }

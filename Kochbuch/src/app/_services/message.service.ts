@@ -13,7 +13,7 @@ export class MessageService {
   constructor() { }
 
   sendMessage(message: any[]) {
-    this.subject.next({ message });
+    this.subject.next( message );
   }
 
   clearMessage() {
