@@ -35,6 +35,7 @@ import {LOCALE_ID} from '@angular/core';
 import {SucheComponent} from './suche/suche.component';
 import {AjaxService} from "./_services/ajax.service";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
+import { UserProfileService } from 'app/user-profile/user-profile.service';
 
 
 /**
@@ -91,6 +92,7 @@ import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
     //Daniel Abel
     RecipeServie,
     IngredientService,
+    UserProfileService,
     /** @author Yoco Harrmann */
     AjaxService
   ],

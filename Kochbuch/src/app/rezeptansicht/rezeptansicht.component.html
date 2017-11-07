@@ -1,12 +1,12 @@
-<!-- Patrick Eichert, Theresa Reus, Leandro Späth, Annika Schatz, Tim Kühnlein, Adrian Haase, Adrian Dumke -->
+<!-- Patrick Eichert, Theresa Reus, Leandro Späth, Annika Schatz, Tim Kühnlein, Adrian Haase, Adrian Dumke, André Berberich -->
 
 <div class="row">
-    <div class="main-image" >
-      <ngb-carousel >
-        <ng-template ngbSlide *ngFor="let i of currentRecipe.pics">
-          <img src="data:{{i.picType}};base64,{{i.picData}}">
-        </ng-template>
-      </ngb-carousel>
+    <div class="main-image">
+        <ngb-carousel>
+            <ng-template ngbSlide *ngFor="let i of currentRecipe.pics">
+                <img src="data:{{i.picType}};base64,{{i.picData}}">
+            </ng-template>
+        </ngb-carousel>
     </div>
 </div>
 
@@ -14,141 +14,141 @@
 
 <div class="container">
 
-  <div class="row">
-    <!-- Leandro Späth, Theresa Reus -->
-    <div class="col">
+    <div class="row">
+        <!-- Leandro Späth, Theresa Reus -->
+        <div class="col">
 
-      <h1>{{currentRecipe.name}}</h1>
+            <h1>{{currentRecipe.name}}</h1>
 
-      <hr>
+            <hr>
 
-      <p>{{currentRecipe.description}}</p>
+            <p>{{currentRecipe.description}}</p>
 
-      <span class="badge badge-secondary">Zeitaufwand: {{currentRecipe.effort}} min</span>
-      <span class="badge badge-dark">Kcal p.P.: {{sumkcal | number:'1.0-2'}}</span>
+            <span class="badge badge-secondary">Zeitaufwand: {{currentRecipe.effort}} min</span>
+            <span class="badge badge-dark">Kcal p.P.: {{sumkcal | number:'1.0-2'}}</span>
 
-      <h3>Zutaten</h3>
-      <div class="input-group col-5">
-        <span class="input-group-addon">für</span>
-        <input class="form-control anzahlPortionen" [(ngModel)]="personCount" type="number" value="4" min="1">
-        <span class="input-group-addon">Personen</span>
-      </div>
+            <h3>Zutaten</h3>
+            <div class="input-group col-5">
+                <span class="input-group-addon">für</span>
+                <input class="form-control anzahlPortionen" [(ngModel)]="personCount" type="number" value="4" min="1">
+                <span class="input-group-addon">Personen</span>
+            </div>
 
-      <table class="table">
-        <tr>
-          <th class="text-right">Menge</th>
-          <th>Zutat</th>
-        </tr>
-        <tr *ngFor="let i of currentRecipe.recipeIngredients">
-          <td class="text-right">{{i.amountPerPerson * personCount}} {{unit[i.ingredient.unit]}}</td>
-          <td>{{i.ingredient.name}}</td>
-        </tr>
-      </table>
+            <table class="table">
+                <tr>
+                    <th class="text-right">Menge</th>
+                    <th>Zutat</th>
+                </tr>
+                <tr *ngFor="let i of currentRecipe.recipeIngredients">
+                    <td class="text-right">{{i.amountPerPerson * personCount}} {{i.ingredient.unit | ingredientunit}}</td>
+                    <td>{{i.ingredient.name}}</td>
+                </tr>
+            </table>
 
-      <hr>
+            <hr>
 
-      <h3>Zubereitung</h3>
-      <ol>
-        <li *ngFor="let i of currentRecipe.preSteps">
-          {{i.description}}
-          <br>
-          <span class="badge badge-secondary">Zeitaufwand: {{i.effort}} min</span>
-        </li>
-      </ol>
-    </div>
-    <div class="col">
-      <div>
-        <span>von {{currentRecipe.creator.username}} erstellt am {{currentRecipe.createDate| date:'mediumDate'}}</span>
-      </div>
-      <div class="progress" [ngSwitch]="currentRecipe.difficulty">
-        <div *ngSwitchCase="1" class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">Leicht</div>
-        <div *ngSwitchCase="2" class="progress-bar bg-success" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">Leicht-Mittel</div>
-        <div *ngSwitchCase="3" class="progress-bar bg-info" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">Mittel</div>
-        <div *ngSwitchCase="4" class="progress-bar bg-warning" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">Mittel-Schwer</div>
-        <div *ngSwitchCase="5" class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Schwer</div>
-      </div>
+            <h3>Zubereitung</h3>
+            <ol>
+                <li *ngFor="let i of currentRecipe.preSteps">
+                    {{i.description}}
+                    <br>
+                    <span class="badge badge-secondary">Zeitaufwand: {{i.effort}} min</span>
+                </li>
+            </ol>
+        </div>
+        <div class="col">
+            <div>
+                <span>von <a routerLink="/user-profile/{{currentRecipe.creator.id}}" >{{currentRecipe.creator.username}}</a> erstellt am {{currentRecipe.createDate| date:'mediumDate'}}</span>
+            </div>
+            <div class="progress" [ngSwitch]="currentRecipe.difficulty">
+                <div *ngSwitchCase="1" class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">Leicht</div>
+                <div *ngSwitchCase="2" class="progress-bar bg-success" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">Leicht-Mittel</div>
+                <div *ngSwitchCase="3" class="progress-bar bg-info" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">Mittel</div>
+                <div *ngSwitchCase="4" class="progress-bar bg-warning" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">Mittel-Schwer</div>
+                <div *ngSwitchCase="5" class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Schwer</div>
+            </div>
 
-      <div class="tag_rezeptansicht">
-        <span class="btn btn-sm btn-outline-secondary mr-1" *ngFor="let tag of currentRecipe.tags">{{tag.name}}</span>
-      </div>
-      <!--Kühnlein-->
-      <span *ngIf="this.givenRating == 0">
+            <div class="tag_rezeptansicht">
+                <span class="btn btn-sm btn-outline-secondary mr-1" *ngFor="let tag of currentRecipe.tags">{{tag.name}}</span>
+            </div>
+            <!--Kühnlein-->
+            <span *ngIf="this.givenRating == 0">
         <span class="text-success" (click)="giveRating(1)">
           <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{this.upratings}}
         </span>
-        <span class="text-danger" (click)="giveRating(-1)">
+            <span class="text-danger" (click)="giveRating(-1)">
           <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{this.downratings}}
         </span>
-      </span>
+            </span>
 
-      <span *ngIf="this.givenRating > 0">
+            <span *ngIf="this.givenRating > 0">
         <span class="text-success" (click)="giveRating(1)">
           <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{this.upratings}}
         </span>
-        <span class="text-muted" (click)="giveRating(-1)">
+            <span class="text-muted" (click)="giveRating(-1)">
           <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{this.downratings}}
         </span>
-      </span>
+            </span>
 
-      <span *ngIf="this.givenRating < 0">
+            <span *ngIf="this.givenRating < 0">
         <span class="text-muted" (click)="giveRating(1)">
           <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{this.upratings}}
         </span>
-        <span class="text-danger" (click)="giveRating(-1)">
+            <span class="text-danger" (click)="giveRating(-1)">
           <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{this.downratings}}
         </span>
-      </span>
-      <!--!Kühnlein-->
+            </span>
+            <!--!Kühnlein-->
 
-    </div>
-  </div>
-  <!-- 💩 Alexander Krieg -->
-  <div class="commentdetails">
-    <h3>Kommentare</h3>
-    <div class="row mt-3" *ngIf="isLoggedIn">
-      <div class="col">
-        <fieldset [disabled]="commentAdding">
-          <p>Sage deine Meinung:</p>
-          <div>
-            <textarea class="input-group-addon" style="text-align:left;width:100%;margin-bottom:10px;" placeholder="Kommentar abgeben ..." [(ngModel)]="newCommentText"></textarea>
-          </div>
-          <div>
-            <input class="btn btn-outline-primary" type="button" value="Kommentar hinzufügen" (click)="saveNewComment(newCommentText)">
-          </div>
-        </fieldset>
-      </div>
-    </div>
-    <div class="row mt-3" *ngIf="!isLoggedIn">
-        <div class="col">
-          <p>Für 1 neu Kommentar muscht dich anmelden!</p>
         </div>
-    </div>
-    <hr class="_ngcontent-c2">
-    <div class="row mt-3">
-      <div class="col">
-        <div *ngIf="commentsLoading == true">
-          <p>Lade Kommentare ...</p>
-        </div>
-        <div *ngIf="commentsLoading == false">
-          <div *ngIf="comments.length == 0">
-            <p>Keine Kommentare</p>
-          </div>
-          <div *ngIf="comments.length > 0">
-              <span class="glyphicon glyphicon-trash"></span>
-            <ul class="comments">
-              <li *ngFor="let c of comments" class="card">
-                <div class="commentDeletion" *ngIf="(isLoggedIn && (authService.currentUser) && (c.user.id == authService.currentUser.id))">
-                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                </div>
-                <p class="small commentSmall"> {{(c.user.username || "`username´")}} registriert seit {{c.user.creationDate | date:'mediumDate'}} schrieb:</p>
-                <p>{{c.text}}</p>
-                <p class="small commentSmall">{{c.creationDate | date:'medium'}}</p>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
     </div>
     <!-- 💩 Alexander Krieg -->
-  </div>
+    <div class="commentdetails">
+        <h3>Kommentare</h3>
+        <div class="row mt-3" *ngIf="isLoggedIn">
+            <div class="col">
+                <fieldset [disabled]="commentAdding">
+                    <p>Sage deine Meinung:</p>
+                    <div>
+                        <textarea class="input-group-addon" style="text-align:left;width:100%;margin-bottom:10px;" placeholder="Kommentar abgeben ..." [(ngModel)]="newCommentText"></textarea>
+                    </div>
+                    <div>
+                        <input class="btn btn-outline-primary" type="button" value="Kommentar hinzufügen" (click)="saveNewComment(newCommentText)">
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="row mt-3" *ngIf="!isLoggedIn">
+            <div class="col">
+                <p>Für 1 neu Kommentar muscht dich anmelden!</p>
+            </div>
+        </div>
+        <hr class="_ngcontent-c2">
+        <div class="row mt-3">
+            <div class="col">
+                <div *ngIf="commentsLoading == true">
+                    <p>Lade Kommentare ...</p>
+                </div>
+                <div *ngIf="commentsLoading == false">
+                    <div *ngIf="comments.length == 0">
+                        <p>Keine Kommentare</p>
+                    </div>
+                    <div *ngIf="comments.length > 0">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        <ul class="comments">
+                            <li *ngFor="let c of comments" class="card">
+                                <div class="commentDeletion" *ngIf="(isLoggedIn && (authService.currentUser) && (c.user.id == authService.currentUser.id))">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </div>
+                                <p class="small commentSmall"> {{(c.user.username || "`username´")}} registriert seit {{c.user.creationDate | date:'mediumDate'}} schrieb:</p>
+                                <p>{{c.text}}</p>
+                                <p class="small commentSmall">{{c.creationDate | date:'medium'}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 💩 Alexander Krieg -->
+    </div>
 </div>
