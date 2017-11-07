@@ -1,22 +1,32 @@
 <!-->
-   @authors
-   Nico Frischkorn
-  Annika Schatz
-  Irina Eurich
-  Tobias Bloch
-
+@authors Nico Frischkorn
+@authors Armin Beck
+@authors Leandro Späth
+@authors Patrick Hahn
+@authors Annika Schatz
+authors Irina Eurich
+authors Tobias Bloch
+authors Endrit Çallaki
 <-->
+  <nav class="navbar sticky-top navbar-dark bg-dark container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="../../../assets/logo_cookit5.png" height="30" class="" alt="">
+    </a>
 
-<nav class="navbar navbar-top navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#"><img id="header-img" src="../../../assets/logo_cookit5.png"></a>
-        </div>
+
+    <div class="text-white" *ngIf="isLoggedIn() | async">{{getName()}}
+      <div class="btn btn-outline-danger text-white" *ngIf="isLoggedIn() | async " (click)="logout()">Logout</div>
     </div>
-       <button type="button" class="btn btn-link">
-        <a class="h6" class="text-light" routerLink="/registrieren" >Registrieren</a>
-      </button>
-        <div>
-          <img id="user" src="../../../assets/user_small.png">
-        </div>
+
+  <button class="btn-success" type="button" (click)="openModal()" >Registrierung</button>
+
+
+    <a class="btn btn-outline-success" *ngIf="!( isLoggedIn() | async )" routerLink="{{'/login'}}">
+      Login
+    </a>
+
+    <div>
+      <img id="user" height="50" src="../../../assets/user_small.png">
+    </div>
+
   </nav>

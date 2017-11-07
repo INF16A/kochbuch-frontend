@@ -3,6 +3,7 @@
 Nico Frischkorn 
  
 */
+/*
 h2, h3, h4 {
     color: #484848;
 }
@@ -51,7 +52,7 @@ h2, h3, h4 {
     color: #ff2a00;
 }
 
-@media (max-width: 575px) {  /* For mobile  */
+@media (max-width: 575px) {  /* For mobile  *//*
     .container h2 {
         font-weight: 600;
         margin: 40px 0 0 10px;
@@ -59,4 +60,4 @@ h2, h3, h4 {
     .container button{
         margin-top: 20px;
     }
-}
+}*/

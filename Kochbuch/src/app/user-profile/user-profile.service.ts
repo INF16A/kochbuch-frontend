@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import { Recipe } from '../alle-rezepte/alle-rezepte.service';
+import { User } from 'app/user.model';
 
 /**
  * @author Yoco Harrmann
@@ -14,20 +15,18 @@ import { Recipe } from '../alle-rezepte/alle-rezepte.service';
 export class UserProfileService {
 
     private static SERVER = 'http://localhost:8080';
-    private subject = new Subject<any>();
-    private recipeList: Recipe[];
 
     constructor(private http: Http) { }
 
-    private fetchRecipesForUser(){
-      let url = UserProfileService.SERVER + '/recipes';
-      return this.http.get(url);
+    getRecipiesForUser(userId: Number): Promise<Recipe[]>{
+      return this.http.get(UserProfileService.SERVER + '/recipes/creator/' + userId)
+      .toPromise()
+      .then(response => response.json() as Recipe[]);
     }
 
-    public getRecipesForUser( callback: (ar: Recipe[]) => void){
-      this.fetchRecipesForUser().subscribe((res:Response) => {
-        this.recipeList = res.json();
-        callback(res.json());
-    });
+    getUser(userId: Number): Promise<User>{
+      return this.http.get(UserProfileService.SERVER + '/user/' + userId)
+      .toPromise()
+      .then(response => response.json() as User);
+    }
   }
-}
