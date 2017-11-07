@@ -15,6 +15,7 @@ import { Recipe, RecipeServie} from '../alle-rezepte/alle-rezepte.service'
  * @author Tim Kühnlein
  * @author Adrian Haase
  * @author Adrian Dumke
+ * @author André Berberich
  */
 
 
@@ -34,7 +35,6 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   }
 
   currentRecipe : Recipe = new Recipe;
-  unit : String [] = [];
   personCount: number = 4;
 
   //Kühnlein
@@ -63,13 +63,6 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     //   this.currentRecipe = data;
     // });
     console.log(this.authService.authenticated);
-    this.unit[0] = "";
-    this.unit[1] = "Stck";
-    this.unit[2] = "g";
-    this.unit[3] = "Prise";
-    this.unit[4] = "TL";
-    this.unit[5] = "EL";
-    this.unit[6] = "ml";
 
     // Patrick Eichert, Theresa Reus
     // holt ID aus der URL

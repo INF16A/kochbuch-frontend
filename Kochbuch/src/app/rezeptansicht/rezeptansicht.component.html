@@ -1,4 +1,4 @@
-<!-- Patrick Eichert, Theresa Reus, Leandro Späth, Annika Schatz, Tim Kühnlein, Adrian Haase, Adrian Dumke -->
+<!-- Patrick Eichert, Theresa Reus, Leandro Späth, Annika Schatz, Tim Kühnlein, Adrian Haase, Adrian Dumke, André Berberich -->
 
 <div class="row">
     <div class="main-image">
@@ -40,7 +40,7 @@
                     <th>Zutat</th>
                 </tr>
                 <tr *ngFor="let i of currentRecipe.recipeIngredients">
-                    <td class="text-right">{{i.amountPerPerson * personCount}} {{unit[i.ingredient.unit]}}</td>
+                    <td class="text-right">{{i.amountPerPerson * personCount}} {{i.ingredient.unit | ingredientunit}}</td>
                     <td>{{i.ingredient.name}}</td>
                 </tr>
             </table>
