@@ -6,7 +6,7 @@
       <img src="data:{{rezept.pics[0].picType}};base64,{{rezept.pics[0].picData}}" *ngIf=rezept.pics[0] class="card-img-top " style="object-fit: cover;">
       <div class="card-body card-block">
         <h2 class="card-title">{{rezept.name}}</h2>
-        <div class="card-subtitle text-muted">{{rezept.creator.username}} {{rezept.createDate | date:"dd.MM.yyyy"}}</div>
+        <div class="card-subtitle text-muted"><a routerLink="/user-profile/{{rezept.creator.id}}" >{{rezept.creator.username}}</a> {{rezept.createDate | date:"dd.MM.yyyy"}}</div>
         <p class="card-text ">{{rezept.description}}</p>
         <a class="btn btn-outline-primary" routerLink="/rezeptansicht/{{rezept.id}}">Jetzt kochen</a>
 
