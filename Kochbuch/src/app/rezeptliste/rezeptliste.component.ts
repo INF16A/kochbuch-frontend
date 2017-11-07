@@ -27,7 +27,6 @@ export class RezeptlisteComponent implements OnInit, OnDestroy {
     this.subscription = this.messageService.getMessage().subscribe(
       message => {
         this.rezepte = message;
-        console.log(this.rezepte);
         return this.rezepte;
       }
     );
