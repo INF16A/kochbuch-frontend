@@ -49,6 +49,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
 
   private updateUserData(params: Params) {
+    this.currentUser = undefined;
     this.userId = + params['id'];
     this.loadUser(this.userId);
     this.loadRecipiesForUser(this.userId);
