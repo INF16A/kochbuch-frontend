@@ -74,7 +74,6 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
 
     this.loadRecipe(this.recipeid);
 
-
     this.authService.authenticated.subscribe((params:boolean) => {
       this.isLoggedIn = params;
     });
@@ -171,30 +170,41 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
 
 
   //Kühnlein
+  /**
+   * Updates both offline values of up- and downrating
+   */
   private updateRating(){
     this.rezeptAnsichtService.countRatingUp(this.recipe.id, amount => {
       this.upratings = amount;
-      console.log("Upratings: "+this.upratings);
     });
 
     this.rezeptAnsichtService.countRatingDown(this.recipe.id, amount => {
       this.downratings = amount;
-      console.log("Downratings: "+this.downratings);
     });
   }
 
-  private updateGivenRating(){
-    this.rezeptAnsichtService.getGivenRating(this.recipe.id, 1 /*TODO: currentuser.id*/,givenRating => {
+  /**
+   * Updates offline value of logged in user's previously given rating
+   */
+  private updateGivenRating() {
+    if (this.isLoggedIn) {
+      this.rezeptAnsichtService.getGivenRating(this.recipe.id, 1 /*TODO: currentuser.id*/, givenRating => {
       this.givenRating = givenRating;
-      console.log("GivenRating: "+this.givenRating);
-    });
+      });
+    }
   }
 
+  /**
+   * Posts rating
+   * @param {number} rating = 1 for like / -1 for dislike
+   */
   private giveRating(rating: number){
-    this.givenRating = rating;
-    this.rezeptAnsichtService.giveRating(this.recipeid, 1 /*TODO: currentuser.id*/, rating, update => {
-      this.updateRating();
-    });
+    if(this.isLoggedIn) {
+      this.givenRating = rating;
+      this.rezeptAnsichtService.giveRating(this.recipeid, 1 /*TODO: currentuser.id*/, rating, update => {
+        this.updateRating();
+      });
+    }
   }
   //!Kühnlein
 }
