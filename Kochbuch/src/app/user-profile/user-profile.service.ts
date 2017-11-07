@@ -15,7 +15,6 @@ import { User } from 'app/user.model';
 export class UserProfileService {
 
     private static SERVER = 'http://localhost:8080';
-    private subject = new Subject<any>();
 
     constructor(private http: Http) { }
 
