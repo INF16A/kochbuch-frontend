@@ -11,9 +11,9 @@
         <a class="btn btn-outline-primary" routerLink="/rezeptansicht/{{rezept.id}}">Jetzt kochen</a>
 
         <!-- <a class="btn btn-outline-primary" routerLink="/rezeptansicht">Jetzt kochen</a> -->
-      </div>
+<!--      </div>[queryParams]="{search: tag.name}"-->
       <div class="card-footer d-flex flex-row flex-wrap justify-content-start">
-        <a *ngFor="let tag of rezept.tags" routerLink="./" [queryParams]="{search: tag}" class="btn btn-sm btn-outline-secondary m-1">{{tag.name}}</a>
+        <a *ngFor="let tag of rezept.tags" [routerLink]="['/suche', {suchtext:tag.name,option:1}]" class="btn btn-sm btn-outline-secondary m-1">{{tag.name}}</a>
       </div>
       <div class="card-footer d-flex flex-row justify-content-around">
         <span class="text-danger" *ngIf="rezept.bewertung < 0">

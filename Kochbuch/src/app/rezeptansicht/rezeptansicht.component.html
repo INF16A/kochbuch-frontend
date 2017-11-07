@@ -17,7 +17,7 @@
         <!-- Leandro Späth, Theresa Reus -->
         <div class="col">
 
-            <h1>{{currentRecipe.name}}</h1>
+           <h1>{{currentRecipe.name}}</h1>
 
             <hr>
 
@@ -68,7 +68,7 @@
             </div>
 
             <div class="tag_rezeptansicht">
-                <span class="btn btn-sm btn-outline-secondary mr-1" *ngFor="let tag of currentRecipe.tags">{{tag.name}}</span>
+                <span class="btn btn-sm btn-outline-secondary mr-1" *ngFor="let tag of currentRecipe.tags" [routerLink]="['/suche', {suchtext:tag.name, option:2}]">{{tag.name}}</span>
             </div>
             <!--Kühnlein-->
             <button [disabled]="!isLoggedIn" [ngClass]="{'text-success':!(this.givenRating < 0)}" class="btn btn-sm btn-outline-secondary mr-1 mt-1" (click)="giveRating(1)">
