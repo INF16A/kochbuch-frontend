@@ -1,5 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, ComponentFactory, ComponentFactoryResolver, OnInit} from '@angular/core';
+import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { RegistrierungsmodalComponent } from "../../registrierungsmodal/registrierungsmodal.component";
+import { ViewChild } from '@angular/core';
 import { AuthenticationService } from "../../authentication/AuthenticationService";
+
+/**
+   @authors
+  Annika Schatz
+  Irina Eurich
+  Tobias Bloch
+  Endrit Çallaki
+*/
+
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -7,10 +20,21 @@ import { AuthenticationService } from "../../authentication/AuthenticationServic
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private AuthorizationService: AuthenticationService) { }
+
+  constructor(private modalService: NgbModal, private AuthorizationService: AuthenticationService) {
+  }
+
+  public openModal():void{
+  const modalReg = this.modalService.open( RegistrierungsmodalComponent);
+  }
+
+  public closeModal():void{
+  window.alert("close");
+  }
 
   ngOnInit() {
-  }
+
+    }
   isLoggedIn() {
     return this.AuthorizationService.authenticated;
   }
@@ -22,4 +46,6 @@ export class NavbarComponent implements OnInit {
       return this.AuthorizationService.currentUser.username;
     }
   }
+
 }
+
