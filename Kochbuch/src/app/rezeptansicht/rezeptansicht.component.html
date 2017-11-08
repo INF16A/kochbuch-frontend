@@ -81,7 +81,7 @@
 
         </div>
     </div>
-    <!-- 💩 Alexander Krieg -->
+    <!-- 💩 Alexander Krieg, Marc Reinke-->
     <div class="commentdetails">
         <h3>Kommentare</h3>
         <div class="row mt-3" *ngIf="isLoggedIn">
@@ -102,18 +102,6 @@
                 <p>Für 1 neu Kommentar muscht dich anmelden!</p>
             </div>
         </div>
-<<<<<<< HEAD
-        <div *ngIf="commentsLoading == false">
-          <div *ngIf="comments.length == 0">
-            <p>Keine Kommentare</p>
-          </div>
-          <div *ngIf="comments.length > 0">
-              <span class="glyphicon glyphicon-trash"></span>
-            <ul class="comments">
-              <li *ngFor="let c of comments" class="card">
-                <div class="commentDeletion" *ngIf="(isLoggedIn && (authService.currentUser) && (c.user.id == authService.currentUser.id))">
-                    <i class="fa fa-trash-o" aria-hidden="true" (click)="deleteComment(c)"></i>
-=======
         <hr class="_ngcontent-c2">
         <div class="row mt-3">
             <div class="col">
@@ -129,7 +117,7 @@
                         <ul class="comments">
                             <li *ngFor="let c of comments" class="card">
                                 <div class="commentDeletion" *ngIf="(isLoggedIn && (authService.currentUser) && (c.user.id == authService.currentUser.id))">
-                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    <i class="fa fa-trash-o" aria-hidden="true" (click)="deleteComment(c)"></i>
                                 </div>
                                 <p class="small commentSmall"> {{(c.user.username || "`username´")}} registriert seit {{c.user.creationDate | date:'mediumDate'}} schrieb:</p>
                                 <p>{{c.text}}</p>
@@ -137,10 +125,8 @@
                             </li>
                         </ul>
                     </div>
->>>>>>> master
                 </div>
             </div>
         </div>
-        <!-- 💩 Alexander Krieg -->
     </div>
 </div>
