@@ -13,6 +13,11 @@ import { Comment } from '../rezeptansicht/rezeptansicht.service';
  * @author Daniel Abel
  * @author Alexander Krieg
  * 
+ * 
+ * @author
+ * Team Chrocorg: Yoco Harrmann, Christian Werner und Georg Frey
+ *
+ * 
  * @author Leandro Späth
  * @author Armin Beck
  * @author Patrick Hahn
@@ -43,6 +48,12 @@ export class RezepteService {
     public getAllRecipes(): Observable<Recipe[]> {
         if (this.allRecipes) { return this.allRecipes; }
         return this.allRecipes = this.http.get<Recipe[]>(environment.backendUrl + "/recipes");
+    }
+    public getRezepteByTag(tag: string): Observable<Array<Recipe>> {
+        return this.http.get<Array<Recipe>>(environment.backendUrl + "/recipes/{tag}?tag=" + tag)
+    }
+    public getRezepteByName(name: string): Observable<Array<any>> {
+        return this.http.get<Array<any>>(environment.backendUrl + "/recipes/{name}?name=" + name)
     }
 
 }

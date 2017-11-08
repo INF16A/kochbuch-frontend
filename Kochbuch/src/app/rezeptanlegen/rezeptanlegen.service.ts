@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {Http, RequestOptions, Headers} from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
@@ -8,8 +8,9 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/merge';
-import {IngredientSmall} from "./rezeptanlegen.model";
-import {Tag} from "../tag.model";
+import { IngredientSmall } from "./rezeptanlegen.model";
+import { Tag } from "../tag.model";
+import { environment } from "environments/environment";
 
 /**
  * @author Thomas Hörner
@@ -17,7 +18,7 @@ import {Tag} from "../tag.model";
 @Injectable()
 export class TagSearchService {
 
-  private baseUrl = 'http://localhost:8080/tag/search?q=';  // URL to web api
+  private baseUrl = environment.backendUrl + '/tag/search?q=';  // URL to web api
 
   constructor(private http: Http) {
   }
@@ -40,7 +41,7 @@ export class TagSearchService {
 @Injectable()
 export class IngredientSearchService {
 
-  private baseUrl = 'http://localhost:8080/ingredient/search?q=';  // URL to web api
+  private baseUrl = environment.backendUrl + '/ingredient/search?q=';  // URL to web api
 
   constructor(private http: Http) {
   }
@@ -62,14 +63,14 @@ export class IngredientSearchService {
 
 @Injectable()
 export class RezeptanlegenService {
-  private baseUrl = 'http://localhost:8080/recipe/create';  // URL to web api
+  private baseUrl = environment.backendUrl + '/recipe/create';  // URL to web api
 
   constructor(private http: Http) {
   }
 
   create(recipe: string): Promise<any> {
-    let headers: Headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
+    let headers: Headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
 
     return this.http.post(this.baseUrl, JSON.stringify(recipe), options)
       .toPromise()
