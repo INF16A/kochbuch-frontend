@@ -194,15 +194,17 @@ export class RezeptansichtService {
   }
   /**
    * 💩 Alexander Krieg
+   * Marc Reinke
    * Führt einen Post-Request aus, um ein Kommenar zu löschen.
    * @param comment: Der Kommentar der hinzugefügt werden soll.
    * @param callback: Wird aufgerufen sobald eine Antwort vom Server kommt
    */
   public deleteComment(comment:Comment, callback?: (fail:boolean, data:any) => void){
-    let url = RezeptansichtService.SERVER+"/comment/delete";
+    let url = RezeptansichtService.SERVER+"/comment/"+comment.id;
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    this.http.post(url, JSON.stringify(comment.id), options).subscribe(data => {
+
+    this.http.delete(url, options).subscribe(data => {
       if(callback){
         callback(false, data);
       }

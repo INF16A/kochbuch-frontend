@@ -81,7 +81,7 @@
 
         </div>
     </div>
-    <!-- 💩 Alexander Krieg -->
+    <!-- 💩 Alexander Krieg, Marc Reinke-->
     <div class="commentdetails">
         <h3>Kommentare</h3>
         <div class="row mt-3" *ngIf="isLoggedIn">
@@ -117,7 +117,7 @@
                         <ul class="comments">
                             <li *ngFor="let c of comments" class="card">
                                 <div class="commentDeletion" *ngIf="(isLoggedIn && (authService.currentUser) && (c.user.id == authService.currentUser.id))">
-                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    <i class="fa fa-trash-o" aria-hidden="true" (click)="deleteComment(c)"></i>
                                 </div>
                                 <p class="small commentSmall"> {{(c.user.username || "`username´")}} registriert seit {{c.user.creationDate | date:'mediumDate'}} schrieb:</p>
                                 <p>{{c.text}}</p>
@@ -128,6 +128,5 @@
                 </div>
             </div>
         </div>
-        <!-- 💩 Alexander Krieg -->
     </div>
 </div>
