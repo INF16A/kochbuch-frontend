@@ -120,10 +120,11 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     });
   }
 
-  public saveNewComment(text: String) {
-    if (!text) return;
+  //Marc Reinke
+  public saveNewComment(text:String){
+    if(!text) return;
     this.commentAdding = true;
-    let c = new Comment(text, 1 /*User*/, this.recipe.id, new Date());
+    let c = new Comment(text, this.authService.currentUser.id, this.recipe.id, new Date());
     console.log("C", c);
     this.rezeptAnsichtService.addComment(c, (fail: boolean, data: any) => {
       if (fail) {
@@ -135,12 +136,13 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
       this.commentAdding = false;
     });
   }
-  public deleteComment(comemnt: Comment) {
-    if (!this.authService.currentUser) return;
-    console.dir(comemnt);
-    if (comemnt.user.id === this.authService.currentUser.id) {
-      this.rezeptAnsichtService.deleteComment(comemnt, (fail: boolean, data: any) => {
-        if (fail) {
+
+  public deleteComment(comment:Comment){
+    if(!this.authService.currentUser) return;
+    console.dir(comment);
+    if(comment.user.id === this.authService.currentUser.id){
+      this.rezeptAnsichtService.deleteComment(comment, (fail:boolean, data:any) => {
+        if(fail){
           console.log(JSON.stringify(data));
         } else {
           this.loadComments();
