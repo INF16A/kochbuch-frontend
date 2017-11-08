@@ -1,12 +1,6 @@
 <!-->
-@authors Nico Frischkorn
-@authors Armin Beck
-@authors Leandro Späth
-@authors Patrick Hahn
-@authors Annika Schatz
-authors Irina Eurich
-authors Tobias Bloch
-authors Endrit Çallaki
+@authors Nico Frischkorn @authors Armin Beck @authors Leandro Späth @authors Patrick Hahn @authors Annika Schatz authors
+Irina Eurich authors Tobias Bloch authors Endrit Çallaki
 <-->
   <nav class="navbar sticky-top navbar-dark bg-dark container-fluid">
     <a class="navbar-brand" href="#">
@@ -16,17 +10,16 @@ authors Endrit Çallaki
 
     <div class="text-white" *ngIf="isLoggedIn() | async">{{getName()}}
       <div class="btn btn-outline-danger text-white" *ngIf="isLoggedIn() | async " (click)="logout()">Logout</div>
+      <div>
+        <img id="user" height="50" src="../../../assets/user_small.png">
+      </div>
     </div>
 
-  <button class="btn-success" type="button" (click)="openModal()" >Registrierung</button>
+    <div *ngIf="!( isLoggedIn() | async )">
+      <button class="btn btn-outline-secondary" type="button" (click)="openModal()">Registrierung</button>
+      <a class="btn btn-outline-success" routerLink="{{'/login'}}">
+        Login
+      </a>
 
-
-    <a class="btn btn-outline-success" *ngIf="!( isLoggedIn() | async )" routerLink="{{'/login'}}">
-      Login
-    </a>
-
-    <div>
-      <img id="user" height="50" src="../../../assets/user_small.png">
     </div>
-
   </nav>
