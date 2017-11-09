@@ -8,11 +8,10 @@ Irina Eurich authors Tobias Bloch authors Endrit Çallaki
     </a>
 
 
-    <div class="text-white" *ngIf="isLoggedIn() | async">{{getName()}}
-      <div class="btn btn-outline-danger text-white" *ngIf="isLoggedIn() | async " (click)="logout()">Logout</div>
-      <div>
-        <img id="user" height="50" src="../../../assets/user_small.png">
-      </div>
+    <div class="text-white" *ngIf="isLoggedIn() | async">
+      <a class="text-white m-2" routerLink="{{'/user-profile'}}"> {{getName()}}</a>
+      <div class="btn btn-outline-danger text-white" (click)="logout()">Logout</div>
+      <img id="user" height="50" src="../../../assets/user_small.png">
     </div>
 
     <div *ngIf="!( isLoggedIn() | async )">
