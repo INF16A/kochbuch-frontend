@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   constructor(private AuthorizationService: AuthenticationService, private router: Router, private location: Location) { this.model = { user: "", pass: "" }; }
 
   ngOnInit() {
+    if(this.isLoggedIn){
+    }
   }
   isLoggedIn() {
     return this.AuthorizationService.authenticated;

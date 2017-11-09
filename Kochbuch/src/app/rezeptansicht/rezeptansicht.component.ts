@@ -1,17 +1,22 @@
 import { Ingredient } from '../ingredient/ingredient.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RezeptansichtService, Comment } from "./rezeptansicht.service";
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { ActivatedRoute, Router, Params } from "@angular/router";
 import { Subscription } from 'rxjs/Subscription';
+import { IngredientService } from "app/ingredient/ingredient.service";
+import { KommentarService, Comment } from "app/KommentarService/kommentar-service";
 import { AuthenticationService } from '../authentication/AuthenticationService';
 import { Recipe, RezepteService } from '../RezepteService/rezepte-service'
+import { User } from 'app/user.model';
+import { RatingService } from "app/RatingService/rating-service";
 
 /**
  * @author Alexander Krieg
  * @author Theresa Reus
  * @author Patrick Eichert
+ * @author Patrick Hahn
  * @author Leandro Späth
+ * @author Armin Beck
  * @author Tim Kühnlein
  * @author Adrian Haase
  * @author Adrian Dumke
@@ -29,12 +34,14 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private rezeptAnsichtService: RezeptansichtService,
     private authService: AuthenticationService,
+    private ingredientService: IngredientService,
+    private kommentarService: KommentarService,
+    private ratingService:RatingService,
     private reService: RezepteService) {
   }
 
-  currentRecipe: Recipe = new Recipe;
+  currentRecipe: Recipe = new Recipe();
   personCount: number = 4;
 
   //Kühnlein
@@ -62,6 +69,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     // this.rezeptAnsichtService.getRecipeData(0).subscribe(data => {
     //   this.currentRecipe = data;
     // });
+    this.currentRecipe.creator = new User(1);
     console.log(this.authService.authenticated);
 
     // Patrick Eichert, Theresa Reus
@@ -94,13 +102,13 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
         this.updateRating();
         this.updateGivenRating();
         console.log(this.recipe);
-      });
+      },
+      err => console.log(err));
   }
 
   private loadIngredients(id: number) {
-    this.rezeptAnsichtService.getIngredientByRecipe(id, ingredients => {
-      this.ingredients = ingredients;
-    });
+    this.ingredientService.getIngredientByRecipe(id)
+      .subscribe(ingredients => this.ingredients = ingredients, err => console.log(`couldn't load ingredients of recipe ${id}`, err));
   }
 
   private sumkcalpp() {
@@ -113,41 +121,36 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
 
   private loadComments() {
     this.commentsLoading = true;
-    this.rezeptAnsichtService.getRecipeComments(this.recipe.id, comments => {
-      this.commentsLoading = false;
-      this.comments = comments;
-      console.log(this.comments);
-    });
+    this.kommentarService.getRecipeComments(this.recipe.id)
+      .subscribe(comments => {
+        this.commentsLoading = false;
+        this.comments = comments;
+        console.log("comments loaded:", this.comments);
+      }, err => console.log("couldn't load comments", err));
   }
 
   //Marc Reinke
-  public saveNewComment(text:String){
-    if(!text) return;
+  public saveNewComment(text: String) {
+    if (!text) return;
     this.commentAdding = true;
     let c = new Comment(text, this.authService.currentUser.id, this.recipe.id, new Date());
     console.log("C", c);
-    this.rezeptAnsichtService.addComment(c, (fail: boolean, data: any) => {
-      if (fail) {
-        console.error(JSON.stringify(data));
-      } else {
+    this.kommentarService.addComment(c).subscribe(
+      data => {
+        this.commentAdding = false;
+        console.log("comment saved", data);
         this.newCommentText = "";
         this.loadComments();
-      }
-      this.commentAdding = false;
-    });
+      },
+      error => { console.error(error); this.loadComments(); }
+    )
   }
 
-  public deleteComment(comment:Comment){
-    if(!this.authService.currentUser) return;
+  public deleteComment(comment: Comment) {
+    if (!this.authService.currentUser) return;
     console.dir(comment);
-    if(comment.user.id === this.authService.currentUser.id){
-      this.rezeptAnsichtService.deleteComment(comment, (fail:boolean, data:any) => {
-        if(fail){
-          console.log(JSON.stringify(data));
-        } else {
-          this.loadComments();
-        }
-      });
+    if (comment.user.id === this.authService.currentUser.id) {
+      this.kommentarService.deleteComment(comment).subscribe(data => console.log("data received", data), err => console.log("couldn't delete comment", err));
     }
   }
   // <-- 💩 Alexander Krieg
@@ -177,13 +180,13 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
    * Updates both offline values of up- and downrating
    */
   private updateRating() {
-    this.rezeptAnsichtService.countRatingUp(this.recipe.id, amount => {
+    this.ratingService.countRatingUp(this.recipe.id).subscribe(amount => {
       this.upratings = amount;
-    });
+    }, err => console.log("couldn't load upvotes", err));
 
-    this.rezeptAnsichtService.countRatingDown(this.recipe.id, amount => {
+    this.ratingService.countRatingDown(this.recipe.id).subscribe(amount => {
       this.downratings = amount;
-    });
+    }, err => console.log("couldn't load downvotes", err));
   }
 
   /**
@@ -191,9 +194,10 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
    */
   private updateGivenRating() {
     if (this.isLoggedIn) {
-      this.rezeptAnsichtService.getGivenRating(this.recipe.id, 1 /*TODO: currentuser.id*/, givenRating => {
+      this.ratingService.getGivenRating(this.recipe.id, this.authService.currentUser.id).subscribe(givenRating => {
         this.givenRating = givenRating;
-      });
+      },
+        err => console.log("couldn't update given rating", err));
     }
   }
 
@@ -204,9 +208,10 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   private giveRating(rating: number) {
     if (this.isLoggedIn) {
       this.givenRating = rating;
-      this.rezeptAnsichtService.giveRating(this.recipeid, 1 /*TODO: currentuser.id*/, rating, update => {
-        this.updateRating();
-      });
+      this.ratingService.giveRating(this.recipeid, this.authService.currentUser.id, rating)
+        .subscribe(update => {
+          this.updateRating();
+        });
     }
   }
   //!Kühnlein

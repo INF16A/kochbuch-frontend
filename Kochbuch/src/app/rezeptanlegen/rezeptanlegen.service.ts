@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
@@ -14,22 +14,23 @@ import { environment } from "environments/environment";
 
 /**
  * @author Thomas Hörner
+ * 
+ * @author Armin Beck
+ * @author Patrick Hahn
+ * @author Leandro Späth
  */
 @Injectable()
 export class TagSearchService {
 
   private baseUrl = environment.backendUrl + '/tag/search?q=';  // URL to web api
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   search(text: string): Promise<Tag[]> {
     let url = this.baseUrl + text;
-    return this.http.get(url)
+    return this.http.get<Tag[]>(url)
       .toPromise()
-      .then(response => {
-        return response.json() as Tag[];
-      })
       .catch(this.handleError);
   }
 
@@ -43,16 +44,12 @@ export class IngredientSearchService {
 
   private baseUrl = environment.backendUrl + '/ingredient/search?q=';  // URL to web api
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   search(text: string): Promise<IngredientSmall[]> {
-    let url = this.baseUrl + text;
-    return this.http.get(url)
+    return this.http.get<IngredientSmall[]>(this.baseUrl + text)
       .toPromise()
-      .then(response => {
-        return response.json() as IngredientSmall[];
-      })
       .catch(this.handleError);
   }
 
@@ -65,18 +62,12 @@ export class IngredientSearchService {
 export class RezeptanlegenService {
   private baseUrl = environment.backendUrl + '/recipe/create';  // URL to web api
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   create(recipe: string): Promise<any> {
-    let headers: Headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-
-    return this.http.post(this.baseUrl, JSON.stringify(recipe), options)
+    return this.http.post(this.baseUrl, recipe)
       .toPromise()
-      .then(response => {
-        return response.json();
-      })
       .catch(this.handleError);
   }
 

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RezeptansichtComponent } from './rezeptansicht/rezeptansicht.component';
@@ -15,7 +16,6 @@ import { IngredientUnitPipe } from './ingredient/ingredientunit.pipe';
 import { AlleRezepteComponent } from './alle-rezepte/alle-rezepte.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RezeptanlegenComponent } from './rezeptanlegen/rezeptanlegen.component';
-import { RezeptansichtService } from "./rezeptansicht/rezeptansicht.service";
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -39,6 +39,8 @@ import { MessageService } from "./_services/message.service";
 import { UserProfileService } from 'app/user-profile/user-profile.service';
 import { AuthInterceptor } from "app/authentication/auth-interceptor";
 import { TokenService } from "app/authentication/token-service";
+import { KommentarService } from "app/KommentarService/kommentar-service";
+import { RatingService } from "app/RatingService/rating-service";
 
 /**
  * @author Thomas Hörner
@@ -93,8 +95,8 @@ import { TokenService } from "app/authentication/token-service";
     },
     AuthenticationService,
     TokenService,
-    RezeptansichtService,
-
+    { provide: RatingService, useClass: RatingService, deps: [HttpClient] },
+    { provide: KommentarService, useClass: KommentarService, deps: [HttpClient] },
     /**
      * @author 💩 Alexander Krieg
      * Für die DatePipe (deutsches Datumsformat)
