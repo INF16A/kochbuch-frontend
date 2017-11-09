@@ -35,7 +35,7 @@ export class AjaxService {
   }
 
   getRezepteByIngredient(ingredient: string): Observable<Array<any>> {
-    return this.http.get("http://localhost:8080/recipes/{name}?name=" + ingredient)
+    return this.http.get("http://localhost:8080/recipes/{ingredient}?ingredient=" + ingredient)
       .map(res => res.json());
   }
 
