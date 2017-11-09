@@ -1,4 +1,4 @@
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
@@ -16,17 +16,15 @@ import { environment } from 'environments/environment';
 export class UserProfileService {
 
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   getRecipiesForUser(userId: Number): Promise<Recipe[]> {
-    return this.http.get(environment.backendUrl + '/recipes/creator/' + userId)
+    return this.http.get<Recipe[]>(environment.backendUrl + '/recipes/creator/' + userId)
       .toPromise()
-      .then(response => response.json() as Recipe[]);
   }
 
   getUser(userId: Number): Promise<User> {
-    return this.http.get(environment.backendUrl + '/user/' + userId)
+    return this.http.get<User>(environment.backendUrl + '/user/' + userId)
       .toPromise()
-      .then(response => response.json() as User);
   }
 }
