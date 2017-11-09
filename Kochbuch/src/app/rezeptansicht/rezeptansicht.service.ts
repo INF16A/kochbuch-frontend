@@ -1,9 +1,9 @@
 import { Ingredient } from '../ingredient/ingredient.model';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { User } from '../user.model';
-import { Recipe,RezepteService } from "app/RezepteService/rezepte-service";
+import { Recipe, RezepteService } from "app/RezepteService/rezepte-service";
 import { environment } from "environments/environment";
 
 /**
@@ -38,7 +38,7 @@ export class Comment {
 @Injectable()
 export class RezeptansichtService {
 
-  constructor(private http: Http,private RezepteService:RezepteService ) {
+  constructor(private http: HttpClient, private RezepteService: RezepteService) {
   }
 
   /**
@@ -108,21 +108,10 @@ export class RezeptansichtService {
   }*/
 
 
-  getIngredientByRecipe(recipeId: number, callback: (ar: Ingredient[]) => void) {
-    this.fetchIngredientsByRecipe(recipeId).subscribe((res: Response) => {
-      callback(res.json());
-    }, error => {
-      if (callback) {
-        callback([]);
-      }
-    });
+  getIngredientByRecipe(recipeId: number): Observable<Ingredient[]> {
+    let url = environment.backendUrl + "/recipe/" + recipeId;
+    return this.http.get<Ingredient[]>(url);
   }
-
-  private fetchIngredientsByRecipe(id: Number) {
-    let url = environment.backendUrl + "/recipe/" + id;
-    return this.http.get(url);
-  }
-
 
   /**
    * 💩 Alexander Krieg
@@ -131,31 +120,11 @@ export class RezeptansichtService {
    * @param recipeId
    * @param callback
    */
-  public getRecipeComments(recipeId: Number, callback: (ar: Comment[]) => void) {
-    this.fetchRecipeComments(recipeId).subscribe((res: Response) => {
-      let ret = new Array<Comment>();
-      res.json().forEach(element => {
-        ret.push
-      });
-      let coms = res.json() as Comment[];
-      callback(coms);
-    }, error => {
-      if (callback) {
-        callback([]);
-      }
-    });
+  public getRecipeComments(recipeId: Number): Observable<Comment[]> {
+    let url = environment.backendUrl + "/comments/" + recipeId;
+    return this.http.get<Comment[]>(url);
   }
 
-  /**
-   * 💩 Alexander Krieg
-   * Private Methode holt alle Kommentare zu einem Rezept.
-   * @param recipeId
-   * @return HTTPPromise
-   */
-  private fetchRecipeComments(id: Number) {
-    let url = environment.backendUrl + "/comments/" + id;
-    return this.http.get(url);
-  }
 
   /**
    * 💩 Alexander Krieg
@@ -163,19 +132,8 @@ export class RezeptansichtService {
    * @param comment: Der Kommentar der hinzugefügt werden soll.
    * @param callback: Wird aufgerufen sobald eine Antwort vom Server kommt
    */
-  public addComment(comment: Comment, callback?: (fail: boolean, data: any) => void) {
-    let url = environment.backendUrl + "/comment";
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    this.http.post(url, JSON.stringify(comment), options).subscribe(data => {
-      if (callback) {
-        callback(false, data);
-      }
-    }, error => {
-      if (callback) {
-        callback(true, error);
-      }
-    });
+  public addComment(comment: Comment, callback?: (fail: boolean, data: any) => void): Observable<Comment> {
+    return this.http.post<Comment>(environment.backendUrl + "/comment", comment);
   }
   /**
    * 💩 Alexander Krieg
@@ -184,68 +142,31 @@ export class RezeptansichtService {
    * @param comment: Der Kommentar der hinzugefügt werden soll.
    * @param callback: Wird aufgerufen sobald eine Antwort vom Server kommt
    */
-  public deleteComment(comment:Comment, callback?: (fail:boolean, data:any) => void){
-    let url = RezeptansichtService.SERVER+"/comment/"+comment.id;
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-
-    this.http.delete(url, options).subscribe(data => {
-      if(callback){
-        callback(false, data);
-      }
-    }, error => {
-      if (callback) {
-        callback(true, error);
-      }
-    });
+  public deleteComment(comment: Comment): Observable<any> {
+    return this.http.delete(environment.backendUrl + "/comment/" + comment.id);
   }
 
 
   //Kühnlein
   /**
-   * Two wrapper methods which calls countRating with parameter 1 / -1
    * Method to run corresponding GET requests
    * @param {number} recipeid
-   * @param {(amount: number) => void} callback to get the amount of up-/ downratings when loaded
+   * get the amount of up-/ downratings when loaded
    */
-  public countRatingUp(recipeid: number, callback?: (amount: number) => void) {
-    this.countRating(recipeid, 1, callback);
+  public countRatingUp(recipeid: number): Observable<number> {
+    return this.http.get<number>(`${environment.backendUrl}/rating/${recipeid}/count/up`)
   }
-  public countRatingDown(recipeid: number, callback?: (amount: number) => void) {
-    this.countRating(recipeid, -1, callback);
-  }
-  private countRating(recipeid: number, count: number, callback?: (amount: number) => void) {
-    let url = environment.backendUrl + "/rating/";
-    let method = (count == 1) ? "/count/up" : "/count/down";
-    let headers = new Headers({ 'Accept': '*/*' });
-    let options = new RequestOptions({ headers });
-    this.http.get(url + recipeid + method, options).subscribe((res: Response) => {
-      if (callback)
-        callback(res.json());
-    }, error => {
-      if (callback) {
-        callback(0);
-      }
-    });
+  public countRatingDown(recipeid: number): Observable<number> {
+    return this.http.get<number>(`${environment.backendUrl}/rating/${recipeid}/count/down`)
   }
 
   /**
    * @param {number} recipeid
    * @param {number} userid
-   * @param {(givenRating: number) => void} callback to get the previously given rating by the current user or 0 if there is none
+   * get the previously given rating by the current user or 0 if there is none
    */
-  public getGivenRating(recipeid: number, userid: number, callback?: (givenRating: number) => void) {
-    let url = environment.backendUrl + "/rating/";
-    let headers = new Headers({ 'Accept': '*/*' });
-    let options = new RequestOptions({ headers });
-    this.http.get(url + recipeid + "/" + userid, options).subscribe((res: Response) => {
-      if (callback)
-        callback(res.json());
-    }, error => {
-      if (callback) {
-        callback(0);
-      }
-    });
+  public getGivenRating(recipeid: number, userid: number): Observable<number> {
+    return this.http.get<number>(`${environment.backendUrl}/rating/${recipeid}/${userid}`);
   }
 
   /**
@@ -255,18 +176,13 @@ export class RezeptansichtService {
    * @param {number} givenRating
    * @param {(update) => void} callback
    */
-  public giveRating(recipeid: number, userid: number, givenRating: number, callback?: (update) => void) {
-    let url = environment.backendUrl + "/rating";
-    let json = "{\"recipeId\":" + recipeid + ",\"userId\":" + userid + ",\"value\":" + givenRating + "}";
-    let headers = new Headers({ 'Accept': '*/*', 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers });
-    this.http.post(url, json, options).subscribe(data => {
-      if (callback) {
-        callback(1);
-      }
-    }, error => {
-      console.log("true" + error);
-    });;
+  public giveRating(recipeid: number, userid: number, givenRating: number, callback?: (update) => void): Observable<any> {
+    let data = {
+      recipeId: recipeid,
+      userId: userid,
+      value: givenRating
+    };
+    return this.http.post(environment.backendUrl + "/rating", data);
   }
   //!Kühnlein
 }
