@@ -1,54 +1,66 @@
 import { Subject } from "rxjs/Subject";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { Response, Headers, RequestOptions } from '@angular/http';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpClient, HttpHeaders } from "@angular/common/http";
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpInterceptor, HttpRequest, HttpHandler } from "@angular/common/http";
 import { User } from '../user.model';
 import { Injectable } from '@angular/core';
-import { environment } from "../../environments/environment";
-import { TokenService } from "./token-service";
-
 /**
  * @author Patrick Hahn
  * @author Alexander Krieg
  * @author Armin Beck
  * @author Leandro Späth
  */
+
 @Injectable()
-export class AuthenticationService {
+export class AuthenticationService implements HttpInterceptor {
 	public authenticated: Subject<boolean>;
 	public currentUser: User = null;
-	public constructor(private http: HttpClient, private tokenService: TokenService) {
+	public token: string;
+	public constructor(private http: Http) {
 		this.authenticated = new BehaviorSubject(false);
 	}
-
-	public tryAuthentification(username: string, password: string) {
-		const backendLoginUrl = environment.backendUrl + "/login";
-		return this.http.post(backendLoginUrl,
-			`username=${encodeURI(username)}&password=${encodeURI(password)}`,
-			{
-				headers: new HttpHeaders()
-					.set('Content-Type', 'application/x-www-form-urlencoded'),
-				observe: 'response',
-			}
-		).do(z => {
-			let xtoken = z.headers.get("X-Token");
-			let data: any = z.body;
-			if (data.id && data.username && xtoken) {
-				this.currentUser = new User(data.id);
-				this.currentUser.username = data.username;
-				this.tokenService.Token = xtoken;
-				console.log("user logged in", this.currentUser);
-				this.authenticated.next(true);
+	public intercept(req: HttpRequest<any>, next: HttpHandler) {
+		//TODO this 'if' might has to be replaced
+		if (this.token) {
+			if (req.headers.has("X-Token")) {
+				req.headers.set("X-Token", this.token);
 			}
 			else {
-				throw new Error("insufficient data loaded");
+				req.headers.append("X-Token", this.token);
 			}
-		});
+		}
+		return next.handle(req);
+	}
+	public tryAuthentification(username: string, password: string) {
+		const backendLoginUrl = "http://localhost:8080/login";
+		console.log("tick");
+		let headers = new Headers();
+		headers.append("Content-Type", 'application/x-www-form-urlencoded');
+
+		let reqOptions = new RequestOptions({
+			headers: headers
+		})
+		return this.http.post(backendLoginUrl, `username=${encodeURI(username)}&password=${encodeURI(password)}`,
+			reqOptions).do(z => {
+				console.log("done", z, z.headers.values());
+
+				let xtoken = z.headers.get("X-Token");
+				let data = z.json()
+				console.log(xtoken, data.id, data.username);
+				if (data.id && data.username && xtoken) {
+					this.currentUser = new User(data.id);
+					this.currentUser.username = data.username;
+					this.token = xtoken;
+					this.authenticated.next(true);
+				}
+				else {
+					throw new Error("insufficient data loaded");
+				}
+			});
 	}
 	public logout() {
-		console.log("logout");
 		this.currentUser = null;
-		this.tokenService.Token = null;
+		this.token = null;
 		this.authenticated.next(false);
 	}
 	public debugSetLogin(loggedIn: boolean): void {
@@ -60,7 +72,3 @@ export class AuthenticationService {
 		}
 	}
 }
-
-
-
-
