@@ -5,7 +5,7 @@
 */
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserProfileService } from './user-profile.service';
-import { Recipe } from '../RezepteService/rezepte-service';
+import { Recipe } from '../alle-rezepte/alle-rezepte.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { User } from 'app/user.model';

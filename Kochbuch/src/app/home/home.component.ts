@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RezepteService, Recipe } from "../RezepteService/rezepte-service";
+import { RecipeServie, Recipe } from "../alle-rezepte/alle-rezepte.service";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -7,21 +7,20 @@ import { RezepteService, Recipe } from "../RezepteService/rezepte-service";
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private RecipeService: RezepteService) { }
-  private suchtext: string;
+  constructor(private RecipeService: RecipeServie) { }
+  private suchtext : string;
 
 
   Rezepte: Recipe[];
   NewestRecipes: Recipe[];
   BestRecipes: Recipe[];
   ngOnInit() {
-    this.RecipeService.getAllRecipes().subscribe(
-      data => {
-        this.Rezepte = data
-        this.NewestRecipes = this.getNewestRecipes();
-        this.BestRecipes = this.getBestRecipes();
-      }
-    );
+    this.RecipeService.getAllRecipes(ar => {
+      this.Rezepte = ar
+      this.NewestRecipes = this.getNewestRecipes();
+      this.BestRecipes = this.getBestRecipes();
+
+    });
   }
   getNewestRecipes() {
     //get the newest 6 recipes

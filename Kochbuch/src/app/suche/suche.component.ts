@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { MessageService } from "../_services/message.service";
-import { RezepteService } from "../RezepteService/rezepte-service";
+import {Component, OnInit} from '@angular/core';
+import {AjaxService} from "../_services/ajax.service";
+import {ActivatedRoute} from "@angular/router";
+import {MessageService} from "../_services/message.service";
+
 
 /**
  @author Team Chrocorg: Yoco Harrmann, Christian Werner, Georg Frey
@@ -18,9 +19,10 @@ export class SucheComponent implements OnInit {
   private option: any;
   private suchtext: string;
 
-  constructor(private RezepteService: RezepteService,
-    private route: ActivatedRoute,
-    private messageService: MessageService) {
+  constructor(private ajaxService: AjaxService,
+              private route: ActivatedRoute,
+              private messageService: MessageService)
+  {
     this.route.params.subscribe((event) => {
       this.suchtext = event.suchtext;
       this.suchen();
@@ -83,14 +85,14 @@ export class SucheComponent implements OnInit {
   // Nachfolgend die Funktionen, mit denen die Rezeptergebnisse geholt werden /
 
   getRezeptebyTag(tag: string) {
-    this.RezepteService.getRezepteByTag(tag).subscribe((response) => {
+    this.ajaxService.getRezepteByTag(tag).subscribe((response) => {
       this.liste = response;
       this.sendMessage();
     });
   }
 
   getRezeptebyName(name: string) {
-    this.RezepteService.getRezepteByName(name).subscribe((response) => {
+    this.ajaxService.getRezepteByName(name).subscribe((response) => {
       this.liste = response;
       this.sendMessage();
     });
