@@ -43,7 +43,7 @@ export class RezepteService {
     private allRecipes: Observable<Recipe[]>;
 
     public getRecipeById(id: number): Observable<Recipe> {
-        return this.http.get<Recipe>(environment.backendUrl + "/recipe/{id}?id=" + id);
+        return this.http.get<Recipe>(environment.backendUrl + "/recipe/" + id);
     }
     public getAllRecipes(): Observable<Recipe[]> {
         if (this.allRecipes) { return this.allRecipes; }
