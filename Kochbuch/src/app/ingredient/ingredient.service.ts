@@ -36,12 +36,17 @@ export class IngredientService {
 
   createIngredient(ingredient: Ingredient): Promise<IngredientSmall> {
     return this.http
-      .post<IngredientSmall>(environment.backendUrl + '/ingredient',ingredient)
+      .post<IngredientSmall>(environment.backendUrl + '/ingredient', ingredient)
       .toPromise()
       .then(res => this.ingredientCreated(res))
       .catch(this.handleError);
   }
 
+  getIngredientByRecipe(recipeId: number): Observable<Ingredient[]> {
+    let url = environment.backendUrl + "/recipe/" + recipeId;
+    return this.http.get<Ingredient[]>(url);
+  }
+  
   private ingredientCreated(ingredient: IngredientSmall) {
     this.subject.next(ingredient);
     return ingredient;

@@ -7,7 +7,7 @@ import { User } from '../user.model';
 import { Pic } from '../pic.model';
 import { Tag } from '../tag.model';
 import { RecipeIngredient } from '../mapRecipeIngredient.model';
-import { Comment } from '../rezeptansicht/rezeptansicht.service';
+import { Comment } from 'app/KommentarService/kommentar-service';
 
 /**
  * @author Daniel Abel

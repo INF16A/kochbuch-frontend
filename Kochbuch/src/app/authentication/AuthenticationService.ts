@@ -41,6 +41,7 @@ export class AuthenticationService {
 				this.authenticated.next(true);
 			}
 			else {
+				console.log(z.body);
 				throw new Error("insufficient data loaded");
 			}
 		});
