@@ -31,8 +31,6 @@ export class RezeptanlegenComponent {
   tempIngredientSearch: string;
   tempTagSearch: string;
 
-  userid: number = -1;
-
 
   constructor(private _tss: TagSearchService,
               private _iss: IngredientSearchService,
@@ -44,9 +42,7 @@ export class RezeptanlegenComponent {
               private _authService: AuthenticationService) {
 
     if (this._authService.currentUser == null) {
-      this.router.navigate(["/login"]);
-    } else {
-      this.userid = this._authService.currentUser.id;
+      this.router.navigate(['/login']);
     }
 
     this.recipeForm = _fb.group({
@@ -57,7 +53,6 @@ export class RezeptanlegenComponent {
           Validators.maxLength(50)
         ]
       ],
-      userid: [this.userid],
       description: ['',
         [
           Validators.required,
@@ -100,8 +95,6 @@ export class RezeptanlegenComponent {
       pics:
         _fb.array([], RecipeValidators.minLengthArray(1))
     });
-
-    this.recipeForm.patchValue({"userid": this.userid});
 
     this.recipeFormTagArray = <FormArray> this.recipeForm.controls['tags'];
     this.recipeFormPrepStepsArray = <FormArray> this.recipeForm.controls['prepSteps'];
