@@ -1,3 +1,4 @@
+import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -75,6 +76,7 @@ import { UserProfileService } from 'app/user-profile/user-profile.service';
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     AppRoutingModule,
     NgbModule.forRoot(),
     /**
