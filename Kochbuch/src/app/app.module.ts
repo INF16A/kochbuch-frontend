@@ -33,7 +33,6 @@ import {AjaxService} from "./_services/ajax.service";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {MessageService} from "./_services/message.service";
 import {UserProfileService} from 'app/user-profile/user-profile.service';
-import {HttpClientModule} from "@angular/common/http";
 
 
 /**
@@ -78,8 +77,7 @@ import {HttpClientModule} from "@angular/common/http";
     /**
      * @author Thomas Hörner
      */
-    ReactiveFormsModule,
-    HttpClientModule
+    ReactiveFormsModule
   ],
   providers: [
     RezeptansichtService,

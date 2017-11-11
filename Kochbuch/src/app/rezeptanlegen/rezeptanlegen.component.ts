@@ -7,6 +7,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AddingredientmodalComponent} from "../ingredient/addingredientmodal/addingredientmodal.component";
 import {IngredientService} from "../ingredient/ingredient.service";
 import {Router} from "@angular/router";
+import {AuthenticationService} from "../authentication/AuthenticationService";
 
 /**
  * @author Thomas Hörner
@@ -17,7 +18,7 @@ import {Router} from "@angular/router";
   selector: 'app-rezeptanlegen',
   templateUrl: './rezeptanlegen.component.html',
   styleUrls: ['./rezeptanlegen.component.css'],
-  providers: [TagSearchService, IngredientSearchService, RezeptanlegenService]
+  providers: [TagSearchService, IngredientSearchService, RezeptanlegenService, AuthenticationService]
 })
 export class RezeptanlegenComponent {
 
@@ -30,6 +31,8 @@ export class RezeptanlegenComponent {
   tempIngredientSearch: string;
   tempTagSearch: string;
 
+  userid: number = -1;
+
 
   constructor(private _tss: TagSearchService,
               private _iss: IngredientSearchService,
@@ -37,7 +40,14 @@ export class RezeptanlegenComponent {
               private _fb: FormBuilder,
               private _is: IngredientService,
               private _rss: RezeptanlegenService,
-              private router: Router) {
+              private router: Router,
+              private _authService: AuthenticationService) {
+
+    if (this._authService.currentUser == null) {
+      this.router.navigate(["/login"]);
+    } else {
+      this.userid = this._authService.currentUser.id;
+    }
 
     this.recipeForm = _fb.group({
       name: ['',
@@ -47,6 +57,7 @@ export class RezeptanlegenComponent {
           Validators.maxLength(50)
         ]
       ],
+      userid: [this.userid],
       description: ['',
         [
           Validators.required,
@@ -90,6 +101,8 @@ export class RezeptanlegenComponent {
         _fb.array([], RecipeValidators.minLengthArray(1))
     });
 
+    this.recipeForm.patchValue({"userid": this.userid});
+
     this.recipeFormTagArray = <FormArray> this.recipeForm.controls['tags'];
     this.recipeFormPrepStepsArray = <FormArray> this.recipeForm.controls['prepSteps'];
     this.recipeFormIngredientsArray = <FormArray> this.recipeForm.controls['ingredients'];
@@ -100,7 +113,7 @@ export class RezeptanlegenComponent {
 
   }
 
-  private submitting: boolean   = false;
+  private submitting: boolean = false;
 
   createRecipe() {
     if (this.recipeForm.valid) {
