@@ -31,7 +31,7 @@ export class AddingredientmodalComponent implements OnInit {
           Validators.minLength(3)
         ]
       ],
-      unit: [this.units.Gramm,
+      unit: [this.units.ml,
         [Validators.required]
       ],
       kcalPerUnit: ['',
@@ -53,8 +53,8 @@ export class AddingredientmodalComponent implements OnInit {
     //initial value setzen
     this.newIngredient.patchValue({
       name: this.preselectedIngredientName != null ? this.preselectedIngredientName : '',
-      unit: 1
-    })
+      unit: 6
+    });
   }
 
   //unit keys
