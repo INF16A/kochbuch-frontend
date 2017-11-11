@@ -5,11 +5,11 @@ import {DefaultValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 @Directive({
   selector: 'input[trim], textarea[trim]',
   providers: [
-    {provide: NG_VALUE_ACCESSOR, useExisting: InputTextareaTexTrimDirective, multi: true}
+    {provide: NG_VALUE_ACCESSOR, useExisting: InputTextareaTrimDirective, multi: true}
   ],
 
 })
-export class InputTextareaTexTrimDirective extends DefaultValueAccessor {
+export class InputTextareaTrimDirective extends DefaultValueAccessor {
 
   @Input() trim: string;
 
