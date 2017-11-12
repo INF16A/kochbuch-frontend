@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AjaxService} from "./ajax.service";
 import {ActivatedRoute} from "@angular/router";
 import {MessageService} from "../_services/message.service";
+import {AjaxService} from "./ajax.service";
+
 
 /**
  @author Team Chrocorg: Yoco Harrmann, Christian Werner, Georg Frey
@@ -109,6 +111,7 @@ export class SucheComponent implements OnInit {
     this.messageService.sendMessage(this.liste);
   }
 
+
   /* Ende Yoco, Christian, Georg Frey */
 
   /**@author Anfang Jarno Wagner, Philipp Steigler, Roman Würtemberger, Yoco Harrmann */
@@ -122,6 +125,7 @@ export class SucheComponent implements OnInit {
 
   getRezeptebyIngredient(ingredient: string) {
     this.ajaxService.getRezepteByIngredient(ingredient).subscribe((response) => {
+
       this.liste = response;
       this.sendMessage();
     });
