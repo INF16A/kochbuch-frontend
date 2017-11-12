@@ -30,12 +30,12 @@ export class AjaxService {
   /** @author Jarno Wagner, Philipp Steigler, Roman Würtemberger, Yoco Harrmann   */
 
   getRezepteByUser(user: string): Observable<Array<any>> {
-    return this.http.get("http://localhost:8080/recipes/{user}?user=" + user)
+    return this.http.get("http://localhost:8080/recipes/search?user=" + user)
       .map(res => res.json());
   }
 
   getRezepteByIngredient(ingredient: string): Observable<Array<any>> {
-    return this.http.get("http://localhost:8080/recipes/{name}?name=" + ingredient)
+    return this.http.get("http://localhost:8080/recipes/search?ingredient=" + ingredient)
       .map(res => res.json());
   }
 

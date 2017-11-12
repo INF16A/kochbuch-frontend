@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { MessageService } from "../_services/message.service";
-import { RezepteService } from "../RezepteService/rezepte-service";
+import {Component, OnInit} from '@angular/core';
 import {AjaxService} from "./ajax.service";
+import {ActivatedRoute} from "@angular/router";
+import {MessageService} from "../_services/message.service";
 
 /**
  @author Team Chrocorg: Yoco Harrmann, Christian Werner, Georg Frey
@@ -23,11 +22,12 @@ export class SucheComponent implements OnInit {
   private suchtext: string;
 
   constructor(private ajaxService: AjaxService,
-    private route: ActivatedRoute,
-    private messageService: MessageService) {
+              private route: ActivatedRoute,
+              private messageService: MessageService) {
+
     this.route.params.subscribe((event) => {
       this.suchtext = event.suchtext;
-      this.option = event.option;
+      event.option && (this.option = Number.parseInt(event.option)); //Falls event.option einen Wert enthält, dann soll dieser in this.option gespeichert werden
       this.suchen();
       return
     });
@@ -109,26 +109,25 @@ export class SucheComponent implements OnInit {
     this.messageService.sendMessage(this.liste);
   }
 
-/* Ende Yoco, Christian, Georg Frey */
+  /* Ende Yoco, Christian, Georg Frey */
 
   /**@author Anfang Jarno Wagner, Philipp Steigler, Roman Würtemberger, Yoco Harrmann */
 
-  getRezeptebyUser(tag: string) {
-    this.ajaxService.getRezepteByTag(tag).subscribe((response) => {
+  getRezeptebyUser(user: string) {
+    this.ajaxService.getRezepteByUser(user).subscribe((response) => {
       this.liste = response;
       this.sendMessage();
     });
   }
 
-  getRezeptebyIngredient(name: string) {
-    this.ajaxService.getRezepteByName(name).subscribe((response) => {
+  getRezeptebyIngredient(ingredient: string) {
+    this.ajaxService.getRezepteByIngredient(ingredient).subscribe((response) => {
       this.liste = response;
       this.sendMessage();
     });
   }
 
   /*Ende Jarno, Philipp, Roman, Yoco  */
-
 
 
 
