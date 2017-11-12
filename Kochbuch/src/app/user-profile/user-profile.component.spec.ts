@@ -1,10 +1,9 @@
 /**
-@author Yoco Harrmann
-@author Robert Zebec
-@author André Berberich
+ * @author André Berberich
+ * @author Robert Zebec
 */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserProfileComponent } from './user-profile.component';
 
 describe('UserProfileComponent', () => {
