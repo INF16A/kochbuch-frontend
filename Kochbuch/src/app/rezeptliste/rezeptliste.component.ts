@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {RezeptListItem} from "./RezeptListItem";
-import {Recipe} from '../RezepteService/rezepte-service';
+import {Recipe} from '../alle-rezepte/alle-rezepte.service';
 import {MessageService} from "../_services/message.service";
 import {SubscribableOrPromise} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";

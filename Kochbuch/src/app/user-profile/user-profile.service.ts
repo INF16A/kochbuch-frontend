@@ -1,10 +1,9 @@
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions  } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
-import { Recipe } from '../RezepteService/rezepte-service';
+import { Recipe } from '../alle-rezepte/alle-rezepte.service';
 import { User } from 'app/user.model';
-import { environment } from 'environments/environment';
 
 /**
  * @author Yoco Harrmann
@@ -15,18 +14,19 @@ import { environment } from 'environments/environment';
 @Injectable()
 export class UserProfileService {
 
+    private static SERVER = 'http://localhost:8080';
 
-  constructor(private http: Http) { }
+    constructor(private http: Http) { }
 
-  getRecipiesForUser(userId: Number): Promise<Recipe[]> {
-    return this.http.get(environment.backendUrl + '/recipes/creator/' + userId)
+    getRecipiesForUser(userId: Number): Promise<Recipe[]>{
+      return this.http.get(UserProfileService.SERVER + '/recipes/creator/' + userId)
       .toPromise()
       .then(response => response.json() as Recipe[]);
-  }
+    }
 
-  getUser(userId: Number): Promise<User> {
-    return this.http.get(environment.backendUrl + '/user/' + userId)
+    getUser(userId: Number): Promise<User>{
+      return this.http.get(UserProfileService.SERVER + '/user/' + userId)
       .toPromise()
       .then(response => response.json() as User);
+    }
   }
-}

@@ -1,8 +1,10 @@
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { MessageService } from "../_services/message.service";
 import { RezepteService } from "../RezepteService/rezepte-service";
 import {AjaxService} from "./ajax.service";
+
 
 /**
  @author Team Chrocorg: Yoco Harrmann, Christian Werner, Georg Frey
@@ -23,8 +25,8 @@ export class SucheComponent implements OnInit {
   private suchtext: string;
 
   constructor(private ajaxService: AjaxService,
-    private route: ActivatedRoute,
-    private messageService: MessageService) {
+               private route: ActivatedRoute)
+  {
     this.route.params.subscribe((event) => {
       this.suchtext = event.suchtext;
       this.option = event.option;
