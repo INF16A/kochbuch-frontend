@@ -1,8 +1,8 @@
 /**
-@author Yoco Harrmann
-@author Robert Zebec
-@author André Berberich
-*/
+ * @author André Berberich
+ * @author Robert Zebec
+ */
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserProfileService } from './user-profile.service';
 import { Recipe } from '../alle-rezepte/alle-rezepte.service';
@@ -18,9 +18,9 @@ import { AuthenticationService } from 'app/authentication/AuthenticationService'
 })
 export class UserProfileComponent implements OnInit, OnDestroy {
 
-  recipies: Recipe[];
-  currentUser: User;
-  userId: Number;
+  loadedUserRecipies: Recipe[];
+  loadedUser: User;
+  loadedUserId: Number;
   sub: Subscription;
   isLoggedIn: Boolean = false;
 
@@ -49,21 +49,21 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
 
   private updateUserData(params: Params) {
-    this.currentUser = undefined;
-    this.userId = + params['id'];
-    this.loadUser(this.userId);
-    this.loadRecipiesForUser(this.userId);
+    this.loadedUser = undefined;
+    this.loadedUserId = + params['id'];
+    this.loadUser(this.loadedUserId);
+    this.loadRecipiesForUser(this.loadedUserId);
   }
 
   private loadRecipiesForUser(userId: Number) {
     this.service.getRecipiesForUser(userId).then( recipies => {
-      this.recipies = recipies;
+      this.loadedUserRecipies = recipies;
     });
   }
 
   private loadUser(userId: Number) {
     this.service.getUser(userId).then( user => {
-      this.currentUser = user;
+      this.loadedUser = user;
     });
   }
 }

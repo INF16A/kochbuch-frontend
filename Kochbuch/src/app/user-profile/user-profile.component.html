@@ -5,8 +5,8 @@
 -->
 <div class="userProfile">
     <div class="container form-group">
-        <div *ngIf="currentUser">
-            <h1 class="text-center"> {{currentUser.username}} </h1>
+        <div *ngIf="loadedUser">
+            <h1 class="text-center"> {{loadedUser.username}} </h1>
             <!--
             <img src="assets/user.png" class="rounded-circle float-left col-lg-3" />
             <h4 class="col-form-legend">Interessen</h4>
@@ -67,7 +67,7 @@
         -->
             <dl class="row col-sm-6">
                 <dt class="col-lg-8">Benutzer seit</dt>
-                <dd class="col-lg-8">{{currentUser.creationDate | date:'dd-MM-yyyy'}}</dd>
+                <dd class="col-lg-8">{{loadedUser.creationDate | date:'dd-MM-yyyy'}}</dd>
                 <!--
                 <dt class="col-sm-3">Beschreibung</dt>
                 <dd class="col-sm-9">
@@ -77,11 +77,11 @@
             -->
             </dl>
         </div>
-		<div *ngIf="!currentUser">
-			<h1 class="text-center">
-				User not found
-			</h1>
-		</div>
-        <app-rezeptliste [rezepte]="recipies"></app-rezeptliste>
+        <div *ngIf="!loadedUser">
+            <h1 class="text-center">
+                User not found
+            </h1>
+        </div>
+        <app-rezeptliste [rezepte]="loadedUserRecipies"></app-rezeptliste>
     </div>
 </div>

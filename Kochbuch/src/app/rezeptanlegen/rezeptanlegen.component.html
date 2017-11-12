@@ -97,14 +97,15 @@
                  [inputFormatter]="formatterTag"
                  [resultFormatter]="formatterTag"
                  (selectItem)="tagSelected($event)"
+                 [focusFirst]="false"
                  [(ngModel)]="tempTagSearch"
-                 (keydown.enter)="needNewTag && createNewTag()"
+                 (keydown.enter)="newTagPossible && createNewTag()"
                  [ngModelOptions]="{standalone: true}"
                  required
                  minlength="3"
                  maxlength="25">
           <span class="input-group-addon">
-            <i class="fa fa-check" (click)="needNewTag && createNewTag()" aria-hidden="true"></i>
+            <i class="fa fa-check" (click)="newTagPossible && createNewTag()" aria-hidden="true"></i>
           </span>
         </div>
       </div>
@@ -132,7 +133,8 @@
              [inputFormatter]="formatterIngredient"
              [resultFormatter]="formatterIngredient"
              (selectItem)="ingredientSelected($event)"
-             (keydown.enter)="needNewIngredient && createNewIngredient(inputIngredSearch)"
+             (keydown.enter)="newIngredientPossible && createNewIngredient(inputIngredSearch)"
+             [focusFirst]="false"
              [(ngModel)]="tempIngredientSearch"
              [ngModelOptions]="{standalone: true}">
     </div>
