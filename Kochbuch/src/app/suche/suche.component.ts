@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AjaxService} from "./ajax.service";
 import {ActivatedRoute} from "@angular/router";
 import {MessageService} from "../_services/message.service";
-import {AjaxService} from "./ajax.service";
+
 
 
 /**
