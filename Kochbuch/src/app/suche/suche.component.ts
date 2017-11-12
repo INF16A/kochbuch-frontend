@@ -1,13 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {AjaxService} from "../_services/ajax.service";
+import {AjaxService} from "./ajax.service";
 import {ActivatedRoute} from "@angular/router";
 import {MessageService} from "../_services/message.service";
 
 
+
 /**
  @author Team Chrocorg: Yoco Harrmann, Christian Werner, Georg Frey
+ @author Jarno Wagner, Philipp Steigler, Roman Würtemberger, Yoco Harrmann
  */
 
+
+/* Anfang Team Chrocorg */
 @Component({
   selector: 'app-suche',
   templateUrl: './suche.component.html',
@@ -21,10 +25,11 @@ export class SucheComponent implements OnInit {
 
   constructor(private ajaxService: AjaxService,
               private route: ActivatedRoute,
-              private messageService: MessageService)
-  {
+              private messageService: MessageService) {
+
     this.route.params.subscribe((event) => {
       this.suchtext = event.suchtext;
+      event.option && (this.option = Number.parseInt(event.option)); //Falls event.option einen Wert enthält, dann soll dieser in this.option gespeichert werden
       this.suchen();
       return
     });
@@ -75,8 +80,10 @@ export class SucheComponent implements OnInit {
           this.getRezeptebyTag(this.suchtext);
           break;
         case 3:
+          this.getRezeptebyUser(this.suchtext);
           break;
         case 4:
+          this.getRezeptebyIngredient(this.suchtext);
           break;
       }
     }
@@ -104,8 +111,26 @@ export class SucheComponent implements OnInit {
     this.messageService.sendMessage(this.liste);
   }
 
-  clearMessage(): void {
-    this.messageService.clearMessage();
+
+  /* Ende Yoco, Christian, Georg Frey */
+
+  /**@author Anfang Jarno Wagner, Philipp Steigler, Roman Würtemberger, Yoco Harrmann */
+
+  getRezeptebyUser(user: string) {
+    this.ajaxService.getRezepteByUser(user).subscribe((response) => {
+      this.liste = response;
+      this.sendMessage();
+    });
   }
+
+  getRezeptebyIngredient(ingredient: string) {
+    this.ajaxService.getRezepteByIngredient(ingredient).subscribe((response) => {
+
+      this.liste = response;
+      this.sendMessage();
+    });
+  }
+
+  /*Ende Jarno, Philipp, Roman, Yoco  */
 
 }
