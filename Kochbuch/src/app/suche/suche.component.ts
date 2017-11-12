@@ -129,6 +129,4 @@ export class SucheComponent implements OnInit {
 
   /*Ende Jarno, Philipp, Roman, Yoco  */
 
-
-
 }
