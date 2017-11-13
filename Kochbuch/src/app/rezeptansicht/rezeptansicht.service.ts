@@ -4,6 +4,8 @@ import {Observable} from "rxjs";
 import {Http, Response, Headers, RequestOptions } from '@angular/http';
 import {User} from '../user.model';
 import {Recipe} from "app/alle-rezepte/alle-rezepte.service";
+// import { HttpClient } from '@angular/common/http/src/client';
+import { HttpClient } from "@angular/common/http";
 
 
 /**
@@ -38,7 +40,7 @@ export class RezeptansichtService {
 
   private static SERVER = "http://localhost:8080";
 
-  constructor(private http:Http) {
+  constructor(private http:Http, private httpClient:HttpClient) {
   }
 
   /**
@@ -182,15 +184,25 @@ export class RezeptansichtService {
     let url = RezeptansichtService.SERVER+"/comment";
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    this.http.post(url, JSON.stringify(comment), options).subscribe(data => {
-      if(callback){
-        callback(false, data);
-      }
-    }, error => {
-      if(callback){
-        callback(true, error);
-      }
+    this.httpClient
+    .post(url, comment)
+    .toPromise()
+    .then(res => callback(false, res))
+    .catch(error => {
+      console.log(error);
     });
+    // this.http.post(url, JSON.stringify(comment), options).subscribe(data => {
+    //   if(callback){
+    //     callback(false, data);
+    //   }
+    // }, error => {
+    //   if(callback){
+    //     callback(true, error);
+    //   }
+    // });
+
+
+
   }
   /**
    * 💩 Alexander Krieg
@@ -204,15 +216,23 @@ export class RezeptansichtService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
-    this.http.delete(url, options).subscribe(data => {
-      if(callback){
-        callback(false, data);
-      }
-    }, error => {
-      if(callback){
-        callback(true, error);
-      }
+    this.httpClient
+    .delete(url)
+    .toPromise()
+    .then(res => callback(false, res))
+    .catch(error => {
+      console.log(error);
     });
+
+    // this.http.delete(url, options).subscribe(data => {
+    //   if(callback){
+    //     callback(false, data);
+    //   }
+    // }, error => {
+    //   if(callback){
+    //     callback(true, error);
+    //   }
+    // });
   }
 
 
