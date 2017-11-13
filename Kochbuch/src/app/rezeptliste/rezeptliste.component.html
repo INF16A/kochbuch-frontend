@@ -6,12 +6,14 @@
       <img src="data:{{rezept.pics[0].picType}};base64,{{rezept.pics[0].picData}}" *ngIf=rezept.pics[0] class="card-img-top " style="object-fit: cover;">
       <div class="card-body card-block">
         <h2 class="card-title">{{rezept.name}}</h2>
-        <div class="card-subtitle text-muted"><a routerLink="/user-profile/{{rezept.creator.id}}" >{{rezept.creator.username}}</a> {{rezept.createDate | date:"dd.MM.yyyy"}}</div>
+        <div class="card-subtitle text-muted">
+          <a routerLink="/user-profile/{{rezept.creator.id}}">{{rezept.creator.username}}</a> {{rezept.createDate | date:"dd.MM.yyyy"}}</div>
         <p class="card-text ">{{rezept.description}}</p>
         <a class="btn btn-outline-primary" routerLink="/rezeptansicht/{{rezept.id}}">Jetzt kochen</a>
 
         <!-- <a class="btn btn-outline-primary" routerLink="/rezeptansicht">Jetzt kochen</a> -->
-<!--      </div>[queryParams]="{search: tag.name}"-->
+        <!--      </div>[queryParams]="{search: tag.name}"-->
+      </div>
       <div class="card-footer d-flex flex-row flex-wrap justify-content-start">
         <a *ngFor="let tag of rezept.tags" [routerLink]="['/suche', {suchtext:tag.name,option:2}]" class="btn btn-sm btn-outline-secondary m-1">{{tag.name}}</a>
       </div>
@@ -35,4 +37,3 @@
       </div>
     </div>
   </div>
-</div>
