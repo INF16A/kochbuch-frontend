@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {AjaxService} from "./ajax.service";
-import {ActivatedRoute} from "@angular/router";
-import {MessageService} from "../_services/message.service";
+import { Component, OnInit } from '@angular/core';
+import { AjaxService } from "./ajax.service";
+import { ActivatedRoute } from "@angular/router";
+import { MessageService } from "../_services/message.service";
 
 
 
@@ -22,10 +22,10 @@ export class SucheComponent implements OnInit {
   private liste: any[];     //Warning hier ignorieren, liste wird im HTML gebraucht um alle Ergebnisse der Suche anzuzeigen
   private option: any;
   private suchtext: string;
-
+  private searchOptions = ["Rezeptname", "Tag", "User", "Zutat"];
   constructor(private ajaxService: AjaxService,
-              private route: ActivatedRoute,
-              private messageService: MessageService) {
+    private route: ActivatedRoute,
+    private messageService: MessageService) {
 
     this.route.params.subscribe((event) => {
       this.suchtext = event.suchtext;
@@ -69,6 +69,17 @@ export class SucheComponent implements OnInit {
     this.suchen();
   }
 
+  private lastSearch;
+  delayedSuche() {
+    if (this.lastSearch) {
+      return;
+    }
+    this.suchen();
+    this.lastSearch = setTimeout(() => {
+      this.lastSearch = null;
+    }, 250);
+
+  }
 
   suchen() {
     if (this.suchtext) {        //Suche wird nur ausgeführt, wenn auch etwas im Suchfeld steht

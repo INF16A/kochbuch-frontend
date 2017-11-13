@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 import {Observable} from 'rxjs/Observable';
 import {IngredientSmall} from "../rezeptanlegen/rezeptanlegen.model";
-
+import { environment} from "environments/environment";
 /**
  * @author André Berberich
  * @author Thomas Hörner - Rückgabewert beim Anlegen geändert
@@ -13,7 +13,7 @@ import {IngredientSmall} from "../rezeptanlegen/rezeptanlegen.model";
 @Injectable()
 export class IngredientService {
 
-  private static SERVER = 'http://localhost:8080';
+  private static SERVER = environment.backendUrl;
   private subject = new Subject<any>();
 
   constructor(private http: HttpClient) { }

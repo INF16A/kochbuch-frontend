@@ -10,7 +10,7 @@ Irina Eurich authors Tobias Bloch authors Endrit Çallaki @authors Thomas Hörne
 
 
       <div class="navbar-nav">
-        <a class="text-white nav-link" routerLink="{{'/rezeptanlegen'}}">
+        <a class="text-white nav-link" *ngIf="isLoggedIn() | async" routerLink="{{'/rezeptanlegen'}}">
           Rezept anlegen
         </a>
         <a class="text-white nav-link" routerLink="{{'/suche'}}">
@@ -20,7 +20,7 @@ Irina Eurich authors Tobias Bloch authors Endrit Çallaki @authors Thomas Hörne
     </div>
 
     <div class="text-white" *ngIf="isLoggedIn() | async">
-      <span class="" routerLink="{{'/user-profile'}}">{{getName()}}</span>
+      <span class="" routerLink="{{'/user-profile/'+getId()}}">{{getName()}}</span>
       <div class="btn btn-outline-danger text-white " *ngIf="isLoggedIn() | async " (click)="logout()">Logout</div>
     </div>
 
