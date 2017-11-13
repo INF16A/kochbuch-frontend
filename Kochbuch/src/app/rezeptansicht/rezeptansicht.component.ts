@@ -1,12 +1,11 @@
 import { Ingredient } from '../ingredient/ingredient.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RezeptansichtService, Comment } from "./rezeptansicht.service";
-import { DatePipe, DecimalPipe } from '@angular/common';
+import { DatePipe,DecimalPipe } from '@angular/common';
 import { ActivatedRoute, Router, Params } from "@angular/router";
 import { Subscription } from 'rxjs/Subscription';
 import { AuthenticationService } from '../authentication/AuthenticationService';
-import { Recipe, RecipeServie } from '../alle-rezepte/alle-rezepte.service'
-import { User } from "app/user.model";
+import { Recipe, RecipeServie} from '../alle-rezepte/alle-rezepte.service'
 
 /**
  * @author Alexander Krieg
@@ -32,31 +31,29 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     private router: Router,
     private rezeptAnsichtService: RezeptansichtService,
     private authService: AuthenticationService,
-    private reService: RecipeServie) {
-    this.currentRecipe = new Recipe();
-    this.currentRecipe.creator = new User(-1);
+    private reService:RecipeServie) {
   }
 
-  currentRecipe: Recipe;
+  currentRecipe : Recipe = new Recipe;
   personCount: number = 4;
 
   //Kühnlein
-  upratings: number = 0;
-  downratings: number = 0;
-  givenRating: number = 0;
+  upratings:number=0;
+  downratings:number=0;
+  givenRating:number=0;
   //!Kühnlein
 
   // --> 💩 Alexander Krieg
   private commentsLoading = true;
-  private comments: Comment[] = [];
+  private comments:Comment[] = [];
   private sub: Subscription;
   private recipe: Recipe;
   private recipeid: number;
   private newCommentText: String = "";
-  private commentAdding: boolean = false;
-  private isLoggedIn: boolean = false;
+  private commentAdding:boolean = false;
+  private isLoggedIn:boolean = false;
   private ingredients: Ingredient[];
-  private sumkcal: number = 0;
+  private sumkcal:number = 0;
 
 
   ngOnInit() {
@@ -70,14 +67,14 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     // Patrick Eichert, Theresa Reus
     // holt ID aus der URL
     this.sub = this.route.params.subscribe(
-      (params: Params) => {
-        this.recipeid = + params["id"];
+      (params:Params) => {
+       this.recipeid = + params["id"];
       }
     );
 
     this.loadRecipe(this.recipeid);
 
-    this.authService.authenticated.subscribe((params: boolean) => {
+    this.authService.authenticated.subscribe((params:boolean) => {
       this.isLoggedIn = params;
     });
     this.authService.debugSetLogin(true);
@@ -99,21 +96,21 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     });
   }
 
-  private loadIngredients(id: number) {
+  private loadIngredients(id:number) {
     this.rezeptAnsichtService.getIngredientByRecipe(id, ingredients => {
       this.ingredients = ingredients;
     });
   }
 
   private sumkcalpp() {
-    let sum: number = 0;
+    let sum : number = 0;
     for (let recipeIngredients of this.currentRecipe.recipeIngredients) {
       sum += (recipeIngredients.amountPerPerson * recipeIngredients.ingredient.kcalPerUnit);
     }
     this.sumkcal = sum;
   }
 
-  private loadComments() {
+  private loadComments(){
     this.commentsLoading = true;
     this.rezeptAnsichtService.getRecipeComments(this.recipe.id, comments => {
       this.commentsLoading = false;
@@ -122,29 +119,29 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     });
   }
   //Marc Reinke
-  public saveNewComment(text: String) {
-    if (!text) return;
+  public saveNewComment(text:String){
+    if(!text) return;
     this.commentAdding = true;
     let c = new Comment(text, this.authService.currentUser.id, this.recipe.id, new Date());
     console.log("C", c);
-    this.rezeptAnsichtService.addComment(c, (fail: boolean, data: any) => {
-      if (fail) {
+    this.rezeptAnsichtService.addComment(c, (fail:boolean, data:any) => {
+      if(fail){
         console.error(JSON.stringify(data));
-      } else {
+      }else{
         this.newCommentText = "";
         this.loadComments();
       }
       this.commentAdding = false;
     });
   }
-  public deleteComment(comment: Comment) {
-    if (!this.authService.currentUser) return;
+  public deleteComment(comment:Comment){
+    if(!this.authService.currentUser) return;
     console.dir(comment);
-    if (comment.user.id === this.authService.currentUser.id) {
-      this.rezeptAnsichtService.deleteComment(comment, (fail: boolean, data: any) => {
-        if (fail) {
+    if(comment.user.id === this.authService.currentUser.id){
+      this.rezeptAnsichtService.deleteComment(comment, (fail:boolean, data:any) => {
+        if(fail){
           console.log(JSON.stringify(data));
-        } else {
+        }else{
           this.loadComments();
         }
       });
@@ -176,7 +173,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   /**
    * Updates both offline values of up- and downrating
    */
-  private updateRating() {
+  private updateRating(){
     this.rezeptAnsichtService.countRatingUp(this.recipe.id, amount => {
       this.upratings = amount;
     });
@@ -191,8 +188,8 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
    */
   private updateGivenRating() {
     if (this.isLoggedIn) {
-      this.rezeptAnsichtService.getGivenRating(this.recipe.id, 1 /*TODO: currentuser.id*/, givenRating => {
-        this.givenRating = givenRating;
+      this.rezeptAnsichtService.getGivenRating(this.recipe.id,  this.authService.currentUser.id, givenRating => {
+      this.givenRating = givenRating;
       });
     }
   }
@@ -201,10 +198,10 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
    * Posts rating
    * @param {number} rating = 1 for like / -1 for dislike
    */
-  private giveRating(rating: number) {
-    if (this.isLoggedIn) {
+  private giveRating(rating: number){
+    if(this.isLoggedIn) {
       this.givenRating = rating;
-      this.rezeptAnsichtService.giveRating(this.recipeid, 1 /*TODO: currentuser.id*/, rating, update => {
+      this.rezeptAnsichtService.giveRating(this.recipeid, this.authService.currentUser.id, rating, update => {
         this.updateRating();
       });
     }
