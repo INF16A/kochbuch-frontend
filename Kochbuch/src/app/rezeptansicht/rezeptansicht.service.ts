@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import {Http, Response, Headers, RequestOptions } from '@angular/http';
 import {User} from '../user.model';
 import {Recipe} from "app/alle-rezepte/alle-rezepte.service";
-
+import { environment} from "environments/environment";
 
 /**
  * @author Alexander Krieg
@@ -36,7 +36,7 @@ export class Comment{
 @Injectable()
 export class RezeptansichtService {
 
-  private static SERVER = "http://localhost:8080";
+  private static SERVER = environment.backendUrl;
 
   constructor(private http:Http) {
   }
@@ -119,7 +119,7 @@ export class RezeptansichtService {
   }
 
   private fetchRecipe(id:Number){
-    let url = "http://localhost:8080/recipe/"+id;
+    let url = environment.backendUrl +"/recipe/"+id;
     return this.http.get(url);
   }
 
@@ -134,7 +134,7 @@ export class RezeptansichtService {
   }
 
   private fetchIngredientsByRecipe(id:Number){
-    let url = "http://localhost:8080/recipe/"+id;
+    let url = environment.backendUrl+"/recipe/"+id;
     return this.http.get(url);
   }
 
