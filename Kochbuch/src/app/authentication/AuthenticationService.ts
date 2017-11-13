@@ -16,9 +16,12 @@ import { TokenService } from "./token-service";
 @Injectable()
 export class AuthenticationService {
 	public authenticated: Subject<Boolean>;
-	private user ;
 	public get currentUser() {
 		return this.user;
+	}
+	private get user() { return JSON.parse(localStorage.getItem("user")); }
+	private set user(user) {
+		localStorage.setItem("user", JSON.stringify(user));
 	}
 	public constructor(private http: HttpClient, private tokenService: TokenService) {
 		this.authenticated = new BehaviorSubject(new Boolean(tokenService.Token));
