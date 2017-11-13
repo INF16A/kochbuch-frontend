@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from "@angular/forms";
+import {User} from "../user.model";
+import {RegistrierungsService} from "./registrierungsmodal.service";
 
 
 /**
@@ -20,14 +22,13 @@ Endrit Çallaki
 export class RegistrierungsmodalComponent implements OnInit {
   closeResult: string;
 
+  user: User ;
   form: FormGroup;
-  constructor(public modalService: NgbModal, public activeModal: NgbActiveModal, private _fb: FormBuilder) {
+  constructor(public modalService: NgbModal, public activeModal: NgbActiveModal, private _fb: FormBuilder, private registerService: RegistrierungsService) {
 
   }
 
   ngOnInit() {
-    //initial value setzen
-
   }
 
 
@@ -42,7 +43,11 @@ export class RegistrierungsmodalComponent implements OnInit {
     }
   }
 
-  private creatingIngredient: boolean = false;
+  private register(){
+    this.registerService.create(this.user);
+    close();
+  }
+
 
 
 }

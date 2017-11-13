@@ -22,19 +22,19 @@ Endrit Çallaki
 
       <div class="form-group">
         <label for="benutzername">Benutzername</label>
-        <input type="text" class="form-control" name="username" id="benutzername" placeholder="exampleuser">
+        <input type="text" class="form-control" name="username" id="benutzername" [value]="user.username" placeholder="Max Mustermann">
       </div>
 
       <div class="form-group">
         <label for="email">E-Mail</label>
-        <input type="email" class="form-control" name="email" id="email" placeholder="example@mail.de">
+        <input type="email" class="form-control" name="email" id="email" [value]="user.email" placeholder="example@example.com">
       </div>
 
       <div class="form-group">
         <label for="passwort1">Passwort</label>
-        <input type="password" class="form-control" name="passwort1" id="passwort1" placeholder="start123">
+        <input type="password" class="form-control" name="passwort1" id="passwort1" [value]="user.pw" placeholder="start123">
         <br>
-        <input type="password" class="form-control" name="passwort2" id="passwort2" placeholder="start123">
+        <input type="password" class="form-control" name="passwort2" id="passwort2" [value]="user.pwRepeat" placeholder="start123">
       </div>
       <br>
 
@@ -50,7 +50,7 @@ Endrit Çallaki
 
     <!-- Modal Footer -->
     <div class="modal-footer">
-      <button type="button" class="btn btn-success btn-lg btn-block" (click)="c('Close click')"><b>Registrieren</b></button>
+      <button type="button" class="btn btn-success btn-lg btn-block" (click)="register()"><b>Registrieren</b></button>
     </div>
 
 
