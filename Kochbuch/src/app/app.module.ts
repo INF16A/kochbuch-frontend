@@ -33,6 +33,9 @@ import {MessageService} from "./_services/message.service";
 import {UserProfileService} from 'app/user-profile/user-profile.service';
 import {AjaxService} from "./suche/ajax.service";
 import {HttpClientModule} from "@angular/common/http";
+import { AuthInterceptor } from "app/authentication/auth-interceptor";
+import { TokenService } from "app/authentication/token-service";
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 /**
@@ -70,8 +73,8 @@ import {HttpClientModule} from "@angular/common/http";
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
     HttpClientModule,
+    HttpModule,
     AppRoutingModule,
     NgbModule.forRoot(),
     /**
@@ -81,7 +84,13 @@ import {HttpClientModule} from "@angular/common/http";
   ],
   providers: [
     RezeptansichtService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
     AuthenticationService,
+    TokenService,
     /**
      * @author 💩 Alexander Krieg
      * Für die DatePipe (deutsches Datumsformat)

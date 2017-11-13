@@ -15,10 +15,13 @@ import { TokenService } from "./token-service";
  */
 @Injectable()
 export class AuthenticationService {
-	public authenticated: Subject<boolean>;
-	public currentUser: User = null;
+	public authenticated: Subject<Boolean>;
+	private user ;
+	public get currentUser() {
+		return this.user;
+	}
 	public constructor(private http: HttpClient, private tokenService: TokenService) {
-		this.authenticated = new BehaviorSubject(false);
+		this.authenticated = new BehaviorSubject(new Boolean(tokenService.Token));
 	}
 
 	public tryAuthentification(username: string, password: string) {
@@ -34,8 +37,8 @@ export class AuthenticationService {
 			let xtoken = z.headers.get("X-Token");
 			let data: any = z.body;
 			if (data.id && data.username && xtoken) {
-				this.currentUser = new User(data.id);
-				this.currentUser.username = data.username;
+				this.user = new User(data.id);
+				this.user.username = data.username;
 				this.tokenService.Token = xtoken;
 				console.log("user logged in", this.currentUser);
 				this.authenticated.next(true);
@@ -48,17 +51,12 @@ export class AuthenticationService {
 	}
 	public logout() {
 		console.log("logout");
-		this.currentUser = null;
+		this.user = null;
 		this.tokenService.Token = null;
 		this.authenticated.next(false);
 	}
 	public debugSetLogin(loggedIn: boolean): void {
-		this.authenticated.next(loggedIn);
-		if (loggedIn) {
-			this.currentUser = new User(1);
-		} else {
-			this.currentUser = null;
-		}
+		console.log("deprecated");
 	}
 }
 
