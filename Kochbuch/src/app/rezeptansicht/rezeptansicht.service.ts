@@ -221,6 +221,7 @@ export class RezeptansichtService {
     .toPromise()
     .then(res => callback(false, res))
     .catch(error => {
+      callback(false, {});
       console.log(error);
     });
 
