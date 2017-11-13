@@ -14,7 +14,7 @@ import { environment } from 'environments/environment';
 @Injectable()
 export class UserProfileService {
 
-    private static SERVER = 'http://localhost:8080';
+    private static SERVER = environment.backendUrl;
 
     constructor(private http: HttpClient) { }
 
