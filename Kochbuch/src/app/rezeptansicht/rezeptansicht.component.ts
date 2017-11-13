@@ -189,7 +189,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
    */
   private updateGivenRating() {
     if (this.isLoggedIn) {
-      this.rezeptAnsichtService.getGivenRating(this.recipe.id, 1 /*TODO: currentuser.id*/, givenRating => {
+      this.rezeptAnsichtService.getGivenRating(this.recipe.id, this.authService.currentUser.id, givenRating => {
       this.givenRating = givenRating;
       });
     }
@@ -202,7 +202,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   private giveRating(rating: number){
     if(this.isLoggedIn) {
       this.givenRating = rating;
-      this.rezeptAnsichtService.giveRating(this.recipeid, 1 /*TODO: currentuser.id*/, rating, update => {
+      this.rezeptAnsichtService.giveRating(this.recipeid, this.authService.currentUser.id, rating, update => {
         this.updateRating();
       });
     }
