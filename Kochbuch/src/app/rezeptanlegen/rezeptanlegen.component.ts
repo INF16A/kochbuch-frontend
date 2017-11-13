@@ -19,7 +19,7 @@ import {IngredientSmall} from "./rezeptanlegen.model";
   selector: 'app-rezeptanlegen',
   templateUrl: './rezeptanlegen.component.html',
   styleUrls: ['./rezeptanlegen.component.css'],
-  providers: [TagSearchService, IngredientSearchService, RezeptanlegenService, AuthenticationService]
+  providers: [TagSearchService, IngredientSearchService, RezeptanlegenService]
 })
 export class RezeptanlegenComponent {
 
