@@ -7,6 +7,7 @@ import { Recipe } from "app/alle-rezepte/alle-rezepte.service";
 import { environment } from "environments/environment";
 import { HttpClient } from "@angular/common/http";
 
+
 /**
  * @author Alexander Krieg
  * @author Patrick Eichert
@@ -21,7 +22,7 @@ import { HttpClient } from "@angular/common/http";
 
 /**
  * 💩 Alexander Krieg
- * Representiert ein Kommentar-Objekt
+ * Repräsentiert ein Kommentar-Objekt
  */
 export class Comment {
   public id: Number;
@@ -43,7 +44,11 @@ export class RezeptansichtService {
   }
 
 
-  // Theresa Reus, Patrick Eichert
+  /**
+   * Theresa Reus, Patrick Eichert
+   * @param {number} recipeId
+   * @param {(ar: Recipe) => void} callback
+   */
   getRecipeData(recipeId: number, callback: (ar: Recipe) => void) {
     this.fetchRecipe(recipeId).subscribe((res: Response) => {
       callback(res.json());
@@ -54,6 +59,12 @@ export class RezeptansichtService {
     });
   }
 
+  /**
+   * Theresa Reus, Patrick Eichert
+   * Private Methode holt das Rezept zu der ID
+   * @param {Number} id
+   * @returns {Observable<Response>}
+   */
   private fetchRecipe(id: Number) {
     let url = environment.backendUrl + "/recipe/" + id;
     return this.http.get(url);
@@ -73,7 +84,6 @@ export class RezeptansichtService {
     let url = environment.backendUrl + "/recipe/" + id;
     return this.http.get(url);
   }
-
 
   /**
    * 💩 Alexander Krieg

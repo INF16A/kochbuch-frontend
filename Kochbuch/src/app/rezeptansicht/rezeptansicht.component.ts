@@ -64,8 +64,10 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     // });
     console.log(this.authService.authenticated);
 
-    // Patrick Eichert, Theresa Reus
-    // holt ID aus der URL
+    /**
+     * Patrick Eichert, Theresa Reus
+     * holt Rezept ID aus der aufgerufenen URL
+     */
     this.sub = this.route.params.subscribe(
       (params:Params) => {
        this.recipeid = + params["id"];
@@ -83,7 +85,11 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  // Theresa Reus, Patrick Eichert
+  /**
+   * Theresa Reus, Patrick Eichert
+   * Lädt das Rezept zu der aktuellen Rezept-ID
+   * @param {number} id
+   */
   private loadRecipe(id: number) {
     this.rezeptAnsichtService.getRecipeData(id, recipe => {
       this.currentRecipe = recipe;
@@ -92,16 +98,13 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
       this.sumkcalpp();
       this.updateRating();
       this.updateGivenRating();
-      console.log(this.recipe);
     });
   }
 
-  private loadIngredients(id:number) {
-    this.rezeptAnsichtService.getIngredientByRecipe(id, ingredients => {
-      this.ingredients = ingredients;
-    });
-  }
-
+  /**
+   * Theresa Reus, Patrick Eichert
+   * berechnet die kcal pro Person auf Grundlage der Zutaten
+   */
   private sumkcalpp() {
     let sum : number = 0;
     for (let recipeIngredients of this.currentRecipe.recipeIngredients) {
@@ -136,7 +139,6 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   }
   public deleteComment(comment:Comment){
     if(!this.authService.currentUser) return;
-    console.dir(comment);
     if(comment.user.id === this.authService.currentUser.id){
       this.rezeptAnsichtService.deleteComment(comment, (fail:boolean, data:any) => {
         if(fail){
