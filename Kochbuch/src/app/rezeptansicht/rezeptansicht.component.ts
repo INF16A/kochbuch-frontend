@@ -139,12 +139,10 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   }
   public deleteComment(comment:Comment){
     if(!this.authService.currentUser) return;
-    console.dir(comment);
     if(comment.user.id === this.authService.currentUser.id){
       this.rezeptAnsichtService.deleteComment(comment, (fail:boolean, data:any) => {
         if(fail){
-          console.log("Hallo i bims");
-          // console.log(JSON.stringify(data));
+          console.log(JSON.stringify(data));
         }else{
           this.loadComments();
         }

@@ -213,10 +213,12 @@ export class RezeptansichtService {
     this.httpClient
     .delete(url)
     .toPromise()
-    .then(res => callback(false, res))
+    .then(res => {
+      console.log("Comment deleted:", res);
+      callback(false, res)
+    })
     .catch(error => {
-      callback(false, {});
-      console.log(error);
+      console.log("Error Deleting Comment", error);
     });
 
     // this.http.delete(url, options).subscribe(data => {
