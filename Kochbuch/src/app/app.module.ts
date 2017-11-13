@@ -36,6 +36,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { AuthInterceptor } from "app/authentication/auth-interceptor";
 import { TokenService } from "app/authentication/token-service";
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RezeptService } from "app/RezeptService/rezept.service";
 
 
 /**
@@ -89,6 +90,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
       useClass: AuthInterceptor,
       multi: true
     },
+    RezeptService,
     AuthenticationService,
     TokenService,
     /**
