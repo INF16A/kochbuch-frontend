@@ -6,7 +6,7 @@
     <div class="col-md-12">
       <!--Suchleiste-->
       <form class="d-flex p-1 flex-row">
-        <input class="p-2" type="text" [(ngModel)]="suchtext" placeholder="Carbonara" [ngModelOptions]="{standalone: true}" />
+        <input class="p-2" type="text" [(ngModel)]="suchtext" placeholder="Carbonara" (keyup)="delayedSuche()" [ngModelOptions]="{standalone: true}" />
         <span class="input-group-btn">
           <button class="btn btn-default" type="submit" (click)="suchen()">
             <i class="material-icons">search</i>

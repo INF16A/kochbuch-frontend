@@ -69,6 +69,17 @@ export class SucheComponent implements OnInit {
     this.suchen();
   }
 
+  private lastSearch;
+  delayedSuche() {
+    if (this.lastSearch) {
+      return;
+    }
+    this.suchen();
+    this.lastSearch = setTimeout(() => {
+      this.lastSearch = null;
+    }, 250);
+
+  }
 
   suchen() {
     if (this.suchtext) {        //Suche wird nur ausgeführt, wenn auch etwas im Suchfeld steht
