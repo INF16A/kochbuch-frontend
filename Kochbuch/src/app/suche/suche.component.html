@@ -8,25 +8,26 @@
       <!--Radiobuttons -->
       <div class="form-check">
         <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="rezeptsuche" id="rezeptenamen" [value]="1" [(ngModel)]="option"> Suche nach
-          Rezeptnamen
+          <input class="form-check-input" type="radio" name="rezeptsuche" id="rezeptenamen" [value]="1"
+                 [(ngModel)]="option"> Suche nach Rezeptnamen
         </label>
       </div>
       <div class="form-check">
         <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="rezeptsuche" id="rezeptetag" [value]="2" [(ngModel)]="option"> Suche nach Tag
+          <input class="form-check-input" type="radio" name="rezeptsuche" id="rezeptetag" [value]="2"
+                 [(ngModel)]="option"> Suche nach Tag
         </label>
       </div>
       <div class="form-check">
         <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="rezeptsuche" id="rezeptekeyword" [value]="3" [(ngModel)]="option"> Suche
-          nach Keyword
+          <input class="form-check-input" type="radio" name="rezeptsuche" id="rezeptekeyword" [value]="3"
+                 [(ngModel)]="option"> Suche nach User
         </label>
       </div>
       <div class="form-check">
         <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="rezeptsuche" id="rezeptezutat" [value]="4" [(ngModel)]="option"> Suche nach
-          Zutat
+          <input class="form-check-input" type="radio" name="rezeptsuche" id="rezeptezutat" [value]="4"
+                 [(ngModel)]="option"> Suche nach Zutat
         </label>
       </div>
 
@@ -40,19 +41,8 @@
               </span>
       </div>
 
-      <!--Ergebnisse der Suchanfrage-->
-
-        <div class="col-sm-6 col-md-4" *ngFor="let rezept of liste">
-          <div class="card" style="width: 20rem;">
-            <img class="card-img-top" src="../../assets/home/rezept1.jpg" alt="Card image cap">
-            <div class="card-body">
-              <h4 class="card-title"><a routerLink="/rezeptansicht/{{rezept.id}}"> Rezeptname: {{rezept.name}} </a></h4>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-        </div>
+      <app-rezeptliste></app-rezeptliste>
 
     </div>
-
   </div>
 </div>

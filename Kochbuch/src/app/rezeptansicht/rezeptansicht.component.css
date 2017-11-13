@@ -33,13 +33,14 @@ h1 {
 
 @media (max-width: 575px) {  /* For mobile  */
     .main-image{
-        height: 400px;
+        height: 600px;
     }
 }
 
 ul.comments {
   margin-left: 0px;
   padding-left: 0px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 .commentdetails p {
     color: #000;
@@ -53,9 +54,16 @@ ul.comments {
     color: rgba(0, 0, 0, .125);
     font-weight: bold;
     cursor: pointer;
+    width: 25px;
+    text-align: center;
 }
 .commentdetails .commentDeletion:hover {
     color: #000;
+    border: 1px solid rgba(0, 0, 0);
+    /* background-color: #d9534f; */
+}
+.commentdetails .commentSmall {
+    color: #868e96;
 }
 ul.comments > li.card {
   margin-bottom: 15px;
@@ -65,4 +73,12 @@ ul.comments > li.card {
 }
 ul.comments > li.card:hover {
   /* box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.3); */
+}
+
+.anzahlPortionen {
+  min-width: 70px;
+}
+
+.tag_rezeptansicht{
+  margin-top: 5px;
 }

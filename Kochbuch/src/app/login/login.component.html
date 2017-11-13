@@ -1,0 +1,34 @@
+<!--
+@authors  Leandro Späth
+@authors Patrick Hahn
+@authors Armin Beck
+-->
+<div class="container">
+    <div class="jumbotron">
+      <h1>Login</h1>
+      <hr>
+      <form class="form-horizontal" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="user">Username:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="user" required [(ngModel)]="model.user" name="name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="pwd">Passwort:</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="pwd" required [(ngModel)]="model.pass" name="pass">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary " [disabled]="!loginForm.form.valid">Anmelden</button>
+          </div>
+        </div>
+        <div class="alert alert-danger" *ngIf="wrongCredentials">
+          <strong>Fehler</strong> Username oder Passwort falsch.
+        </div>
+      </form>
+    </div>
+  </div>
+  

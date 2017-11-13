@@ -7,9 +7,13 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AddingredientmodalComponent} from "../ingredient/addingredientmodal/addingredientmodal.component";
 import {IngredientService} from "../ingredient/ingredient.service";
 import {Router} from "@angular/router";
+import {AuthenticationService} from "../authentication/AuthenticationService";
+import {IngredientSmall} from "./rezeptanlegen.model";
 
 /**
  * @author Thomas Hörner
+ * @author Enrico Greßer
+ * @author Florian Eder
  */
 @Component({
   selector: 'app-rezeptanlegen',
@@ -35,7 +39,12 @@ export class RezeptanlegenComponent {
               private _fb: FormBuilder,
               private _is: IngredientService,
               private _rss: RezeptanlegenService,
-              private router: Router) {
+              private router: Router,
+              private _authService: AuthenticationService) {
+
+    if (this._authService.currentUser == null) {
+      this.router.navigate(['/login']);
+    }
 
     this.recipeForm = _fb.group({
       name: ['',
@@ -98,7 +107,7 @@ export class RezeptanlegenComponent {
 
   }
 
-  private submitting: boolean   = false;
+  private submitting: boolean = false;
 
   createRecipe() {
     if (this.recipeForm.valid) {
@@ -117,7 +126,7 @@ export class RezeptanlegenComponent {
    * Tags
    */
 
-  private needNewTag: boolean = false;
+  private newTagPossible: boolean = false;
 
   removeTag(indexToRemove: number) {
     this.recipeFormTagArray.removeAt(indexToRemove);
@@ -133,10 +142,10 @@ export class RezeptanlegenComponent {
           } else {
             let temp = this._tss.search(term)
             temp.then(value => {
-              if (value.length == 0) {
-                this.needNewTag = true;
+              if (value.length == 0 || (value.length > 0 && value.filter((x) => x.name.toLowerCase() == term.toLowerCase()).length == 0)) {
+                this.newTagPossible = true;
               } else {
-                this.needNewTag = false;
+                this.newTagPossible = false;
               }
               return value;
             });
@@ -145,7 +154,7 @@ export class RezeptanlegenComponent {
         }
       )
       .catch(() => {
-        this.needNewTag = true;
+        this.newTagPossible = true;
         return Observable.of([]);
       });
 
@@ -189,7 +198,7 @@ export class RezeptanlegenComponent {
    * Ingredients
    */
 
-  private needNewIngredient: boolean = false;
+  private newIngredientPossible: boolean = false;
 
   removeIngredient(indexToRemove: number) {
     this.recipeFormIngredientsArray.removeAt(indexToRemove);
@@ -205,10 +214,10 @@ export class RezeptanlegenComponent {
           } else {
             let temp = this._iss.search(term)
             temp.then(value => {
-              if (value.length == 0) {
-                this.needNewIngredient = true;
+              if (value.length == 0 || (value.length > 0 && value.filter((x) => x.ingredientName.toLowerCase() == term.toLowerCase()).length == 0)) {
+                this.newIngredientPossible = true;
               } else {
-                this.needNewIngredient = false;
+                this.newIngredientPossible = false;
               }
               return value;
             });
@@ -217,7 +226,7 @@ export class RezeptanlegenComponent {
         }
       )
       .catch(() => {
-        this.needNewIngredient = true;
+        this.newIngredientPossible = true;
         return Observable.of([]);
       });
 

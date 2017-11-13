@@ -12,6 +12,10 @@ import { Recipe, RecipeServie} from '../alle-rezepte/alle-rezepte.service'
  * @author Theresa Reus
  * @author Patrick Eichert
  * @author Leandro Späth
+ * @author Tim Kühnlein
+ * @author Adrian Haase
+ * @author Adrian Dumke
+ * @author André Berberich
  */
 
 
@@ -31,7 +35,6 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   }
 
   currentRecipe : Recipe = new Recipe;
-  unit : String [] = [];
   personCount: number = 4;
 
   //Kühnlein
@@ -50,6 +53,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
   private commentAdding:boolean = false;
   private isLoggedIn:boolean = false;
   private ingredients: Ingredient[];
+  private sumkcal:number = 0;
 
 
   ngOnInit() {
@@ -59,13 +63,6 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     //   this.currentRecipe = data;
     // });
     console.log(this.authService.authenticated);
-    this.unit[0] = "";
-    this.unit[1] = "Stck";
-    this.unit[2] = "g";
-    this.unit[3] = "Prise";
-    this.unit[4] = "TL";
-    this.unit[5] = "EL";
-    this.unit[6] = "ml";
 
     // Patrick Eichert, Theresa Reus
     // holt ID aus der URL
@@ -76,8 +73,6 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     );
 
     this.loadRecipe(this.recipeid);
-
-    //this.updateRating();
 
     this.authService.authenticated.subscribe((params:boolean) => {
       this.isLoggedIn = params;
@@ -94,6 +89,9 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
       this.currentRecipe = recipe;
       this.recipe = recipe;
       this.loadComments();
+      this.sumkcalpp();
+      this.updateRating();
+      this.updateGivenRating();
       console.log(this.recipe);
     });
   }
@@ -104,12 +102,12 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
     });
   }
 
-  private sumkcalpp():number {
+  private sumkcalpp() {
     let sum : number = 0;
     for (let recipeIngredients of this.currentRecipe.recipeIngredients) {
       sum += (recipeIngredients.amountPerPerson * recipeIngredients.ingredient.kcalPerUnit);
     }
-    return sum;
+    this.sumkcal = sum;
   }
 
   private loadComments(){
@@ -120,11 +118,11 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
       console.log(this.comments);
     });
   }
-
+  //Marc Reinke
   public saveNewComment(text:String){
     if(!text) return;
     this.commentAdding = true;
-    let c = new Comment(text, 1 /*User*/, this.recipe.id, new Date());
+    let c = new Comment(text, this.authService.currentUser.id, this.recipe.id, new Date());
     console.log("C", c);
     this.rezeptAnsichtService.addComment(c, (fail:boolean, data:any) => {
       if(fail){
@@ -136,11 +134,11 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
       this.commentAdding = false;
     });
   }
-  public deleteComment(comemnt:Comment){
+  public deleteComment(comment:Comment){
     if(!this.authService.currentUser) return;
-    console.dir(comemnt);
-    if(comemnt.user.id === this.authService.currentUser.id){
-      this.rezeptAnsichtService.deleteComment(comemnt, (fail:boolean, data:any) => {
+    console.dir(comment);
+    if(comment.user.id === this.authService.currentUser.id){
+      this.rezeptAnsichtService.deleteComment(comment, (fail:boolean, data:any) => {
         if(fail){
           console.log(JSON.stringify(data));
         }else{
@@ -172,29 +170,41 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
 
 
   //Kühnlein
+  /**
+   * Updates both offline values of up- and downrating
+   */
   private updateRating(){
     this.rezeptAnsichtService.countRatingUp(this.recipe.id, amount => {
       this.upratings = amount;
-      console.log("Upratings: "+this.upratings);
     });
 
     this.rezeptAnsichtService.countRatingDown(this.recipe.id, amount => {
       this.downratings = amount;
-      console.log("Downratings: "+this.downratings);
     });
   }
 
-  private updateGivenRating(){
-    this.rezeptAnsichtService.getGivenRating(this.recipe.id, 1 /*TODO: currentuser.id*/,givenRating => {
+  /**
+   * Updates offline value of logged in user's previously given rating
+   */
+  private updateGivenRating() {
+    if (this.isLoggedIn) {
+      this.rezeptAnsichtService.getGivenRating(this.recipe.id, 1 /*TODO: currentuser.id*/, givenRating => {
       this.givenRating = givenRating;
-      console.log("GivenRating: "+this.givenRating);
-    });
+      });
+    }
   }
 
+  /**
+   * Posts rating
+   * @param {number} rating = 1 for like / -1 for dislike
+   */
   private giveRating(rating: number){
-    this.givenRating = rating;
-    this.rezeptAnsichtService.giveRating(this.recipeid, 1 /*TODO: currentuser.id*/, rating);
-    this.updateRating();
+    if(this.isLoggedIn) {
+      this.givenRating = rating;
+      this.rezeptAnsichtService.giveRating(this.recipeid, 1 /*TODO: currentuser.id*/, rating, update => {
+        this.updateRating();
+      });
+    }
   }
   //!Kühnlein
 }

@@ -1,84 +1,29 @@
 <!-->
-@authors Nico Frischkorn
-
+@authors Nico Frischkorn @authors Armin Beck @authors Leandro Späth  @authors Patrick Hahn
 <-->
-  <div class="background">
-    <div class="search">
-      <h1>Entdecke neue Rezepte</h1>
-      <p>Schnell, lecker und einfach</p>
-      <div class="input-group col-md-5 center">
-        <input type="text" placeholder="" [(ngModel)]="suchtext"/>
+  <div class="container-fluid">
+
+    <div class="row d-flex flex-column p-5" style="height:60vh;background-image: url('/assets/home/background.jpg'); background-size:cover;">
+      <h1 class="text-white text-center">Entdecke neue Rezepte</h1>
+      <p class="text-center text-muted">Schnell, lecker und einfach</p>
+      <div class="d-flex p-1 flex-row justify-content-center ">
+        <input class="p-2" type="text" placeholder="Carbonara" [(ngModel)]="suchtext"/>
         <span class="input-group-btn">
-          <button class="btn btn-default" type="button" [routerLink]="['/suche', {suchtext:suchtext}]">
+          <button class="btn btn-default" type="button" [routerLink]="['/suche', {suchtext:suchtext,option:1}]">
             <i class="material-icons">search</i>
           </button>
         </span>
       </div>
     </div>
-  </div>
-  <div class="container">
-    <h2>Empfehlungen</h2>
-    <button routerLink="/rezeptliste" class="btn btn-default pull-right">Mehr</button>
-    <div class="row">
-      <div class="col-sm-6 col-md-4">
-        <div class="card" style="width: 20rem;">
-          <img class="card-img-top" src="../../assets/home/rezept1.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <div class="card" style="width: 20rem;">
-          <img class="card-img-top" src="../../assets/home/rezept1.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <div class="card" style="width: 20rem;">
-          <img class="card-img-top" src="../../assets/home/rezept1.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div>
-      </div>
+
+    <div class="column">
+      <h2>Empfehlungen</h2>
+      <button routerLink="/rezeptliste" class="btn btn-default pull-right">Mehr</button>
+      <app-rezeptliste [rezepte]="BestRecipes"></app-rezeptliste>
     </div>
-  </div>
-  <div class="container">
-    <h2>Neue Rezepte</h2>
-    <button routerLink="/rezeptliste" class="btn btn-default pull-right">Mehr</button>
-    <div class="row">
-      <div class="col-sm-6 col-md-4">
-        <div class="card" style="width: 20rem;">
-          <img class="card-img-top" src="../../assets/home/rezept1.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <div class="card" style="width: 20rem;">
-          <img class="card-img-top" src="../../assets/home/rezept1.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <div class="card" style="width: 20rem;">
-          <img class="card-img-top" src="../../assets/home/rezept1.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div>
-      </div>
+    <div class="column">
+      <h2>Neue Rezepte</h2>
+      <button routerLink="/rezeptliste" class="btn btn-default pull-right">Mehr</button>
+      <app-rezeptliste [rezepte]="NewestRecipes"></app-rezeptliste>
     </div>
   </div>

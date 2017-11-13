@@ -20,16 +20,30 @@ import {HomeComponent} from './home/home.component';
 import {NavbarComponent} from './shared/navbar/navbar.component';
 import {FooterComponent} from './shared/footer/footer.component';
 import {AuthenticationService} from "./authentication/AuthenticationService";
+import {LoginComponent} from './login/login.component';
 import {RecipeServie} from './alle-rezepte/alle-rezepte.service';
 import {Autosize} from "angular2-autosize";
 import {ShowerrorsComponent} from './rezeptanlegen/showerrors.component';
 import {DragAndDropDirective} from "./rezeptanlegen/dnd.directive";
-import {InputTextareaTexTrimDirective} from "./rezeptanlegen/trim.directive";
+import {InputTextareaTrimDirective} from "./rezeptanlegen/trim.directive";
 import {LOCALE_ID} from '@angular/core';
 import {SucheComponent} from './suche/suche.component';
-import {AjaxService} from "./_services/ajax.service";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
+import {MessageService} from "./_services/message.service";
+import {UserProfileService} from 'app/user-profile/user-profile.service';
+import {AjaxService} from "./suche/ajax.service";
+import {HttpClientModule} from "@angular/common/http";
+import { AuthInterceptor } from "app/authentication/auth-interceptor";
+import { TokenService } from "app/authentication/token-service";
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RezeptService } from "app/RezeptService/rezept.service";
 
+
+/**
+ * @author Thomas Hörner
+ * @author Alexander Krieg
+ * @author Armin Beck
+ */
 
 @NgModule({
   declarations: [
@@ -46,6 +60,7 @@ import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
     NavbarComponent,
     FooterComponent,
     AddingredientmodalComponent,
+    LoginComponent,
     SucheComponent,
     /**
      * @author Thomas Hörner
@@ -53,12 +68,13 @@ import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
     Autosize,
     ShowerrorsComponent,
     DragAndDropDirective,
-    InputTextareaTexTrimDirective,
+    InputTextareaTrimDirective,
     PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     HttpModule,
     AppRoutingModule,
     NgbModule.forRoot(),
@@ -69,7 +85,14 @@ import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
   ],
   providers: [
     RezeptansichtService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    RezeptService,
     AuthenticationService,
+    TokenService,
     /**
      * @author 💩 Alexander Krieg
      * Für die DatePipe (deutsches Datumsformat)
@@ -78,13 +101,16 @@ import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
     //Daniel Abel
     RecipeServie,
     IngredientService,
+    UserProfileService,
     /** @author Yoco Harrmann */
-    AjaxService
+    AjaxService,
+    MessageService
   ],
   /**
    * @author Thomas Hörner
+   * Endrit Çallaki
    */
-  entryComponents: [AddingredientmodalComponent],
+  entryComponents: [AddingredientmodalComponent, RegistrierungsmodalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {
