@@ -4,45 +4,26 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+      <!--Suchleiste-->
+      <div class="d-flex p-1 flex-row">
+        <input class="p-2" type="text" placeholder="Carbonara" [(ngModel)]="suchtext" />
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit" (click)="suchen()">
+            <i class="material-icons">search</i>
+          </button>
+        </span>
+      </div>
 
       <!--Radiobuttons -->
-      <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="rezeptsuche" id="rezeptenamen" [value]="1"
-                 [(ngModel)]="option"> Suche nach Rezeptnamen
-        </label>
+      <h4>Suche nach</h4>
+      <div class="btn-group" data-toggle="buttons">
+        <div *ngFor="let op of searchOptions;let idx=index" class="btn" [ngClass]="{ 'active':idx==option-1, 'btn-outline-primary':idx!=option-1, 'btn-primary':idx==option-1}"
+          (click)="option=idx+1; suchen()">
+          {{op}}</div>
       </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="rezeptsuche" id="rezeptetag" [value]="2"
-                 [(ngModel)]="option"> Suche nach Tag
-        </label>
+      <div class="mt-2">
+        <app-rezeptliste></app-rezeptliste>
       </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="rezeptsuche" id="rezeptekeyword" [value]="3"
-                 [(ngModel)]="option"> Suche nach User
-        </label>
-      </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="rezeptsuche" id="rezeptezutat" [value]="4"
-                 [(ngModel)]="option"> Suche nach Zutat
-        </label>
-      </div>
-
-      <!--Suchleiste-->
-      <div class="input-group col-md-5 center">
-        <input type="text" placeholder="" [(ngModel)]="suchtext"/>
-        <span class="input-group-btn">
-                <button class="btn btn-default" type="button" (click)="suchen()">
-                  <i class="material-icons">search</i>
-                </button>
-              </span>
-      </div>
-
-      <app-rezeptliste></app-rezeptliste>
-
     </div>
   </div>
 </div>
