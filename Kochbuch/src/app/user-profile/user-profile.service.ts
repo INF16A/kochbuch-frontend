@@ -14,18 +14,16 @@ import { environment } from 'environments/environment';
 @Injectable()
 export class UserProfileService {
 
-    private static SERVER = 'http://localhost:8080';
-
     constructor(private http: HttpClient) { }
 
     getRecipiesForUser(userId: Number): Promise<Recipe[]> {
-      return this.http.get<Recipe[]>(UserProfileService.SERVER + '/recipes/creator/' + userId)
+      return this.http.get<Recipe[]>(environment.backendUrl + '/recipes/creator/' + userId)
       .toPromise()
       .catch(this.error);
     }
 
     getUser(userId: Number): Promise<User> {
-      return this.http.get<User>(UserProfileService.SERVER + '/user/' + userId)
+      return this.http.get<User>(environment.backendUrl + '/user/' + userId)
       .toPromise()
       .catch();
     }
