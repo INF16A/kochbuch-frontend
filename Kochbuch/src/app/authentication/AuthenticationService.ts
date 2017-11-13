@@ -24,7 +24,8 @@ export class AuthenticationService {
 		localStorage.setItem("user", JSON.stringify(user));
 	}
 	public constructor(private http: HttpClient, private tokenService: TokenService) {
-		this.authenticated = new BehaviorSubject(new Boolean(tokenService.Token));
+		console.log("auth created", tokenService.Token,tokenService.Token==null);
+		this.authenticated = new BehaviorSubject(!new Boolean(tokenService.Token));
 	}
 
 	public tryAuthentification(username: string, password: string) {
@@ -40,8 +41,7 @@ export class AuthenticationService {
 			let xtoken = z.headers.get("X-Token");
 			let data: any = z.body;
 			if (data.id && data.username && xtoken) {
-				this.user = new User(data.id);
-				this.user.username = data.username;
+				this.user=data;
 				this.tokenService.Token = xtoken;
 				console.log("user logged in", this.currentUser);
 				this.authenticated.next(true);
