@@ -28,10 +28,6 @@ export class NavbarComponent implements OnInit {
   const modalReg = this.modalService.open( RegistrierungsmodalComponent);
   }
 
-  public closeModal():void{
-  window.alert("close");
-  }
-
   ngOnInit() {
 
     }

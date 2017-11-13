@@ -1,7 +1,7 @@
-<!-->
+<!--
 @authors Nico Frischkorn @authors Armin Beck @authors Leandro Späth @authors Patrick Hahn @authors Annika Schatz authors
 Irina Eurich authors Tobias Bloch authors Endrit Çallaki @authors Thomas Hörner
-<-->
+-->
   <nav class=" navbar navbar-expand sticky-top navbar-dark bg-dark d-flex flex-row justify-content-between">
     <div class="navbar-nav">
       <a class="navbar-brand" href="#">
@@ -26,7 +26,7 @@ Irina Eurich authors Tobias Bloch authors Endrit Çallaki @authors Thomas Hörne
 
 
     <div class="" *ngIf="!( isLoggedIn() | async )">
-      <div class="btn btn-outline-success " (click)="openModal()">Registrierung</div>
+      <div class="btn btn-outline-success" (click)="openModal()">Registrierung</div>
       <a class="btn btn-outline-success m-1" routerLink="{{'/login'}}">
         Login
       </a>
