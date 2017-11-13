@@ -16,14 +16,15 @@
       </form>
     </div>
 
-    <div class="column">
+    <div class="d-flex flex-row justify-content-between m-3">
       <h2>Empfehlungen</h2>
       <button routerLink="/rezeptliste" class="btn btn-default pull-right">Mehr</button>
-      <app-rezeptliste [rezepte]="BestRecipes"></app-rezeptliste>
     </div>
-    <div class="column">
+    <app-rezeptliste [rezepte]="BestRecipes"></app-rezeptliste>
+
+    <div class="d-flex flex-row justify-content-between m-3">
       <h2>Neue Rezepte</h2>
       <button routerLink="/rezeptliste" class="btn btn-default pull-right">Mehr</button>
-      <app-rezeptliste [rezepte]="NewestRecipes"></app-rezeptliste>
     </div>
+    <app-rezeptliste [rezepte]="NewestRecipes"></app-rezeptliste>
   </div>
