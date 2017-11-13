@@ -17,12 +17,12 @@ export class AjaxService {
   /** @author Team Chrocorg: Yoco Harrmann, Christian Werner und Georg Frey */
 
   getRezepteByTag(tag: string): Observable<Array<any>> {
-    return this.http.get(environment.backendUrl + "/recipes/{tag}?tag=" + tag)
+    return this.http.get(environment.backendUrl + "/recipes/search?tag=" + tag)
       .map(res => res.json());
   }
 
   getRezepteByName(name: string): Observable<Array<any>> {
-    return this.http.get(environment.backendUrl + "/recipes/{name}?name=" + name)
+    return this.http.get(environment.backendUrl + "/recipes/search?name=" + name)
       .map(res => res.json());
   }
 
