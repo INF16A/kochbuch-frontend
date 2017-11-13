@@ -12,5 +12,12 @@ export class TokenService {
     }
     private token;
     public get Token() { return localStorage.getItem("token"); }
-    public set Token(value: string) { localStorage.setItem("token", value); }
+    public set Token(value: string) {
+        if (value) {
+            localStorage.setItem("token", value);
+        }
+        else {
+            localStorage.setItem("token", "");
+        }
+    }
 }
