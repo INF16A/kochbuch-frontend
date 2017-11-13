@@ -3,7 +3,7 @@ import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bo
 import { RegistrierungsmodalComponent } from "../../registrierungsmodal/registrierungsmodal.component";
 import { ViewChild } from '@angular/core';
 import { AuthenticationService } from "../../authentication/AuthenticationService";
-
+import {ActivatedRoute, Router, Params} from "@angular/router";
 /**
    @authors
   Annika Schatz
@@ -21,7 +21,7 @@ import { AuthenticationService } from "../../authentication/AuthenticationServic
 export class NavbarComponent implements OnInit {
 
 
-  constructor(private modalService: NgbModal, private AuthorizationService: AuthenticationService) {
+  constructor(private modalService: NgbModal,private Router:Router, private AuthorizationService: AuthenticationService) {
   }
 
   public openModal():void{
@@ -40,6 +40,7 @@ export class NavbarComponent implements OnInit {
   }
   logout() {
     this.AuthorizationService.logout();
+    this.Router.navigateByUrl("/home");
   }
   getName() {
     if (this.AuthorizationService.currentUser) {
