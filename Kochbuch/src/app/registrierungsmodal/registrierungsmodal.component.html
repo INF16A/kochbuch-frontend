@@ -8,7 +8,7 @@ Endrit Çallaki
 
 
 
-    <!-- Modal Header -->
+<!-- Modal Header -->
 <div class="modal-header">
   <h4 class="modal-title">Registrierung</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
@@ -16,42 +16,43 @@ Endrit Çallaki
   </button>
 </div>
 
-    <!-- Modal Body -->
-    <div class="modal-body">
+<!-- Modal Body -->
+<form class="modal-body">
 
 
-      <div class="form-group">
-        <label for="benutzername">Benutzername</label>
-        <input type="text" class="form-control" name="username" id="benutzername" placeholder="exampleuser">
-      </div>
+  <div class="form-group">
+    <label for="benutzername">Benutzername</label>
+    <input type="text" class="form-control" placeholder="exampleuser" required #username>
+  </div>
 
-      <div class="form-group">
-        <label for="email">E-Mail</label>
-        <input type="email" class="form-control" name="email" id="email" placeholder="example@mail.de">
-      </div>
+  <div class="form-group">
+    <label for="email">E-Mail</label>
+    <input type="email" class="form-control" placeholder="example@mail.de" required #email>
+  </div>
 
-      <div class="form-group">
-        <label for="passwort1">Passwort</label>
-        <input type="password" class="form-control" name="passwort1" id="passwort1" placeholder="start123">
-        <br>
-        <input type="password" class="form-control" name="passwort2" id="passwort2" placeholder="start123">
-      </div>
-      <br>
+  <div class="form-group">
+    <label for="passwort1">Passwort</label>
+    <input type="password" class="form-control" placeholder="start123" required #password>
+    <br>
+    <input type="password" class="form-control" placeholder="start123" required #passwordRepeat>
+  </div>
+  <br>
 
-      <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" name="nutzungsbedingungen" value="nutzungsbedingungen">
-          Ich habe die <a href="https://de.wikipedia.org/wiki/Allgemeine_Gesch%C3%A4ftsbedingungen"
-                          target="_blank" rel="noopener"> &nbsp;Nutzungsbedingungen&nbsp;</a> gelesen
-          und bin damit einverstanden.
-        </label>
-      </div>
+  <div class="form-check">
+    <div class="alert alert-danger" *ngIf="error">
+      <strong>Fehler</strong> Bitte überprüfen sie ihre Eingaben und versuchen sie es nochmal.
     </div>
+    <label class="form-check-label">
+      <input class="form-check-input" type="checkbox" name="nutzungsbedingungen" value="nutzungsbedingungen"> Ich habe die
+      <a href="https://de.wikipedia.org/wiki/Allgemeine_Gesch%C3%A4ftsbedingungen" target="_blank" rel="noopener">
+        &nbsp;Nutzungsbedingungen&nbsp;</a> gelesen und bin damit einverstanden.
+    </label>
+  </div>
+</form>
 
-    <!-- Modal Footer -->
-    <div class="modal-footer">
-      <button type="button" class="btn btn-success btn-lg btn-block" (click)="c('Close click')"><b>Registrieren</b></button>
-    </div>
-
-
-
+<!-- Modal Footer -->
+<div class="modal-footer">
+  <button type="button" class="btn btn-success btn-lg btn-block" (click)="register()">
+    <b>Registrieren</b>
+  </button>
+</div>
