@@ -1,35 +1,34 @@
 <!-->
-@authors Nico Frischkorn
-@authors Armin Beck
-@authors Leandro Späth
-@authors Patrick Hahn
-@authors Annika Schatz
-authors Irina Eurich
-authors Tobias Bloch
-authors Endrit Çallaki
-@authors Thomas Hörner
+@authors Nico Frischkorn @authors Armin Beck @authors Leandro Späth @authors Patrick Hahn @authors Annika Schatz authors
+Irina Eurich authors Tobias Bloch authors Endrit Çallaki @authors Thomas Hörner
 <-->
-  <nav class="navbar sticky-top navbar-dark bg-dark container-fluid">
-    <a class="navbar-brand" href="#">
-      <img src="assets/logo_cookit5.png" height="30" class="" alt="">
-    </a>
+  <nav class=" navbar navbar-expand sticky-top navbar-dark bg-dark d-flex flex-row justify-content-between">
+    <div class="navbar-nav">
+      <a class="navbar-brand" href="#">
+        <img src="assets/logo_cookit5.png" height="30" class="" alt="">
+      </a>
 
-    <div class="btn btn-outline-success" *ngIf="isLoggedIn() | async" routerLink="{{'/rezeptanlegen'}}">
-      Rezept anlegen
+
+      <div class="navbar-nav">
+        <a class="text-white nav-link" routerLink="{{'/rezeptanlegen'}}">
+          Rezept anlegen
+        </a>
+        <a class="text-white nav-link" routerLink="{{'/suche'}}">
+          Rezept suchen
+        </a>
+      </div>
     </div>
 
-    <div class="text-white" *ngIf="isLoggedIn() | async">{{getName()}}
-      <div class="btn btn-outline-danger text-white" *ngIf="isLoggedIn() | async " (click)="logout()">Logout</div>
+    <div class="text-white" *ngIf="isLoggedIn() | async">
+      <span class="" routerLink="{{'/user-profile'}}">{{getName()}}</span>
+      <div class="btn btn-outline-danger text-white " *ngIf="isLoggedIn() | async " (click)="logout()">Logout</div>
     </div>
 
-    <button class="btn btn-success" type="button" (click)="openModal()" >Registrierung</button>
 
-    <a class="btn btn-outline-success" *ngIf="!( isLoggedIn() | async )" routerLink="{{'/login'}}">
-      Login
-    </a>
-
-    <div>
-      <img id="user" height="50" src="assets/user_small.png">
+    <div class="" *ngIf="!( isLoggedIn() | async )">
+      <div class="btn btn-outline-success " (click)="openModal()">Registrierung</div>
+      <a class="btn btn-outline-success m-1" routerLink="{{'/login'}}">
+        Login
+      </a>
     </div>
-
   </nav>
