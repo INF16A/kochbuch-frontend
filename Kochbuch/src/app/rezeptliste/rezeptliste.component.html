@@ -1,7 +1,7 @@
 <!-- @author: Daniel Abel, Patrick Eichert, Theresa Reus, Robert Zebec -->
 <div class="container-fluid">
   <div class="card-columns">
-    <div class="card" *ngFor="let rezept of rezepte">
+    <div class="card" *ngFor="let rezept of rezepteProcessed">
 
       <img src="data:{{rezept.pics[0].picType}};base64,{{rezept.pics[0].picData}}" *ngIf=rezept.pics[0] class="card-img-top " style="object-fit: cover;">
       <div class="card-body card-block">
@@ -18,11 +18,11 @@
         <a *ngFor="let tag of rezept.tags" [routerLink]="['/suche', {suchtext:tag.name,option:2}]" class="btn btn-sm btn-outline-secondary m-1">{{tag.name}}</a>
       </div>
       <div class="card-footer d-flex flex-row justify-content-around">
-        <span class="text-danger" *ngIf="rezept.bewertung < 0">
-          <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{-rezept.bewertung}}
+        <span class="text-danger" *ngIf="rezept.ratingSum < 0">
+          <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{-rezept.ratingSum}}
         </span>
-        <span *ngIf="rezept.bewertung > 0" class=" text-success">
-          <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{rezept.bewertung}}
+        <span *ngIf="rezept.ratingSum > 0" class=" text-success">
+          <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{rezept.ratingSum}}
         </span>
         <span [ngClass]="{  'text-success':rezept.difficulty===1,'text-warning':rezept.difficulty===2 || rezept.difficulty===3||rezept.difficulty===4, 'text-danger':rezept.difficulty===5 }">
           <i *ngIf="rezept.difficulty > 0" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
@@ -32,7 +32,7 @@
           <i class="fa fa-clock-o" aria-hidden="true"></i> {{rezept.effort}} min.
         </span>
         <span class="">
-          <i [ngClass]="{'fa-user':rezept.forpersons===1, 'fa-users':rezept.forpersons>1}" class="fa" aria-hidden="true"></i> {{rezept.forpersons}}
+            <i class="fa fa-comment" aria-hidden="true"></i> {{rezept.comments.length}}
         </span>
       </div>
     </div>

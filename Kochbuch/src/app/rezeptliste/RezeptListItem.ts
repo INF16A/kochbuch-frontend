@@ -2,17 +2,12 @@
  * @author Patrick Hahn
  * @author Armin Beck
  */
+import { Pic } from '../pic.model';
+import { User } from "app/user.model";
+import { Recipe } from '../alle-rezepte/alle-rezepte.service';
 
-export interface RezeptListItem {
-  id: string
-  name: string,
-  beschreibung: string,
-  aufwandmin: number,
-  schwierigkeit: number,
-  bewertung: number,
-  creator: string,
-  creatorDate: string,
-  img: string,
-  forpersons: number,
-  tags: string[]
+export interface RezeptListItem extends Recipe {
+  rating: { value: number }[],
+  ratingSum: number,
+  img: Pic,
 }
