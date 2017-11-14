@@ -8,7 +8,7 @@ import { Pic } from '../pic.model';
 import { Tag } from '../tag.model';
 import { RecipeIngredient } from '../mapRecipeIngredient.model';
 import { Comment } from '../rezeptansicht/rezeptansicht.service';
-
+import { environment} from "environments/environment";
 
 /**
  * @author Daniel Abel
@@ -55,7 +55,7 @@ export class Recipe {
 
 
     private fetchRecipeById(id: number) {
-      const url = 'http://localhost:8080/recipe/{id}?id=' + id;
+      const url = environment.backendUrl+'/recipe/{id}?id=' + id;
       return this.http.get(url);
     }
 
@@ -66,7 +66,7 @@ export class Recipe {
       });
     }
     private fetchRecipe() {
-      const url = 'http://localhost:8080/recipes';
+      const url = environment.backendUrl+'/recipes';
       return this.http.get(url);
     }
 

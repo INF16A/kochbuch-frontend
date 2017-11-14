@@ -10,6 +10,7 @@ import 'rxjs/add/operator/merge';
 import {IngredientSmall} from "./rezeptanlegen.model";
 import {Tag} from "../tag.model";
 import {HttpClient} from "@angular/common/http";
+import { environment} from "environments/environment";
 
 /**
  * @author Thomas Hörner
@@ -17,7 +18,7 @@ import {HttpClient} from "@angular/common/http";
 @Injectable()
 export class TagSearchService {
 
-  private baseUrl = 'http://localhost:8080/tag/search?q=';  // URL to web api
+  private baseUrl = environment.backendUrl+'/tag/search?q=';  // URL to web api
 
   constructor(private http: HttpClient) {
   }
@@ -37,7 +38,7 @@ export class TagSearchService {
 @Injectable()
 export class IngredientSearchService {
 
-  private baseUrl = 'http://localhost:8080/ingredient/search?q=';  // URL to web api
+  private baseUrl =environment.backendUrl+ '/ingredient/search?q=';  // URL to web api
 
   constructor(private http: HttpClient) {
   }
@@ -56,7 +57,7 @@ export class IngredientSearchService {
 
 @Injectable()
 export class RezeptanlegenService {
-  private baseUrl = 'http://localhost:8080/recipe/create';  // URL to web api
+  private baseUrl = environment.backendUrl+'/recipe/create';  // URL to web api
 
   constructor(private http: HttpClient) {
   }
