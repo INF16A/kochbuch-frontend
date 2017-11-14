@@ -20,7 +20,7 @@ Irina Eurich authors Tobias Bloch authors Endrit Çallaki @authors Thomas Hörne
     </div>
 
     <div class="text-white" *ngIf="isLoggedIn() | async">
-      <span class="" routerLink="{{'/user-profile'}}">{{getName()}}</span>
+      <span class="" routerLink="{{'/user-profile/'+getId()}}">{{getName()}}</span>
       <div class="btn btn-outline-danger text-white " *ngIf="isLoggedIn() | async " (click)="logout()">Logout</div>
     </div>
 
