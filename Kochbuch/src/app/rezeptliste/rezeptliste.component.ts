@@ -29,14 +29,11 @@ export class RezeptlisteComponent implements OnInit, OnDestroy {
   constructor(private messageService: MessageService) {
     this.subscription = this.messageService.getMessage().subscribe(
       message => {
-        let rezepte;
-        this.rezepte = rezepte;
-        return rezepte;
+        this.rezepte = message;
       }
     );
   }
   ConvertRecipe(recipe: Recipe): RezeptListItem {
-    console.log(this, recipe);
     let sum = this.getRatingSum((recipe as any).ratings);
     return Object.assign({
       img: recipe.pics[0],
