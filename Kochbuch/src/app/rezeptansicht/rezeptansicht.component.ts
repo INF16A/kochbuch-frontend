@@ -190,7 +190,7 @@ export class RezeptansichtComponent implements OnInit, OnDestroy {
    */
   private updateGivenRating() {
     if (this.isLoggedIn) {
-      this.rezeptAnsichtService.getGivenRating(this.recipe.id,  this.authService.currentUser.id, givenRating => {
+      this.rezeptAnsichtService.getGivenRating(this.recipe.id, this.authService.currentUser.id, givenRating => {
       this.givenRating = givenRating;
       });
     }
