@@ -3,13 +3,13 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from "@angular/forms";
 import { RegistrierungsService } from "./registrierung.service";
 
+
 /**
 @authors
 Annika Schatz
 Irina Eurich
 Tobias Bloch
 Endrit Çallaki
-
  */
 
 @Component({
@@ -20,18 +20,11 @@ Endrit Çallaki
 export class RegistrierungsmodalComponent implements OnInit {
   closeResult: string;
 
-  form: FormGroup;
-  @ViewChild('email')
-  private email: HTMLInputElement;
-  @ViewChild('username')
-  private username: HTMLInputElement;
-  @ViewChild('password')
-  private password: HTMLInputElement;
-  @ViewChild('passwordRepeat')
-  private passwordRepeat: HTMLInputElement;
+  public model: { user: string, passwort: string, passwort1: string, email: string };
   private error: boolean = false;
-  constructor(public modalService: NgbModal, public activeModal: NgbActiveModal, private _fb: FormBuilder, private registrierungsService: RegistrierungsService) {
-
+  constructor(public modalService: NgbModal, public activeModal: NgbActiveModal, private _fb: FormBuilder, private registrierungsService: RegistrierungsService)
+  {
+    { this.model = { user: "", passwort: "", passwort1: "", email: "", }; }
   }
 
   ngOnInit() {
@@ -40,13 +33,13 @@ export class RegistrierungsmodalComponent implements OnInit {
   }
   register() {
     this.registrierungsService.registerUser(
-      this.email.value,
-      this.username.value,
-      this.password.value,
-      this.passwordRepeat.value).subscribe(
+      this.model.email,
+      this.model.user,
+      this.model.passwort,
+      this.model.passwort1).subscribe(
       data => this.activeModal.close("successful"),
       error => this.error = true
-      );
+    );
   }
 
 

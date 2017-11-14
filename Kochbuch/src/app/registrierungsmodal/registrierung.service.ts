@@ -4,6 +4,15 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { environment } from 'environments/environment';
 
+/**
+ @authors
+ Annika Schatz
+ Irina Eurich
+ Tobias Bloch
+ Endrit Çallaki
+ Armin Beck
+ */
+
 @Injectable()
 export class RegistrierungsService {
 
@@ -11,12 +20,17 @@ export class RegistrierungsService {
 
     constructor(private http: HttpClient) { }
 
-    registerUser(email, username, mPw, pw) {
+    registerUser(email, username, pw, mPw) {
+
+
         return this.http.post(environment.backendUrl + "/user/registration", {
-            email: email,
-            matchinPassword: mPw,
-            password: pw,
-            userName: username
+          userName: username,
+          password: pw,
+          matchingPassword: mPw,
+          email: email
+
         });
+
     }
+
 }
