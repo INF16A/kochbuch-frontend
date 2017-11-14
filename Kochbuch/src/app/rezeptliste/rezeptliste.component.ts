@@ -21,7 +21,8 @@ export class RezeptlisteComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   @Input() set rezepte(rz: Recipe[]) {
-    this.rezepteProcessed = rz.map(x => this.ConvertRecipe(x));
+    if (rz)
+      this.rezepteProcessed = rz.map(x => this.ConvertRecipe(x));
   }
   private rezepteProcessed: RezeptListItem[];
 
@@ -38,7 +39,7 @@ export class RezeptlisteComponent implements OnInit, OnDestroy {
     let sum = this.getRatingSum((recipe as any).ratings);
     return Object.assign({
       img: recipe.pics[0],
-      ratingSum: sum,
+      ratingSum: sum
     }, recipe) as RezeptListItem;
   }
   getRatingSum(Ratings: { value: number }[]) {
