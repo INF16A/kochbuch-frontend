@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from "@angular/forms";
+import { Component, OnInit , ViewChild} from '@angular/core';
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from "@angular/forms";
+import { RegistrierungsService } from "./registrierung.service";
 
 
 /**
@@ -9,7 +10,6 @@ Annika Schatz
 Irina Eurich
 Tobias Bloch
 Endrit Çallaki
-
  */
 
 @Component({
@@ -20,16 +20,27 @@ Endrit Çallaki
 export class RegistrierungsmodalComponent implements OnInit {
   closeResult: string;
 
-  form: FormGroup;
-  constructor(public modalService: NgbModal, public activeModal: NgbActiveModal, private _fb: FormBuilder) {
-
+  public model: { user: string, passwort: string, passwort1: string, email: string };
+  private error: boolean = false;
+  constructor(public modalService: NgbModal, public activeModal: NgbActiveModal, private _fb: FormBuilder, private registrierungsService: RegistrierungsService)
+  {
+    { this.model = { user: "", passwort: "", passwort1: "", email: "", }; }
   }
 
   ngOnInit() {
     //initial value setzen
 
   }
-
+  register() {
+    this.registrierungsService.registerUser(
+      this.model.email,
+      this.model.user,
+      this.model.passwort,
+      this.model.passwort1).subscribe(
+      data => this.activeModal.close("successful"),
+      error => this.error = true
+    );
+  }
 
 
   private getDismissReason(reason: any): string {
