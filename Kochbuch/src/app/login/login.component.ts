@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from "../authentication/AuthenticationService";
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+
+/**
+ * @author Patrick Hahn
+ * @author Armin Beck
+ * @author Leandro Späth
+ */
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -25,7 +33,7 @@ export class LoginComponent implements OnInit {
         //authentificated
         console.log("auth");
         this.location.back();
-      }).subscribe((data) => console.log(data));/*.catch((e, r) => {
+      }).subscribe((data) => console.log(data), err => this.wrongCredentials = true);/*.catch((e, r) => {
         console.log("catch");
         this.wrongCredentials = true;
         return r;
